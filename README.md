@@ -1,6 +1,6 @@
 # Cockpit NNU — publicar no GitHub Pages
 
-> **Pacote v4** · TEMPLATE 2026.07.3 · evolução semanal automática, "Comparar frentes" (ranking com eixo de fases + média da carteira e radar por fase), departamento responsável editável (master cria), Análise Seplanh em 3 linhas, Matrícula/SPE/Contrato na Originação, risco "Aprovação", e SLA com data prevista + Reprogramar + log.
+> **Pacote v4** · TEMPLATE 2026.07.4 · evolução semanal automática, "Comparar frentes" (ranking com eixo de fases + média da carteira e radar por fase), SLA com data prevista + Reprogramar + log, risco "Aprovação", Análise Seplanh em 3 linhas, Matrícula/SPE/Contrato na Originação. Nesta rodada: botão único **"Concluído"** por entregável, aviso de **fase travada manualmente**, lista de **departamentos só no "Registrar pendência interna"** (master adiciona e remove pelo botão "Departamentos"), e responsáveis dos ritos ajustados (Elaboração/Protocolo com dono; Aprovação/Revisão/Aprovação interna sem responsável; Imagens/Cenas/Planta/Maquete → DPRO - EDU).
 
 Esta pasta tem **dois arquivos** que vão para o ar juntos:
 - `index.html` — o painel.

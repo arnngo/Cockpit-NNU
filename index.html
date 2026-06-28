@@ -132,6 +132,9 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .fld input.w-sla{width:62px}.fld input.w-org{width:150px}
 .sla-read{font-family:var(--mono);font-size:11px;font-weight:600;padding:5px 0}
 .deptsel{font-family:var(--mono);font-size:10px;color:var(--ink-mid);border:1px solid var(--line2);border-radius:5px;padding:1px 4px;background:var(--surface);margin-left:6px;max-width:140px}
+.qdone{font-family:var(--body);font-size:11px;font-weight:600;padding:3px 11px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);color:var(--ink-mid);margin:0 12px;flex:0 0 auto;white-space:nowrap}
+.qdone:hover{border-color:var(--green);color:var(--green)}
+.qdone.on{background:var(--green);color:#fff;border-color:var(--green)}
 .entfoot{display:flex;gap:14px;flex-wrap:wrap;padding:6px 0 2px;border-top:1px dashed var(--line);margin-top:6px;font-size:11px}
 .entfoot button{background:none;border:1px solid var(--line2);color:var(--ink-mid);border-radius:6px;padding:4px 9px;font-size:11px}
 .entfoot button:hover{border-color:var(--accent);color:var(--ink)}.entfoot button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -252,6 +255,7 @@ input[type=file]{display:none}
       <button class="tbtn" id="bExp">Exportar</button>
       <button class="tbtn ma-only" id="bImp">Importar</button>
       <button class="tbtn ma-only" id="bPub">Publicar (dados.json)</button>
+      <button class="tbtn ma-only" id="bDept">Departamentos</button>
       <button class="tbtn ma-only" id="bReset">Restaurar dados padrão</button>
       <input type="file" id="fImp" accept="application/json">
     </div>
@@ -365,10 +369,10 @@ const TEMPLATE=[
    {id:"purb",nome:"Projeto urbanístico (produto)",dono:"EDU",peso:6,rito:"estudo"},
    {id:"paisag",nome:"Paisagismo",dono:"EDU",peso:2,rito:"estudo"},
    {id:"obrasciv",nome:"Obras civis",dono:"EDU",peso:2,rito:"estudo"},
-   {id:"imagens",nome:"Imagens",dono:"MKT",peso:1,rito:"estudo"},
-   {id:"cenas",nome:"Cenas",dono:"MKT",peso:1,rito:"estudo"},
-   {id:"planta",nome:"Planta humanizada",dono:"MKT",peso:1,rito:"estudo"},
-   {id:"maqu",nome:"Maquete",dono:"MKT",peso:2,rito:"estudo"},
+   {id:"imagens",nome:"Imagens",dono:"DPRO - EDU",peso:1,rito:"estudo"},
+   {id:"cenas",nome:"Cenas",dono:"DPRO - EDU",peso:1,rito:"estudo"},
+   {id:"planta",nome:"Planta humanizada",dono:"DPRO - EDU",peso:1,rito:"estudo"},
+   {id:"maqu",nome:"Maquete",dono:"DPRO - EDU",peso:2,rito:"estudo"},
    {id:"orcp",nome:"Orçamento preliminar",dono:"DTU",peso:5,rito:"estudo"},
    {id:"book",nome:"Book / ficha técnica",dono:"MKT",peso:3,rito:"estudo"},
    {id:"prodap",nome:"Aprovação de produto (Comercial / Diretoria)",dono:"COM",peso:3,rito:"simples"}]},
@@ -386,18 +390,22 @@ const DEPTS_STORE="opus_pmo_depts_v1";
 function loadDepts(){try{const r=localStorage.getItem(DEPTS_STORE);if(r){const a=JSON.parse(r);if(Array.isArray(a)&&a.length)return a}}catch(e){}return DEPT_DEFAULT.slice()}
 function saveDepts(){try{localStorage.setItem(DEPTS_STORE,JSON.stringify(DEPTS))}catch(e){}}
 let DEPTS=loadDepts();
-function deptOpts(curd){const list=DEPTS.slice();if(curd&&!list.includes(curd))list.unshift(curd);let o=list.map(d=>`<option value="${esc(d)}" ${d===curd?'selected':''}>${esc(d)}</option>`).join("");if(MA)o+=`<option value="__new">＋ criar departamento…</option>`;return o}
-function onDeptChange(eid,pi,v){if(v==="__new"){addDept(eid,pi);return}const e=findEnt(proj(cur),eid);if(!e)return;if(pi===null||pi===undefined){e.dono=v}else{e.passos[pi].dono=v}touch(proj(cur));save();renderTab()}
-function addDept(eid,pi){if(!guardM())return;uiForm({title:"Novo departamento",okText:"Criar",fields:[{key:"n",label:"Sigla / nome do departamento",type:"text",placeholder:"Ex.: DPRO - C"}],onOk:v=>{const n=(v.n||"").trim();if(!n){ufError("Informe o nome.");return}if(!DEPTS.includes(n))DEPTS.push(n);saveDepts();const e=findEnt(proj(cur),eid);if(e){if(pi===null||pi===undefined)e.dono=n;else e.passos[pi].dono=n;touch(proj(cur));save()}closeModal();renderTab()}})}
-const TEMPLATE_VERSION="2026.07.3";
+function gerenciarDepts(){if(!guardM())return;const root=document.getElementById("modalRoot");const rows=DEPTS.map((d,i)=>`<div class="row" style="padding:5px 0"><div>${esc(d)}</div><button class="fz" style="color:var(--red)" onclick="removeDept(${i})">remover</button></div>`).join("");root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mform"><div class="mh"><h2>Departamentos</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb"><div id="uf-err" class="uf-err" style="display:none"></div>${rows||'<div class="empty">Nenhum departamento cadastrado.</div>'}<div style="display:flex;gap:8px;margin-top:14px"><input id="newdept" class="notein" placeholder="Novo departamento (ex.: DPRO - C)" style="flex:1;margin:0"><button class="uf-ok" onclick="addDeptInline()">Adicionar</button></div></div></div></div>`}
+function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
+function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
+const TEMPLATE_VERSION="2026.07.4";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
 function ritoPassos(it){
-  if(it.steps)return it.steps.map(s=>{const o=s.kind==="o";return{nome:s.n,dono:s.dono||it.dono,kind:s.kind||"n",orgao:o?(s.orgao||it.orgao||""):"",sla:o?(SLA[s.orgao||it.orgao]||30):undefined,desde:"",status:"nao",data:"",nota:""}});
-  if(it.rito==="reg")return[{nome:"Material técnico",dono:it.dono,kind:"n"},{nome:"Protocolo",dono:"LEG",kind:"n"},{nome:"Análise no órgão",dono:it.orgao||"Órgão",kind:"o",orgao:it.orgao||"",sla:SLA[it.orgao]||30,desde:""},{nome:"Aprovação",dono:"LEG",kind:"n"}].map(p=>({...p,status:"nao",data:"",nota:""}));
-  if(it.rito==="estudo")return[{nome:"Elaboração",dono:it.dono,kind:"n"},{nome:"Revisão",dono:it.dono,kind:"n"},{nome:"Aprovação interna",dono:it.dono,kind:"n"}].map(p=>({...p,status:"nao",data:"",nota:""}));
-  return[{nome:"Conclusão",dono:it.dono,kind:"n",status:"nao",data:"",nota:""}];
+  let arr;
+  if(it.steps)arr=it.steps.map(s=>{const o=s.kind==="o";return{nome:s.n,dono:s.dono||it.dono,kind:s.kind||"n",orgao:o?(s.orgao||it.orgao||""):"",sla:o?(SLA[s.orgao||it.orgao]||30):undefined,desde:"",status:"nao",data:"",nota:""}});
+  else if(it.rito==="reg")arr=[{nome:"Material técnico",dono:it.dono,kind:"n"},{nome:"Protocolo",dono:"LEG",kind:"n"},{nome:"Análise no órgão",dono:it.orgao||"Órgão",kind:"o",orgao:it.orgao||"",sla:SLA[it.orgao]||30,desde:""},{nome:"Aprovação",dono:"LEG",kind:"n"}].map(p=>({...p,status:"nao",data:"",nota:""}));
+  else if(it.rito==="estudo")arr=[{nome:"Elaboração",dono:it.dono,kind:"n"},{nome:"Revisão",dono:it.dono,kind:"n"},{nome:"Aprovação interna",dono:it.dono,kind:"n"}].map(p=>({...p,status:"nao",data:"",nota:""}));
+  else arr=[{nome:"Conclusão",dono:it.dono,kind:"n",status:"nao",data:"",nota:""}];
+  const SEM=["Aprovação","Revisão","Aprovação interna"];
+  arr.forEach(p=>{if(SEM.indexOf(p.nome)>=0)p.dono="";});
+  return arr;
 }
 function build(nome,codigo,prof){
   const fases=TEMPLATE.map(f=>({id:f.id,nome:f.nome,gate:f.gate,trilha:f.trilha,pctManual:null,itens:f.itens.map(it=>({id:it.id,nome:it.nome,dono:it.dono,peso:it.peso,rito:it.rito,orgao:it.orgao||"",abs:!!it.abs,opc:!!it.opc,livre:!!it.livre,texto:"",pctManual:null,trilha:f.trilha,aplicavel:true,blq:null,historico:[],passos:ritoPassos(it)}))}));
@@ -514,7 +522,7 @@ function ippe(p){const c=curGate(p);if(c<0)return{pct:1,fase:"Concluído",gate:p
   f.itens.forEach(e=>{if(!e.aplicavel)return;if(entPct(e)<.999){miss.push({nome:e.nome,abs:e.abs});if(e.abs)trav=true}});
   return{pct:faseTot(f).pct,fase:f.nome,gate:f.gate,missing:miss,travado:trav}}
 function aguardando(p){const o=[];p.fases.forEach(f=>f.itens.forEach(e=>{if(!e.aplicavel)return;e.passos.forEach(x=>{if(x.status==="aguarda"||x.status==="exig"){const prev=previstoDate(x);const over=prev!=null?dias(prev):null;const sla=x.sla||SLA[x.orgao]||30;o.push({ent:e.nome,orgao:x.orgao||"Órgão",prev,over,sla,atraso:over!=null&&over>0,exig:x.status==="exig",reprog:x.reprog||0})}})}));return o}
-function bloqueios(p){const o=[];p.fases.forEach(f=>f.itens.forEach(e=>{if(e.blq)o.push({ent:e.nome,motivo:e.blq.motivo,resp:e.blq.resp||"",dias:dias(e.blq.desde)})}));return o}
+function bloqueios(p){const o=[];p.fases.forEach(f=>f.itens.forEach(e=>{if(e.blq)o.push({ent:e.nome,motivo:e.blq.motivo,dept:e.blq.dept||"",resp:e.blq.resp||"",dias:dias(e.blq.desde)})}));return o}
 function exigCount(p){let n=0;p.fases.forEach(f=>f.itens.forEach(e=>e.passos.forEach(x=>{if(x.status==="exig")n++})));return n}
 function gateRisco(p){const c=curGate(p);if(c<0)return false;const m=p.metas&&p.metas[p.fases[c].id];if(!m)return false;const dd=dias(m);return dd!=null&&dd>-14}
 function gateVencido(p){const c=curGate(p);if(c<0)return false;const m=p.metas&&p.metas[p.fases[c].id];if(!m)return false;const dd=dias(m);return dd!=null&&dd>0}
@@ -596,10 +604,10 @@ function setTab(t){tab=t;renderTab();document.querySelectorAll('.tab').forEach(b
 
 function faseBlocksHTML(p,trilha){let h="";
   p.fases.forEach((f,fi)=>{if(f.trilha!==trilha)return;const ft=faseTot(f),pc=Math.round(ft.pct*100),col=colf[fi]?"col":"";
-    h+=`<div class="faseblk ${col}"><div class="fh" onclick="tf(${fi})"><span class="fl"><span class="chev">▾</span>${esc(f.nome)} <span class="gt">${esc(f.gate)}</span></span><span style="display:flex;align-items:center;gap:9px" onclick="event.stopPropagation()">${ED?`<span class="fpm-w"><input class="fpm" type="number" min="0" max="100" placeholder="auto" value="${f.pctManual!=null?f.pctManual:''}" onchange="setFasePct(${fi},this.value)">%</span>`:`<span class="fp">${pc}%${ft.manual?' <span class="tag" style="border-color:var(--accent);color:var(--accent);padding:0 5px">manual</span>':''}</span>`}${MA?`<button class="fz" onclick="zerarFase(${fi})">zerar</button>`:''}</span></div><div class="mini"><i style="width:${pc}%"></i></div>`;
+    h+=`<div class="faseblk ${col}"><div class="fh" onclick="tf(${fi})"><span class="fl"><span class="chev">▾</span>${esc(f.nome)} <span class="gt">${esc(f.gate)}</span></span><span style="display:flex;align-items:center;gap:9px" onclick="event.stopPropagation()">${ED?`<span class="fpm-w"><input class="fpm" type="number" min="0" max="100" placeholder="auto" value="${f.pctManual!=null?f.pctManual:''}" onchange="setFasePct(${fi},this.value)">%</span>${f.pctManual!=null?`<span class="tag" style="border-color:var(--accent);color:var(--accent);padding:0 6px;font-weight:600">manual ${f.pctManual}% · trava a fase</span>`:''}`:`<span class="fp">${pc}%${ft.manual?' <span class="tag" style="border-color:var(--accent);color:var(--accent);padding:0 5px">manual</span>':''}</span>`}${MA?`<button class="fz" onclick="zerarFase(${fi})">zerar</button>`:''}</span></div><div class="mini"><i style="width:${pc}%"></i></div>`;
     f.itens.forEach(e=>{const ep=entPct(e),exp=expe===e.id;
       const agp=e.passos.find(x=>x.status==="aguarda"||x.status==="exig");let agtag="";if(agp){const prev=previstoDate(agp),over=prev!=null?dias(prev):null,atr=over!=null&&over>0;agtag=`<span class="tag aguarda ${atr?'atraso':''}">${agp.status==="exig"?'exigência':'aguardando'} ${esc(agp.orgao)}${over!=null?(atr?' · vencido '+over+'d':' · faltam '+(-over)+'d'):''}</span>`}
-      h+=`<div class="ent"><div class="eh" onclick="te('${e.id}')"><span class="en ${e.aplicavel?'':'na'}">${esc(e.nome)}<span class="tags">${e.abs?'<span class="tag abs">absoluto</span>':''}${e.opc?'<span class="tag opc">opcional</span>':''}${e.esp?'<span class="tag opc">especial</span>':''}${e.pctManual!=null?'<span class="tag" style="border-color:var(--accent);color:var(--accent)">% manual</span>':''}${e.blq?'<span class="tag blq">pendência interna'+(e.blq.resp?' · '+esc(e.blq.resp):'')+'</span>':''}${agtag}</span></span><span class="ep">${e.aplicavel?(ep>=.999?'100%':pct(ep)+'%'):'N/A'}</span></div>`;
+      h+=`<div class="ent"><div class="eh" onclick="te('${e.id}')"><span class="en ${e.aplicavel?'':'na'}">${esc(e.nome)}<span class="tags">${e.abs?'<span class="tag abs">absoluto</span>':''}${e.opc?'<span class="tag opc">opcional</span>':''}${e.esp?'<span class="tag opc">especial</span>':''}${e.pctManual!=null?'<span class="tag" style="border-color:var(--accent);color:var(--accent)">% manual</span>':''}${e.blq?'<span class="tag blq">pendência interna'+(e.blq.dept?' · '+esc(e.blq.dept):'')+(e.blq.resp?' · '+esc(e.blq.resp):'')+'</span>':''}${agtag}</span></span>${ED&&e.aplicavel?`<button class="qdone ${ep>=.999?'on':''}" onclick="event.stopPropagation();toggleConcluido('${e.id}')">Concluído</button>`:''}<span class="ep">${e.aplicavel?(ep>=.999?'100%':pct(ep)+'%'):'N/A'}</span></div>`;
       if(exp)h+=renderPassos(p,fi,e);
       h+=`</div>`});
     h+=`</div>`});
@@ -617,7 +625,7 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
       <div class="panel"><h3>Aguardando órgãos <span class="legend">pendência externa</span></h3>${ags.length?ags.map(a=>`<div class="row"><div><div>${esc(a.ent)}</div><div class="sub">${esc(a.orgao)}${a.exig?' · em exigência':''} · previsto ${a.prev?brdate(a.prev):'—'}${a.reprog?' · reprog. '+a.reprog+'x':''}</div></div><div class="d ${a.atraso?'r':'y'}">${a.over!=null?(a.atraso?'vencido '+a.over+'d':'faltam '+(-a.over)+'d'):'—'}</div></div>`).join(""):`<div class="empty">Sem pendência externa.</div>`}</div>
-      <div class="panel"><h3>Pendências internas <span class="legend">responsabilidade interna</span></h3>${bls.length?bls.map(x=>`<div class="row"><div><div>${esc(x.ent)}</div><div class="sub">${esc(x.motivo)}${x.resp?' · resp.: '+esc(x.resp):''}</div></div><div class="d r">${x.dias!=null?x.dias+'d':'—'}</div></div>`).join(""):`<div class="empty">Sem pendência interna.</div>`}</div>
+      <div class="panel"><h3>Pendências internas <span class="legend">responsabilidade interna</span></h3>${bls.length?bls.map(x=>`<div class="row"><div><div>${esc(x.ent)}</div><div class="sub">${esc(x.motivo)}${x.dept?' · '+esc(x.dept):''}${x.resp?' · '+esc(x.resp):''}</div></div><div class="d r">${x.dias!=null?x.dias+'d':'—'}</div></div>`).join(""):`<div class="empty">Sem pendência interna.</div>`}</div>
       </div></div>`;
     b.innerHTML=h}
   else if(tab==="entreg"){b.innerHTML=faseBlocksHTML(p,"reg")+(MA?`<button class="addbtn" onclick="addEspecial()">+ Item especial</button>`:"")}
@@ -655,7 +663,7 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
 function renderPassos(p,fi,e){let h=`<div class="passos">`;
   e.passos.forEach((x,pi)=>{
     const isO=x.kind==="o";
-    const donoHTML=(ED&&!isO)?`<select class="deptsel" onchange="onDeptChange('${e.id}',${pi},this.value)">${deptOpts(x.dono)}</select>`:`<span class="pd">${esc(x.dono)}</span>`;
+    const donoHTML=`<span class="pd">${esc(x.dono)}</span>`;
     if(ED){
       const segs=isO?[["nao","","Não"],["aguarda","w","Aguardando"],["exig","x","Exigência"],["ok","o","Concluído"]]:(e.rito==="reg"||e.rito==="estudo"?[["nao","","Não"],["exec","e","Elaboração"],["ok","o","Concluído"]]:[["nao","","Não"],["ok","o","Concluído"]]);
       h+=`<div class="passo"><span class="pn">${esc(x.nome)}${donoHTML}</span><span class="seg">${segs.map(([val,cls,lb])=>`<button class="${x.status===val?'on-'+cls:''}" title="${SLBL[val]}" onclick="setSt('${e.id}',${pi},'${val}')">${lb}</button>`).join("")}</span></div>`;
@@ -682,7 +690,6 @@ function renderPassos(p,fi,e){let h=`<div class="passos">`;
       <button class="${e.blq?'on':''}" onclick="toggleBlq('${e.id}')">${e.blq?'Remover pendência interna':'Registrar pendência interna'}</button>
       <button onclick="renameEnt('${e.id}')">Renomear</button>
       ${e.esp&&MA?`<button onclick="moveEnt('${e.id}',-1)" title="subir">↑</button><button onclick="moveEnt('${e.id}',1)" title="descer">↓</button><button onclick="removeEnt('${e.id}')" style="color:var(--red)">Remover item</button>`:''}
-      <span class="pctm"><label>Depto</label><select class="deptsel" onchange="onDeptChange('${e.id}',null,this.value)">${deptOpts(e.dono)}</select></span>
       <span class="pctm"><label>% manual</label><input type="number" min="0" max="100" placeholder="auto" value="${e.pctManual!=null?e.pctManual:''}" onchange="setPctManual('${e.id}',this.value)"></span>
     </div>`;
   }
@@ -704,9 +711,10 @@ function setPasso(eid,pi,k,v){if(!guard())return;const e=findEnt(proj(cur),eid);
 function addHist(eid,v){if(!guard()||!(v||"").trim())return;const e=findEnt(proj(cur),eid);if(!e.historico)e.historico=[];e.historico.push({data:today(),autor:"Alberto",texto:v.trim()});touch(proj(cur));save();renderTab()}
 function setTexto(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.texto=v;touch(proj(cur));save()}
 function setPctManual(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);const s=String(v).trim();if(s===""){e.pctManual=null}else{let n=parseInt(s,10);if(isNaN(n))n=0;e.pctManual=Math.max(0,Math.min(100,n))}touch(proj(cur));save();renderTab()}
+function toggleConcluido(eid){if(!guard())return;const e=findEnt(proj(cur),eid);e.pctManual=(e.pctManual===100?null:100);touch(proj(cur));save();renderTab()}
 function renameEnt(eid){if(!guard())return;const e=findEnt(proj(cur),eid);uiForm({title:"Renomear entregável",okText:"Salvar",fields:[{key:"n",label:"Nome",type:"text",value:e.nome}],onOk:v=>{if((v.n||"").trim())e.nome=v.n.trim();touch(proj(cur));save();closeModal();renderTab()}})}
 function toggleNA(eid){if(!guard())return;const e=findEnt(proj(cur),eid);e.aplicavel=!e.aplicavel;touch(proj(cur));save();renderTab()}
-function toggleBlq(eid){if(!guard())return;const e=findEnt(proj(cur),eid);if(e.blq){e.blq=null;touch(proj(cur));save();renderTab();return}uiForm({title:"Registrar pendência interna",okText:"Registrar",fields:[{key:"m",label:"Motivo (falta decisão, documento, contratação, pagamento, minuta...)",type:"textarea",placeholder:"Descreva o motivo"},{key:"resp",label:"Responsável (pessoa)",type:"text",placeholder:"Quem vai resolver"}],onOk:v=>{e.blq={motivo:(v.m||"").trim()||"Pendência interna",resp:(v.resp||"").trim(),desde:today()};touch(proj(cur));save();closeModal();renderTab()}})}
+function toggleBlq(eid){if(!guard())return;const e=findEnt(proj(cur),eid);if(e.blq){e.blq=null;touch(proj(cur));save();renderTab();return}uiForm({title:"Registrar pendência interna",okText:"Registrar",fields:[{key:"m",label:"Motivo (falta decisão, documento, contratação, pagamento, minuta...)",type:"textarea",placeholder:"Descreva o motivo"},{key:"dept",label:"Departamento responsável",type:"select",value:DEPTS[0]||"",options:[{v:"",t:"—"}].concat(DEPTS.map(d=>({v:d,t:d})))},{key:"resp",label:"Responsável (pessoa, opcional)",type:"text",placeholder:"Quem vai resolver"}],onOk:v=>{e.blq={motivo:(v.m||"").trim()||"Pendência interna",dept:(v.dept||"").trim(),resp:(v.resp||"").trim(),desde:today()};touch(proj(cur));save();closeModal();renderTab()}})}
 function sugereRisco(p,d){const orgs=DIM_ORGAOS[d]||[];const rel=aguardando(p).filter(a=>orgs.includes(a.orgao));let prob="baixa",imp="baixo";
   if(rel.some(a=>a.atraso)){prob="alta";imp="alto"}else if(rel.length){prob="media";imp="medio"}
   if(d==="Fundiário"&&p.fases.filter(f=>["orig","fund","dir"].includes(f.id)).some(f=>f.itens.some(e=>e.blq))){prob="alta";imp="alto"}
@@ -853,6 +861,7 @@ document.getElementById("bAccess").onclick=()=>{if(GATE){showGate();return}if(RO
 document.getElementById("bPrint").onclick=()=>window.print();
 document.getElementById("bManual").onclick=openManual;
 document.getElementById("bCompare").onclick=openCompare;
+document.getElementById("bDept").onclick=gerenciarDepts;
 document.getElementById("bTheme").onclick=()=>{applyTheme(document.documentElement.getAttribute("data-theme")==="light"?"dark":"light");cur?renderP():renderHome()};
 document.getElementById("bNew").onclick=()=>{if(!guardM())return;uiForm({title:"Nova frente",okText:"Criar",fields:[{key:"nome",label:"Nome da frente",type:"text"},{key:"cod",label:"Código (sigla)",type:"text"}],onOk:v=>{if(!(v.nome||"").trim()){ufError("Informe o nome.");return}let c=((v.cod||"").trim()||v.nome.slice(0,4).toUpperCase());const p=build(v.nome.trim(),c||("P"+Date.now()),{estagio:"Prospecção / MOU",through:-1});let b=p.id,k=1;while(proj(p.id)){p.id=b+(++k);p.codigo=p.id}DATA.push(p);save();closeModal();openP(p.id)}})};
 document.getElementById("bExp").onclick=()=>{const bl=new Blob([JSON.stringify(snapshot(),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="cockpit-urbanismo-"+today()+".json";a.click()};
