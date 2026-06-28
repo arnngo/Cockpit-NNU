@@ -30,6 +30,8 @@ Documento de referência para guardar e consultar quando precisar mexer. Cobre: 
 
 - **Identidade do editor + nº do processo (TEMPLATE 2026.07.5)** — a senha de **edição** passou a ser `URB` (a de master segue `opus890`, a de leitura `123`). Ao entrar como editor, o sistema pergunta **"Quem está atualizando?"** e a pessoa escolhe o responsável (lista padrão: DPRO - EDU, LEG, DTU, OBR, CONS) — esse nome carimba o "atualizado por" de cada alteração e aparece no botão de acesso. O **master** gerencia essa lista pelo botão **"Editores"** (adiciona/remove), salvo em `opus_pmo_editores_v1`. E cada entregável ganhou campo **"Nº do processo / protocolo no órgão"** (livre, em qualquer item — ex.: AVT, AVTO, LP), editável na visão expandida e exibido como tag "proc. …" na linha.
 
+- **Nº do processo no topo, datas 2024–2035 e master edita/remove comentários** — o campo **"Nº do processo / protocolo no órgão"** foi para o **topo do item expandido** (quadro destacado), em qualquer entregável (AVT, AVTO, LP...). Todos os campos de **data** passaram a ter faixa **2024–2035** (`min`/`max`), para o calendário abrir em 2026 e não cair em 2002. O **master** ganhou **editar** e **remover** em cada comentário do histórico — tanto nos **entregáveis** quanto nas **anotações dos Projetos Especiais (Diversos)**. Comentários novos passam a registrar quem escreveu (DPRO-EDU, LEG, etc., conforme o editor logado).
+
 ---
 
 ## 2. Decisões travadas (não reverter sem motivo)

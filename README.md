@@ -1,6 +1,6 @@
 # Cockpit NNU — publicar no GitHub Pages
 
-> **Pacote v4** · TEMPLATE 2026.07.5 · três senhas — leitura `123`, **edição `URB`** (pergunta "quem está atualizando?" e registra o nome em cada alteração), master `opus890` (gerencia a lista de editores e departamentos). Cada item ganhou campo **"Nº do processo"** (AVT, AVTO, LP...). Antes disso: botão único "Concluído", aviso de fase travada, departamentos só na pendência interna, responsáveis dos ritos ajustados, evolução semanal, "Comparar frentes" e SLA com data prevista + Reprogramar.
+> **Pacote v4** · TEMPLATE 2026.07.5 · `dados.json` já publicado com a **base real** (13 frentes). Três senhas — leitura `123`, **edição `URB`** (pergunta "quem está atualizando?" e registra o nome em cada alteração), master `opus890` (gerencia editores e departamentos; **edita/remove comentários** do histórico em entregáveis e em Projetos Especiais). Cada item tem **"Nº do processo"** no topo (AVT, AVTO, LP...); campos de data abrem em 2026 (faixa 2024–2035). Inclui botão único "Concluído", aviso de fase travada, evolução semanal, "Comparar frentes" e SLA com data prevista + Reprogramar.
 
 Esta pasta tem **dois arquivos** que vão para o ar juntos:
 - `index.html` — o painel.
