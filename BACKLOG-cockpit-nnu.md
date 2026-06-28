@@ -28,6 +28,8 @@ Documento de referência para guardar e consultar quando precisar mexer. Cobre: 
 
 - **Preenchimento rápido + responsáveis dos ritos (TEMPLATE 2026.07.4)** — na linha do entregável, os botões 25/50/75/100/auto deram lugar a **um único botão "Concluído"** (marca 100%; clicar de novo volta ao automático pelos passos). No cabeçalho da fase, quando ela está travada manualmente, aparece a tag **"manual X% · trava a fase"** (modo edição), para não esconder que o override anula os itens. Nos passos de rito, **Elaboração do material técnico** segue o dono do entregável e **Protocolo** segue LEG, mas **Aprovação, Revisão e Aprovação interna** ficam **sem responsável** (normalização por nome do passo, vale para todos os ritos). **Imagens, Cenas, Planta humanizada e Maquete** passaram de MKT para **DPRO - EDU** (Book/ficha e Material de vendas seguem MKT).
 
+- **Identidade do editor + nº do processo (TEMPLATE 2026.07.5)** — a senha de **edição** passou a ser `URB` (a de master segue `opus890`, a de leitura `123`). Ao entrar como editor, o sistema pergunta **"Quem está atualizando?"** e a pessoa escolhe o responsável (lista padrão: DPRO - EDU, LEG, DTU, OBR, CONS) — esse nome carimba o "atualizado por" de cada alteração e aparece no botão de acesso. O **master** gerencia essa lista pelo botão **"Editores"** (adiciona/remove), salvo em `opus_pmo_editores_v1`. E cada entregável ganhou campo **"Nº do processo / protocolo no órgão"** (livre, em qualquer item — ex.: AVT, AVTO, LP), editável na visão expandida e exibido como tag "proc. …" na linha.
+
 ---
 
 ## 2. Decisões travadas (não reverter sem motivo)
