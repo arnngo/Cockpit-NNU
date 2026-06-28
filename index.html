@@ -6,14 +6,15 @@
 <title>NNU · Cockpit de Portfólio — Urbanismo</title>
 <style>
 :root{
-  --display:'Aptos Display','Aptos','Segoe UI',system-ui,-apple-system,sans-serif;
-  --body:'Aptos','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:ui-monospace,'Segoe UI Mono','SF Mono',Consolas,monospace;
+  --display:system-ui,'Segoe UI Variable Display','Segoe UI',-apple-system,BlinkMacSystemFont,'Inter','Roboto','Helvetica Neue',Arial,sans-serif;
+  --body:system-ui,'Segoe UI Variable Text','Segoe UI',-apple-system,BlinkMacSystemFont,'Inter','Roboto','Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'Cascadia Code','Segoe UI Mono','SF Mono',Consolas,monospace;
 }
 [data-theme="light"]{--bg:#F5F6F8;--bg2:#EEF0F3;--surface:#FFF;--surface2:#F2F4F7;--line:#E4E7EC;--line2:#D2D7DE;--ink:#171A1F;--ink-mid:#525965;--ink-dim:#8A919C;--accent:#1B3A6B;--accent-dim:#8DA1C2;--on-accent:#FFF;--accent-soft:rgba(27,58,107,.10);--green:#2E9E5B;--amber:#C9821A;--red:#CE4242;--green-soft:rgba(46,158,91,.12);--amber-soft:rgba(201,130,26,.13);--red-soft:rgba(206,66,66,.12);--shadow:0 1px 2px rgba(20,25,35,.05),0 4px 14px rgba(20,25,35,.05)}
 [data-theme="dark"]{--bg:#0E1411;--bg2:#121A15;--surface:#141C17;--surface2:#1C261F;--line:#26322A;--line2:#34423A;--ink:#E7EFE9;--ink-mid:#A4B2A8;--ink-dim:#6B7B70;--accent:#6FC48D;--accent-dim:#356B4A;--on-accent:#0B130E;--accent-soft:rgba(111,196,141,.17);--green:#62C07E;--amber:#E0A23F;--red:#E0685A;--green-soft:rgba(95,185,122,.16);--amber-soft:rgba(224,162,63,.15);--red-soft:rgba(224,104,90,.16);--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.28)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14.5px;line-height:1.55;letter-spacing:-.003em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+h1,h2,h3,.det-head h2,.card .cname,.sectlabel h2{letter-spacing:-.015em}
 button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inherit}
 .lbl{font-family:var(--body);letter-spacing:.09em;text-transform:uppercase}
 .shell{max-width:1200px;margin:0 auto;padding:0 22px 90px}
@@ -198,6 +199,9 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .heat-leg{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
 .heat-leg span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-mid)}
 .heat-leg i{width:13px;height:13px;border-radius:3px;display:inline-block}
+.fpm-w{display:inline-flex;align-items:center;gap:3px;color:var(--ink-mid);font-size:12px;font-weight:600}
+.fpm{width:50px;padding:3px 6px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);color:var(--ink);font-size:12.5px;font-weight:600;text-align:right}
+.fpm:focus{border-color:var(--accent);outline:none}
 .overlay{position:fixed;inset:0;background:rgba(10,14,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
 .modal{background:var(--surface);border:1px solid var(--line);border-radius:14px;max-width:760px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.3)}
 .modal .mh{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);border-radius:14px 14px 0 0}
@@ -210,6 +214,14 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .modal .mb ul{margin:6px 0;padding-left:18px}.modal .mb li{font-size:13px;color:var(--ink-mid);margin:4px 0;line-height:1.55}
 .modal .warn{background:var(--amber-soft);border:1px solid var(--amber);border-radius:8px;padding:11px 13px;margin:14px 0;font-size:12.5px;color:var(--ink)}
 .modal.mform{max-width:440px}
+.modal.mwide{max-width:1080px;width:96vw}
+.cmpsec{margin-bottom:24px}
+.cmpsec:last-child{margin-bottom:4px}
+.cmpsec h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);font-weight:600;margin:0 0 12px}
+.cmpchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.cmpchip{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);color:var(--ink-mid)}
+.cmpchip.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#modalRoot svg text{font-family:var(--body)}
 .uf-l{display:block;font-size:12px;color:var(--ink-mid);margin:14px 0 0;font-weight:600}
 .uf-l input,.uf-l select,.uf-l textarea{display:block;width:100%;margin-top:6px;background:var(--surface);border:1px solid var(--line2);color:var(--ink);border-radius:8px;padding:9px 11px;font-size:13px;font-weight:400;font-family:var(--body)}
 .uf-l textarea{min-height:62px;resize:vertical}
@@ -231,6 +243,7 @@ input[type=file]{display:none}
     <div class="brand"><span class="mark">OPUS</span><div><h1>Cockpit de Portfólio — Urbanismo</h1><div class="sub">NNU · da originação ao lançamento</div></div></div>
     <div class="toolbtns">
       <button class="tbtn" id="bManual">Manual</button>
+      <button class="tbtn" id="bCompare">Comparar frentes</button>
       <button class="tbtn" id="bTheme">Tema</button>
       <button class="tbtn" id="bAccess">Acessar</button>
       <button class="tbtn" id="bPrint">Imprimir</button>
@@ -260,6 +273,7 @@ function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOSt
 function dias(iso){if(!iso)return null;return Math.round((Date.now()-new Date(iso).getTime())/864e5)}
 function today(){return new Date().toISOString().slice(0,10)}
 function brdate(iso){return iso?iso.split('-').reverse().join('/'):'—'}
+function fixYear(v){if(!v)return v;const m=/^(\d{1,4})-(\d{2})-(\d{2})$/.exec(v);if(!m)return v;let y=+m[1];if(y<100)y+=2000;return String(y).padStart(4,"0")+"-"+m[2]+"-"+m[3]}
 
 const RITO_REGI=[{n:"Pedir"},{n:"Elaboração de material técnico"},{n:"Protocolo",dono:"LEG"},{n:"Análise no órgão",kind:"o"},{n:"Aprovação",dono:"LEG"}];
 const RITO_COMPL=[{n:"Pedir"},{n:"Elaboração de material técnico"},{n:"Protocolo",dono:"LEG"},{n:"Análise no órgão",kind:"o"}];
@@ -267,76 +281,81 @@ const RITO_CAUCAO=[{n:"Pedir"},{n:"Avaliar"},{n:"Emitir"},{n:"Protocolar",dono:"
 const RITO_PEAE=[{n:"Pedir"},{n:"Elaborar"},{n:"Avaliar"},{n:"Emitir"}];
 const TEMPLATE=[
  {id:"orig",nome:"Originação",gate:"Prospecção validada",trilha:"reg",itens:[
-   {id:"origfund",nome:"Prospecção e análise fundiária",dono:"GER",peso:3,rito:"estudo"},
-   {id:"mou",nome:"MOU / interesse formal",dono:"GER",peso:2,rito:"simples"}]},
+   {id:"origfund",nome:"Prospecção e análise fundiária",dono:"GER",peso:2,rito:"estudo"},
+   {id:"mou",nome:"MOU / interesse formal",dono:"GER",peso:1,rito:"simples"}]},
  {id:"viab",nome:"Viabilidade",gate:"Viabilidade aprovada",trilha:"reg",itens:[
-   {id:"topo",nome:"Topográfico + memorial de caracterização",dono:"DTU",peso:3,rito:"estudo"},
-   {id:"sond",nome:"Sondagem geotécnica",dono:"DTU",peso:2,rito:"estudo"},
-   {id:"vge",nome:"Viabilidade técnica + econômica (VGV)",dono:"GER",peso:3,rito:"estudo"}]},
+   {id:"topo",nome:"Topográfico + memorial de caracterização",dono:"DTU",peso:2,rito:"estudo"},
+   {id:"sond",nome:"Sondagem geotécnica",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"vge",nome:"Viabilidade técnica + econômica (VGV)",dono:"GER",peso:2,rito:"estudo"}]},
  {id:"fund",nome:"Base fundiária",gate:"Base regularizada",trilha:"reg",itens:[
    {id:"matr",nome:"Matrículas / análise dominial",dono:"JUR",peso:2,rito:"simples"},
    {id:"spe",nome:"SPE / CNPJ",dono:"JUR",peso:1,rito:"simples"},
    {id:"contr",nome:"Contrato de parceria / cessão",dono:"JUR",peso:3,rito:"simples"},
-   {id:"georr",nome:"Georreferenciamento",dono:"DTU",peso:3,rito:"reg",orgao:"Prefeitura"},
-   {id:"transf",nome:"Transferência de gleba",dono:"LEG",peso:3,rito:"reg",orgao:"Cartório",opc:true},
-   {id:"remem",nome:"Remembramento / desmembramento",dono:"DTU",peso:3,rito:"reg",orgao:"Prefeitura",opc:true}]},
+   {id:"georr",nome:"Georreferenciamento",dono:"DTU",peso:2,rito:"reg",orgao:"Prefeitura"},
+   {id:"transf",nome:"Transferência de gleba",dono:"LEG",peso:1,rito:"reg",orgao:"Cartório",opc:true},
+   {id:"remem",nome:"Remembramento / desmembramento",dono:"DTU",peso:1,rito:"reg",orgao:"Prefeitura",opc:true}]},
  {id:"dir",nome:"Diretrizes & Outorgas",gate:"Diretrizes / outorgas",trilha:"reg",itens:[
-   {id:"diretr",nome:"Diretrizes urbanísticas",dono:"LEG",peso:4,rito:"reg",orgao:"SEPLANH",abs:true},
-   {id:"avto",nome:"AVTO / Outorga Saneago",dono:"DTU",peso:4,rito:"reg",orgao:"Saneago",abs:true},
-   {id:"avt",nome:"AVT / Orçamento de conexão",dono:"DTU",peso:2,rito:"reg",orgao:"Equatorial"},
-   {id:"ooau",nome:"OOAU — operação onerosa",dono:"LEG",peso:4,rito:"reg",orgao:"Prefeitura",opc:true},
-   {id:"goinfra",nome:"Acesso GOINFRA",dono:"DTU",peso:2,rito:"reg",orgao:"GOINFRA",opc:true}]},
+   {id:"diretr",nome:"Diretrizes urbanísticas",dono:"LEG",peso:3,rito:"reg",orgao:"SEPLANH",abs:true},
+   {id:"avto",nome:"AVTO / Outorga Saneago",dono:"DTU",peso:3,rito:"reg",orgao:"Saneago",abs:true},
+   {id:"avt",nome:"AVT / Orçamento de conexão",dono:"DTU",peso:1,rito:"reg",orgao:"Equatorial"},
+   {id:"ooau",nome:"OOAU — Outorga Onerosa de Alteração de Uso",dono:"LEG",peso:8,rito:"reg",orgao:"Prefeitura",opc:true},
+   {id:"goinfra",nome:"Acesso GOINFRA",dono:"DTU",peso:1,rito:"reg",orgao:"GOINFRA",opc:true}]},
  {id:"conc",nome:"Conceito urbanístico",gate:"Conceito aprovado",trilha:"reg",itens:[
-   {id:"mplan",nome:"Conceito urbanístico / masterplan",dono:"EDU",peso:8,rito:"estudo",abs:true}]},
- {id:"ante",nome:"Anteprojeto",gate:"Anteprojeto aprovado",trilha:"reg",itens:[
-   {id:"antep",nome:"Anteprojeto urbanístico",dono:"ARQ",peso:6,rito:"estudo",abs:true}]},
+   {id:"mplan",nome:"Conceito urbanístico / masterplan",dono:"EDU",peso:16,rito:"estudo",abs:true}]},
+ {id:"ante",nome:"Projeto Executivo",gate:"Projeto executivo aprovado",trilha:"reg",itens:[
+   {id:"antep",nome:"Projeto executivo",dono:"ARQ",peso:10,rito:"estudo"}]},
  {id:"amb",nome:"Ambiental & Complementares",gate:"Licença Prévia",trilha:"reg",itens:[
-   {id:"tpg",nome:"TPG conceitual (terra + pav + galeria)",dono:"DTU",peso:4,rito:"estudo"},
-   {id:"saac",nome:"SAA conceitual",dono:"DTU",peso:2,rito:"estudo"},
-   {id:"sesc",nome:"SES conceitual",dono:"DTU",peso:2,rito:"estudo"},
-   {id:"rdec",nome:"RDE conceitual",dono:"DTU",peso:2,rito:"estudo"},
-   {id:"ras",nome:"RAS — Relatório Ambiental Simplificado",dono:"DTU",peso:3,rito:"estudo"},
-   {id:"laudos",nome:"Laudos (vegetação, engenharia, geologia)",dono:"DTU",peso:3,rito:"estudo"},
-   {id:"iphan",nome:"IPHAN",dono:"LEG",peso:2,rito:"reg",orgao:"IPHAN",opc:true},
-   {id:"lp",nome:"Licença Prévia (LP) + ASV",dono:"LEG",peso:8,rito:"reg",orgao:"AMMA",abs:true}]},
+   {id:"tpg",nome:"TPG conceitual (terra + pav + galeria)",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"saac",nome:"SAA conceitual",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"sesc",nome:"SES conceitual",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"rdec",nome:"RDE conceitual",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"ras",nome:"RAS — Relatório Ambiental Simplificado",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"laudo_veg",nome:"Laudo de vegetação",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"laudo_eng",nome:"Laudo de engenharia",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"laudo_geo",nome:"Laudo de geologia",dono:"DTU",peso:1,rito:"estudo"},
+   {id:"iphan_fca",nome:"IPHAN — FCA",dono:"LEG",peso:1,rito:"reg",orgao:"IPHAN",opc:true,steps:[{n:"Protocolo",dono:"LEG"}]},
+   {id:"iphan_tr",nome:"IPHAN — TR",dono:"LEG",peso:1,rito:"reg",orgao:"IPHAN",opc:true,steps:[{n:"Análise",kind:"o",orgao:"IPHAN"},{n:"Emissão"}]},
+   {id:"iphan_paipa",nome:"IPHAN — PAIPA",dono:"LEG",peso:1,rito:"estudo",opc:true},
+   {id:"iphan_raipa",nome:"IPHAN — RAIPA",dono:"LEG",peso:1,rito:"estudo",opc:true},
+   {id:"lp",nome:"Licença Prévia (LP)",dono:"LEG",peso:4,rito:"reg",orgao:"AMMA",abs:true}]},
  {id:"prot",nome:"Protocolo Seplanh",gate:"Protocolo Seplanh",trilha:"reg",itens:[
-   {id:"protsep",nome:"Protocolo Seplanh (autuação)",dono:"LEG",peso:4,rito:"reg",orgao:"SEPLANH",abs:true}]},
+   {id:"protsep",nome:"Protocolo Seplanh (autuação)",dono:"LEG",peso:8,rito:"reg",orgao:"SEPLANH",abs:true}]},
  {id:"anal",nome:"Análise & \"De acordo\"",gate:"Seplanh \"de acordo\"",trilha:"reg",itens:[
-   {id:"analsep",nome:"Análise Seplanh (CHEADV / Cartografia / GERAAP)",dono:"LEG",peso:4,rito:"reg",orgao:"SEPLANH"},
-   {id:"deacordo",nome:"Seplanh \"de acordo\"",dono:"LEG",peso:10,rito:"reg",orgao:"SEPLANH",abs:true}]},
+   {id:"analsep",nome:"Análise Seplanh (CHEADV / Cartografia / GERAAP)",dono:"LEG",peso:8,rito:"reg",orgao:"SEPLANH"},
+   {id:"deacordo",nome:"Seplanh \"de acordo\"",dono:"LEG",peso:12,rito:"reg",orgao:"SEPLANH",abs:true}]},
  {id:"inst",nome:"Área Institucional",gate:"Área institucional",trilha:"reg",itens:[
-   {id:"inst_pedir",nome:"Pedir avaliação da área institucional",dono:"LEG",peso:2,rito:"simples"},
-   {id:"inst_receber",nome:"Receber avaliação da área institucional",dono:"LEG",peso:2,rito:"simples"},
-   {id:"inst_destino",nome:"Definir destinação da área institucional",dono:"LEG",peso:2,rito:"simples"},
-   {id:"inst_termo",nome:"Termo de área institucional",dono:"LEG",peso:2,rito:"simples"},
-   {id:"inst_garantia",nome:"Garantia de área institucional",dono:"LEG",peso:3,rito:"simples"}]},
+   {id:"inst_pedir",nome:"Pedir avaliação da área institucional",dono:"LEG",peso:3,rito:"simples"},
+   {id:"inst_receber",nome:"Receber avaliação da área institucional",dono:"LEG",peso:3,rito:"simples"},
+   {id:"inst_destino",nome:"Definir destinação da área institucional",dono:"LEG",peso:3,rito:"simples"},
+   {id:"inst_termo",nome:"Termo de área institucional",dono:"LEG",peso:3,rito:"simples"},
+   {id:"inst_garantia",nome:"Garantia de área institucional",dono:"LEG",peso:4,rito:"simples"}]},
  {id:"li",nome:"Licença de Instalação",gate:"LI",trilha:"reg",itens:[
-   {id:"prad",nome:"PRAD",dono:"DTU",peso:3,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
+   {id:"prad",nome:"PRAD",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
    {id:"recflor",nome:"Recomposição florística",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
    {id:"suptrav",nome:"Supressão de travessias",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
-   {id:"supeee",nome:"Supressão de EEE",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
-   {id:"supcr",nome:"Supressão de CR",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
-   {id:"estobra",nome:"Estimativa de valor de obra",dono:"DTU",peso:2,rito:"reg",steps:[{n:"Pedir"},{n:"Elaboração de material técnico"},{n:"Aprovação",dono:"LEG"}]},
-   {id:"li_inst",nome:"Licença de Instalação (LI)",dono:"LEG",peso:8,rito:"reg",orgao:"AMMA",abs:true,steps:[{n:"Protocolo",dono:"LEG"},{n:"Análise"},{n:"Emissão"},{n:"Aguardando órgão",kind:"o",orgao:"AMMA"},{n:"Publicação"}]},
-   {id:"condic",nome:"Condicionantes (emissão)",dono:"LEG",peso:2,rito:"reg",livre:true,steps:[{n:"Emissão"}]}]},
+   {id:"supeee",nome:"Supressão de EEE",dono:"DTU",peso:1,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
+   {id:"supcr",nome:"Supressão de CR",dono:"DTU",peso:1,rito:"reg",orgao:"AMMA",steps:RITO_REGI},
+   {id:"estobra",nome:"Estimativa de valor de obra",dono:"DTU",peso:1,rito:"reg",steps:[{n:"Pedir"},{n:"Elaboração de material técnico"},{n:"Aprovação",dono:"LEG"}]},
+   {id:"li_inst",nome:"Licença de Instalação (LI)",dono:"LEG",peso:10,rito:"reg",orgao:"AMMA",abs:true,steps:[{n:"Protocolo",dono:"LEG"},{n:"Análise"},{n:"Emissão"},{n:"Aguardando órgão",kind:"o",orgao:"AMMA"},{n:"Publicação"}]},
+   {id:"condic",nome:"Condicionantes (emissão)",dono:"LEG",peso:1,rito:"reg",livre:true,steps:[{n:"Emissão"}]},
+   {id:"c_asv",nome:"Supressão / retirada de indivíduos esparsos (ASV)",dono:"DTU",peso:1,rito:"reg",orgao:"AMMA",steps:RITO_COMPL}]},
  {id:"aprov",nome:"Aprovar projetos complementares",gate:"Projetos complementares",trilha:"reg",itens:[
-   {id:"c_ter",nome:"Terraplenagem (TER)",dono:"DTU",peso:2,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
-   {id:"c_pav",nome:"Pavimentação (PAV)",dono:"DTU",peso:2,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
-   {id:"c_gal",nome:"Galeria de Águas Pluviais (GAL)",dono:"DTU",peso:2,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
-   {id:"c_saa",nome:"Rede de água (SAA)",dono:"DTU",peso:2,rito:"reg",orgao:"Saneago",steps:RITO_COMPL},
-   {id:"c_ses",nome:"Rede de esgoto (SES)",dono:"DTU",peso:2,rito:"reg",orgao:"Saneago",steps:RITO_COMPL},
-   {id:"c_rde",nome:"Rede elétrica (RDE)",dono:"DTU",peso:2,rito:"reg",orgao:"Equatorial",steps:RITO_COMPL},
-   {id:"c_asv",nome:"Supressão / retirada de indivíduos esparsos (ASV)",dono:"DTU",peso:2,rito:"reg",orgao:"AMMA",steps:RITO_COMPL}]},
+   {id:"c_ter",nome:"Terraplenagem (TER)",dono:"DTU",peso:3,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
+   {id:"c_pav",nome:"Pavimentação (PAV)",dono:"DTU",peso:3,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
+   {id:"c_gal",nome:"Galeria de Águas Pluviais (GAL)",dono:"DTU",peso:3,rito:"reg",orgao:"Prefeitura",steps:RITO_COMPL},
+   {id:"c_saa",nome:"Rede de água (SAA)",dono:"DTU",peso:3,rito:"reg",orgao:"Saneago",steps:RITO_COMPL},
+   {id:"c_ses",nome:"Rede de esgoto (SES)",dono:"DTU",peso:3,rito:"reg",orgao:"Saneago",steps:RITO_COMPL},
+   {id:"c_rde",nome:"Rede elétrica (RDE)",dono:"DTU",peso:3,rito:"reg",orgao:"Equatorial",steps:RITO_COMPL}]},
  {id:"dec",nome:"Decreto",gate:"Decreto",trilha:"reg",itens:[
-   {id:"geraapf",nome:"GERAAP — análise final",dono:"LEG",peso:4,rito:"reg",orgao:"SEPLANH"},
-   {id:"caucao",nome:"Caução",dono:"LEG",peso:3,rito:"reg",steps:RITO_CAUCAO},
-   {id:"termocomp",nome:"Termo de Compromisso Obras de Infraestrutura",dono:"LEG",peso:3,rito:"reg",steps:RITO_PEAE},
-   {id:"minutadec",nome:"Minuta Decreto de Aprovação",dono:"LEG",peso:3,rito:"reg",steps:RITO_PEAE},
-   {id:"decreto",nome:"Decreto de aprovação",dono:"LEG",peso:12,rito:"reg",orgao:"Casa Civil",abs:true}]},
+   {id:"geraapf",nome:"GERAAP — análise final",dono:"LEG",peso:3,rito:"reg",orgao:"SEPLANH"},
+   {id:"caucao",nome:"Caução",dono:"LEG",peso:2,rito:"reg",steps:RITO_CAUCAO},
+   {id:"termocomp",nome:"Termo de Compromisso Obras de Infraestrutura",dono:"LEG",peso:2,rito:"reg",steps:RITO_PEAE},
+   {id:"minutadec",nome:"Minuta Decreto de Aprovação",dono:"LEG",peso:2,rito:"reg",steps:RITO_PEAE},
+   {id:"decreto",nome:"Decreto de aprovação",dono:"LEG",peso:9,rito:"reg",orgao:"Casa Civil",abs:true}]},
  {id:"reg",nome:"Registro",gate:"Registro",trilha:"reg",itens:[
    {id:"docreg",nome:"Documentação para registro",dono:"LEG",peso:2,rito:"simples"},
-   {id:"cri",nome:"Registro do loteamento no CRI",dono:"LEG",peso:12,rito:"reg",orgao:"Cartório",abs:true},
-   {id:"indiv",nome:"Individualização das matrículas",dono:"LEG",peso:4,rito:"reg",orgao:"Cartório"}]},
+   {id:"cri",nome:"Registro do loteamento no CRI",dono:"LEG",peso:14,rito:"reg",orgao:"Cartório",abs:true},
+   {id:"indiv",nome:"Individualização das matrículas",dono:"LEG",peso:2,rito:"reg",orgao:"Cartório"}]},
  {id:"prod",nome:"Produto comercial",gate:"Produto pronto",trilha:"produto",itens:[
    {id:"purb",nome:"Projeto urbanístico (produto)",dono:"EDU",peso:6,rito:"estudo"},
    {id:"paisag",nome:"Paisagismo",dono:"EDU",peso:2,rito:"estudo"},
@@ -357,7 +376,7 @@ const TEMPLATE=[
 ];
 const REGFASES=TEMPLATE.filter(f=>f.trilha==="reg").length;
 const RISK_DIMS=["Ambiental","Fundiário","Jurídico","Infraestrutura","Comercial"];
-const TEMPLATE_VERSION="2026.06.5";
+const TEMPLATE_VERSION="2026.07.1";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -368,8 +387,8 @@ function ritoPassos(it){
   return[{nome:"Conclusão",dono:it.dono,kind:"n",status:"nao",data:"",nota:""}];
 }
 function build(nome,codigo,prof){
-  const fases=TEMPLATE.map(f=>({id:f.id,nome:f.nome,gate:f.gate,trilha:f.trilha,itens:f.itens.map(it=>({id:it.id,nome:it.nome,dono:it.dono,peso:it.peso,rito:it.rito,orgao:it.orgao||"",abs:!!it.abs,opc:!!it.opc,livre:!!it.livre,texto:"",pctManual:null,trilha:f.trilha,aplicavel:true,blq:null,historico:[],passos:ritoPassos(it)}))}));
-  const p={id:codigo,nome,codigo,tipo:prof.tipo||"Loteamento de acesso controlado",estagio:prof.estagio||"",status:prof.status||"ativa",ultAt:prof.ult||today(),por:prof.por||"Alberto",dossie:prof.dossie!==false,dossieData:prof.dossieData||"",prioridade:prof.prioridade||null,statusNota:prof.statusNota||"",riscos:normRiscos(prof.r),metas:prof.metas||{},semana:prof.semana||[],_tv:TEMPLATE_VERSION,fases};
+  const fases=TEMPLATE.map(f=>({id:f.id,nome:f.nome,gate:f.gate,trilha:f.trilha,pctManual:null,itens:f.itens.map(it=>({id:it.id,nome:it.nome,dono:it.dono,peso:it.peso,rito:it.rito,orgao:it.orgao||"",abs:!!it.abs,opc:!!it.opc,livre:!!it.livre,texto:"",pctManual:null,trilha:f.trilha,aplicavel:true,blq:null,historico:[],passos:ritoPassos(it)}))}));
+  const p={id:codigo,nome,codigo,tipo:prof.tipo||"Loteamento de acesso controlado",estagio:prof.estagio||"",status:prof.status||"ativa",ultAt:prof.ult||today(),por:prof.por||"Alberto",dossie:prof.dossie!==false,dossieData:prof.dossieData||"",prioridade:prof.prioridade||null,statusNota:prof.statusNota||"",riscos:normRiscos(prof.r),metas:prof.metas||{},semana:prof.semana||[],snapshots:prof.snapshots||[],_tv:TEMPLATE_VERSION,fases};
   if(prof.through!=null){const ti=typeof prof.through==="string"?fases.findIndex(f=>f.id===prof.through):prof.through;if(ti>=0)for(let i=0;i<=ti;i++)fases[i].itens.forEach(it=>{if(it.aplicavel)it.passos.forEach(x=>x.status="ok")})}
   (prof.na||[]).forEach(id=>{const e=findEnt(p,id);if(e)e.aplicavel=false});
   Object.entries(prof.st||{}).forEach(([id,s])=>applyState(findEnt(p,id),s));
@@ -388,8 +407,8 @@ function seed(){return[
  build("Terra da Grama","TG",{estagio:"Lançado · interface com Obras",status:"monitorada",through:"reg",st:{purb:"ok",paisag:"ok",obrasciv:"ok",imagens:"ok",cenas:"ok",planta:"ok",maqu:"ok",orcp:"ok",book:"ok",prodap:"ok",preco:"ok",vendas:"ok",estrat:"ok",meet:"ok",lancou:"ok"},ult:daysAgo(4),r:{Ambiental:"g",Fundiário:"g",Jurídico:"g",Infraestrutura:"g",Comercial:"g"}}),
  build("GO-020","GO020",{estagio:"Lançado · interface com Obras",status:"monitorada",through:"dec",st:{docreg:"ok",cri:{ag:{org:"Cartório",dias:25}},indiv:"nao",purb:"ok",paisag:"ok",obrasciv:"ok",imagens:"ok",cenas:"ok",planta:"ok",maqu:"ok",orcp:"ok",book:"ok",prodap:"ok",preco:"ok",vendas:"ok",estrat:"ok",meet:"ok",lancou:"ok"},ult:daysAgo(3),r:{Ambiental:"g",Fundiário:"g",Jurídico:"y",Infraestrutura:"y",Comercial:"g"}}),
  build("Altana","ALT",{estagio:"Projeto executivo",through:"inst",st:{prad:"ok",recflor:"exec",li_inst:{ag:{org:"AMMA",dias:50}},c_saa:{ag:{org:"Saneago",dias:40}},c_rde:"exec",purb:"exec",imagens:"exec",orcp:"exec",book:"exec"},ult:daysAgo(2),metas:{li:daysAgo(-20)},semana:[{id:"s1",titulo:"Cobrar concessionárias sobre aprovações complementares",resp:"LEG",prazo:daysAgo(-2),prio:"alta",status:"aberta",alerta:true,vinc:"Aprovações complementares"}],r:{Ambiental:"y",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
- build("Opus 2","OP2",{estagio:"Pós-aprovação",through:"ante",st:{tpg:"ok",saac:"ok",sesc:"ok",rdec:"ok",ras:"ok",laudos:"ok",lp:{ag:{org:"AMMA",dias:130}}},ult:daysAgo(6),metas:{amb:daysAgo(10)},semana:[{id:"s1",titulo:"Reunião AMMA — destravar análise da LP (acima do SLA)",resp:"Alberto",prazo:daysAgo(-1),prio:"critica",status:"aberta",alerta:true,vinc:"Licença Prévia"}],r:{Ambiental:"r",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
- build("Opus 3","OP3",{estagio:"Aprovação / licenciamento",through:"inst",st:{prad:"ok",c_ter:{ag:{org:"Prefeitura",dias:42}},c_pav:"exec",li_inst:"nao"},ult:daysAgo(5),metas:{li:daysAgo(-35)},r:{Ambiental:"y",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
+ build("Opus 2","OP2",{estagio:"Pós-aprovação",through:"ante",st:{tpg:"ok",saac:"ok",sesc:"ok",rdec:"ok",ras:"ok",laudo_veg:"ok",laudo_eng:"ok",laudo_geo:"ok",lp:{ag:{org:"AMMA",dias:130}}},ult:daysAgo(6),metas:{amb:daysAgo(10)},semana:[{id:"s1",titulo:"Reunião AMMA — destravar análise da LP (acima do SLA)",resp:"Alberto",prazo:daysAgo(-1),prio:"critica",status:"aberta",alerta:true,vinc:"Licença Prévia"}],r:{Ambiental:"r",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
+ build("Opus 3","OP3",{estagio:"Aprovação / licenciamento",through:"inst",st:{prad:"ok",c_ter:{ag:{org:"Prefeitura",dias:42}},c_pav:"exec",li_inst:"nao"},ult:daysAgo(5),metas:{li:daysAgo(-35)},snapshots:[{rotulo:"Sem 09/06",pts:118,total:195,pct:118/195,data:daysAgo(19),manual:true},{rotulo:"Sem 16/06",pts:122,total:195,pct:122/195,data:daysAgo(12),manual:true}],r:{Ambiental:"y",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
  build("Brisas","BR",{estagio:"Aprovação / licenciamento",through:"fund",st:{diretr:"ok",avto:{ag:{org:"Saneago",dias:20}},ooau:{ag:{org:"Prefeitura",dias:37}},avt:"ok"},na:["goinfra"],ult:daysAgo(1),semana:[{id:"s1",titulo:"Cobrar Prefeitura — análise técnica do OOAU",resp:"LEG",prazo:daysAgo(-2),prio:"alta",status:"aberta",alerta:true,vinc:"OOAU"},{id:"s2",titulo:"Validar superelevação da curva R=82,61m com B&M",resp:"DTU",prazo:daysAgo(-4),prio:"media",status:"aberta",alerta:false,vinc:"OOAU"}],r:{Ambiental:"g",Fundiário:"y",Jurídico:"y",Infraestrutura:"g",Comercial:"g"}}),
  build("Independência Pós GO-020","IPGO",{estagio:"Aprovação / licenciamento",through:"viab",st:{matr:"ok",spe:"ok"},blq:{contr:{motivo:"Falta documentação do proprietário (cessão)",dias:18}},ult:daysAgo(8),r:{Ambiental:"g",Fundiário:"r",Jurídico:"y",Infraestrutura:"g",Comercial:"g"}}),
  build("Indep. Gleba Maior","IGM",{estagio:"Aprovação / licenciamento",through:"dir",st:{mplan:"exec"},ult:daysAgo(7),r:{Ambiental:"y",Fundiário:"g",Jurídico:"g",Infraestrutura:"y",Comercial:"g"}}),
@@ -452,10 +471,10 @@ function setDivStatus(id){if(!guard())return;const d=ESP.diversos.find(x=>x.id==
 function addDivNota(id,t){if(!guard()||!(t||"").trim())return;const d=ESP.diversos.find(x=>x.id===id);if(!d.notas)d.notas=[];d.notas.push({data:today(),autor:"Alberto",texto:t.trim()});saveEsp();renderHome()}
 function copyItemState(nw,old){nw.aplicavel=old.aplicavel!==false;nw.blq=old.blq||null;if(old.texto!==undefined)nw.texto=old.texto;if(old.pctManual!==undefined)nw.pctManual=old.pctManual;nw.historico=old.historico||[];
   if(old.passos&&nw.passos){nw.passos.forEach((ps,i)=>{let o=old.passos.find(x=>x.nome===ps.nome);if(!o&&old.passos[i])o=old.passos[i];if(o){ps.status=o.status||"nao";if(o.data)ps.data=o.data;if(o.nota)ps.nota=o.nota;if(o.desde!==undefined)ps.desde=o.desde}})}}
-function rebuildFrente(p){const oldItems={},espByFase={};(p.fases||[]).forEach(f=>f.itens.forEach(it=>{oldItems[it.id]=it;if(it.esp){(espByFase[f.id]=espByFase[f.id]||[]).push(it)}}));
-  const fresh=build(p.nome,p.codigo,{});["id","codigo","tipo","estagio","status","ultAt","por","dossie","dossieData","prioridade","statusNota","metas","semana"].forEach(k=>{if(p[k]!==undefined)fresh[k]=p[k]});
+function rebuildFrente(p){const oldItems={},espByFase={},oldFases={};(p.fases||[]).forEach(f=>{oldFases[f.id]=f;f.itens.forEach(it=>{oldItems[it.id]=it;if(it.esp){(espByFase[f.id]=espByFase[f.id]||[]).push(it)}})});
+  const fresh=build(p.nome,p.codigo,{});["id","codigo","tipo","estagio","status","ultAt","por","dossie","dossieData","prioridade","statusNota","metas","semana","snapshots"].forEach(k=>{if(p[k]!==undefined)fresh[k]=p[k]});
   fresh.riscos=normRiscos(p.riscos||{});
-  fresh.fases.forEach(f=>{f.itens.forEach(it=>{const old=oldItems[it.id];if(old)copyItemState(it,old)});
+  fresh.fases.forEach(f=>{if(oldFases[f.id]&&oldFases[f.id].pctManual!==undefined)f.pctManual=oldFases[f.id].pctManual;f.itens.forEach(it=>{const old=oldItems[it.id];if(old)copyItemState(it,old)});
     (espByFase[f.id]||[]).forEach(e=>{if(e.pctManual===undefined)e.pctManual=null;if(e.texto===undefined)e.texto="";if(!e.historico)e.historico=[];f.itens.push(e)})});
   const known=fresh.fases.map(f=>f.id);Object.keys(espByFase).forEach(fid=>{if(!known.includes(fid)){const fb=fresh.fases.find(f=>f.id==="dir")||fresh.fases[3];espByFase[fid].forEach(e=>fb.itens.push(e))}});
   fresh._tv=TEMPLATE_VERSION;return fresh}
@@ -471,9 +490,9 @@ function migrate(d){const map={GMA:["IGM","Indep. Gleba Maior"],GME:["IG1A","Ind
 function load(){let d;try{const r=localStorage.getItem(STORE);if(r)d=JSON.parse(r)}catch(e){}if(!d)d=seed();return migrate(d)}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(DATA))}catch(e){}}
 function proj(id){return DATA.find(p=>p.id===id)}
-function touch(p){p.ultAt=today();p.por="Alberto"}
+function touch(p){p.ultAt=today();p.por="Alberto";autoSnap(p)}
 function entPct(e){if(!e.aplicavel)return null;if(e.pctManual!=null)return Math.max(0,Math.min(100,e.pctManual))/100;let s=0;e.passos.forEach(p=>s+=CR[p.status]);return s/e.passos.length}
-function faseTot(f){let d=0,t=0;f.itens.forEach(e=>{if(!e.aplicavel)return;const pc=entPct(e);d+=e.peso*pc;t+=e.peso});return{d,t,pct:t?d/t:0}}
+function faseTot(f){let d=0,t=0;f.itens.forEach(e=>{if(!e.aplicavel)return;const pc=entPct(e);d+=e.peso*pc;t+=e.peso});if(f.pctManual!=null){const v=Math.max(0,Math.min(100,f.pctManual))/100;return{d:v*(t||1),t:t||1,pct:v,manual:true}}return t?{d,t,pct:d/t}:{d:0,t:0,pct:1}}
 function avancoReg(p){let d=0,t=0;p.fases.forEach(f=>{if(f.trilha!=="reg")return;const ft=faseTot(f);d+=ft.d;t+=ft.t});return t?d/t:0}
 function ipplVal(p){let d=0,t=0,any=false;p.fases.forEach(f=>{if(f.trilha!=="produto")return;f.itens.forEach(e=>{if(!e.aplicavel)return;const pc=entPct(e);if(pc>0)any=true;d+=e.peso*pc;t+=e.peso})});return any?(t?d/t:0):null}
 function curGate(p){for(let i=0;i<REGFASES;i++)if(faseTot(p.fases[i]).pct<.999)return i;return -1}
@@ -550,7 +569,7 @@ function renderP(){const p=proj(cur);if(!p){renderHome();return}
   <div class="det-head"><div><div class="eyebrow">${esc(p.codigo)} · ${esc(p.estagio)}${p.status&&p.status!=="ativa"?' · '+STLBL[p.status]:''}</div><h2>${esc(p.nome)}</h2>
     <div class="meta">${esc(p.tipo)} · atualizado há ${dias(p.ultAt)||0}d por ${esc(p.por)} · Dossiê ${p.dossie?'atualizado':'pendente'}${p.dossieData?' ('+brdate(p.dossieData)+')':''}</div>${p.statusNota?`<div class="meta" style="margin-top:3px;font-style:italic">“${esc(p.statusNota)}”</div>`:''}</div>
     <div class="det-big"><div class="num">${pct(av)}<small>%</small></div><div class="stat" style="background:${soft(s)};color:${HEX[s]}">${SL[s]}</div></div></div>
-  ${(ED||MA)?`<div class="pactions">${ED?'<button onclick="regAtualiza()">Registrar atualização</button>':''}${MA?'<button onclick="statusFrente()">Status da frente</button><button onclick="zerarTudo()">Zerar tudo</button><button onclick="excluirFrente()" style="color:var(--red)">Excluir frente</button>':''}</div>`:''}
+  ${(ED||MA)?`<div class="pactions">${ED?'<button onclick="regAtualiza()">Anotação no projeto</button>':''}${MA?'<button onclick="statusFrente()">Status da frente</button><button onclick="zerarTudo()">Zerar tudo</button><button onclick="excluirFrente()" style="color:var(--red)">Excluir frente</button>':''}</div>`:''}
   <div class="gates">${gates}</div>
   <div class="tabs">
     <button class="tab ${tab==='resumo'?'on':''}" onclick="setTab('resumo')">Resumo</button>
@@ -564,7 +583,7 @@ function setTab(t){tab=t;renderTab();document.querySelectorAll('.tab').forEach(b
 
 function faseBlocksHTML(p,trilha){let h="";
   p.fases.forEach((f,fi)=>{if(f.trilha!==trilha)return;const ft=faseTot(f),pc=Math.round(ft.pct*100),col=colf[fi]?"col":"";
-    h+=`<div class="faseblk ${col}"><div class="fh" onclick="tf(${fi})"><span class="fl"><span class="chev">▾</span>${esc(f.nome)} <span class="gt">${esc(f.gate)}</span></span><span style="display:flex;align-items:center;gap:9px"><span class="fp">${pc}%</span>${MA?`<button class="fz" onclick="event.stopPropagation();zerarFase(${fi})">zerar</button>`:''}</span></div><div class="mini"><i style="width:${pc}%"></i></div>`;
+    h+=`<div class="faseblk ${col}"><div class="fh" onclick="tf(${fi})"><span class="fl"><span class="chev">▾</span>${esc(f.nome)} <span class="gt">${esc(f.gate)}</span></span><span style="display:flex;align-items:center;gap:9px" onclick="event.stopPropagation()">${ED?`<span class="fpm-w"><input class="fpm" type="number" min="0" max="100" placeholder="auto" value="${f.pctManual!=null?f.pctManual:''}" onchange="setFasePct(${fi},this.value)">%</span>`:`<span class="fp">${pc}%${ft.manual?' <span class="tag" style="border-color:var(--accent);color:var(--accent);padding:0 5px">manual</span>':''}</span>`}${MA?`<button class="fz" onclick="zerarFase(${fi})">zerar</button>`:''}</span></div><div class="mini"><i style="width:${pc}%"></i></div>`;
     f.itens.forEach(e=>{const ep=entPct(e),exp=expe===e.id;
       const agp=e.passos.find(x=>x.status==="aguarda"||x.status==="exig");let agtag="";if(agp){const d=dias(agp.desde),sla=agp.sla||SLA[agp.orgao]||30;agtag=`<span class="tag aguarda ${d>sla?'atraso':''}">${agp.status==="exig"?'exigência':'aguardando'} ${esc(agp.orgao)} ${d!=null?d+'d':''}</span>`}
       h+=`<div class="ent"><div class="eh" onclick="te('${e.id}')"><span class="en ${e.aplicavel?'':'na'}">${esc(e.nome)}<span class="tags">${e.abs?'<span class="tag abs">absoluto</span>':''}${e.opc?'<span class="tag opc">opcional</span>':''}${e.esp?'<span class="tag opc">especial</span>':''}${e.pctManual!=null?'<span class="tag" style="border-color:var(--accent);color:var(--accent)">% manual</span>':''}${e.blq?'<span class="tag blq">pendência interna'+(e.blq.resp?' · '+esc(e.blq.resp):'')+'</span>':''}${agtag}</span></span><span class="ep">${e.aplicavel?(ep>=.999?'100%':pct(ep)+'%'):'N/A'}</span></div>`;
@@ -580,7 +599,9 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
       ${riscoFlags(p).block?`<div class="calert r" style="margin-top:8px"><span class="mk">!</span>Risco marcado como não aceitável para avançar o gate</div>`:''}
       ${ip.missing.length?`<ul class="miss" style="margin-top:10px">${ip.missing.map(m=>`<li><span class="bx ${m.abs?'abs':''}"></span>${esc(m.nome)}${m.abs?' <span class="tag abs" style="margin-left:auto">absoluto</span>':''}</li>`).join("")}</ul>`:`<div class="empty" style="margin-top:8px">Etapa completa.</div>`}
       ${ippl!=null?`<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)"><div class="bigblk"><span class="n" style="font-size:22px">${pct(ippl)}%</span><div style="font-size:11.5px;color:var(--ink-mid)">IPPL — prontidão para lançamento</div></div></div>`:''}
-      </div></div>
+      </div>
+      <div class="panel"><h3>Evolução do projeto <span class="legend">automático · semanal</span></h3>${evolucaoHTML(p)}</div>
+      </div>
       <div style="display:flex;flex-direction:column;gap:14px">
       <div class="panel"><h3>Aguardando órgãos <span class="legend">pendência externa</span></h3>${ags.length?ags.map(a=>`<div class="row"><div><div>${esc(a.ent)}</div><div class="sub">${esc(a.orgao)}${a.exig?' · em exigência':''} · SLA ${a.sla}d</div></div><div class="d ${a.atraso?'r':'y'}">${a.dias!=null?a.dias+'d':'—'}</div></div>`).join(""):`<div class="empty">Sem pendência externa.</div>`}</div>
       <div class="panel"><h3>Pendências internas <span class="legend">responsabilidade interna</span></h3>${bls.length?bls.map(x=>`<div class="row"><div><div>${esc(x.ent)}</div><div class="sub">${esc(x.motivo)}${x.resp?' · resp.: '+esc(x.resp):''}</div></div><div class="d r">${x.dias!=null?x.dias+'d':'—'}</div></div>`).join(""):`<div class="empty">Sem pendência interna.</div>`}</div>
@@ -660,7 +681,7 @@ function setSt(eid,pi,val){if(!guard())return;const p=proj(cur),e=findEnt(p,eid)
   if(val==="ok"&&!x.data)x.data=today();
   if(val==="exig")x.rodada="R01";
   touch(p);save();renderTab()}
-function setPasso(eid,pi,k,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.passos[pi][k]=k==="sla"?(+v||30):v;touch(proj(cur));save();renderTab()}
+function setPasso(eid,pi,k,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.passos[pi][k]=k==="sla"?(+v||30):(k==="desde"?fixYear(v):v);touch(proj(cur));save();renderTab()}
 function addHist(eid,v){if(!guard()||!(v||"").trim())return;const e=findEnt(proj(cur),eid);if(!e.historico)e.historico=[];e.historico.push({data:today(),autor:"Alberto",texto:v.trim()});touch(proj(cur));save();renderTab()}
 function setTexto(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.texto=v;touch(proj(cur));save()}
 function setPctManual(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);const s=String(v).trim();if(s===""){e.pctManual=null}else{let n=parseInt(s,10);if(isNaN(n))n=0;e.pctManual=Math.max(0,Math.min(100,n))}touch(proj(cur));save();renderTab()}
@@ -674,28 +695,69 @@ function sugereRisco(p,d){const orgs=DIM_ORGAOS[d]||[];const rel=aguardando(p).f
   return{prob,imp}}
 function sugerirRiscos(){if(!guard())return;const p=proj(cur);RISK_DIMS.forEach(d=>{const s=sugereRisco(p,d);if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d].prob=s.prob;p.riscos[d].impacto=s.imp});touch(p);save();renderTab();toast("Níveis sugeridos a partir das pendências — ajuste se precisar.")}
 function setRiscoCampo(d,campo,v){if(!guard())return;const p=proj(cur);if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d][campo]=p.riscos[d][campo]===v?"":v;touch(p);save();renderTab()}
-function addRiscoAcao(d){if(!guard())return;const p=proj(cur);uiForm({title:"Ação de mitigação — "+d,okText:"Criar na semana",fields:[{key:"t",label:"Ação",type:"text",value:"Mitigar risco "+d.toLowerCase()},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const id="a"+Date.now();if(!p.semana)p.semana=[];p.semana.push({id,titulo:v.t.trim(),resp:v.resp||"",prazo:v.prazo||today(),prio:v.prio,status:"aberta",alerta:true,vinc:"Risco: "+d});if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d].acaoId=id;touch(p);save();closeModal();renderTab()}})}
+function addRiscoAcao(d){if(!guard())return;const p=proj(cur);uiForm({title:"Ação de mitigação — "+d,okText:"Criar na semana",fields:[{key:"t",label:"Ação",type:"text",value:"Mitigar risco "+d.toLowerCase()},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const id="a"+Date.now();if(!p.semana)p.semana=[];p.semana.push({id,titulo:v.t.trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||today(),prio:v.prio,status:"aberta",alerta:true,vinc:"Risco: "+d});if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d].acaoId=id;touch(p);save();closeModal();renderTab()}})}
 function removeRiscoAcao(d){if(!guard())return;const p=proj(cur);if(p.riscos[d])p.riscos[d].acaoId=null;touch(p);save();renderTab()}
 function addEspecial(){if(!guardM())return;const p=proj(cur);uiForm({title:"Novo item especial",okText:"Criar",fields:[
-  {key:"n",label:"Nome",type:"text"},
+  {key:"base",label:"Puxar item pronto (biblioteca)",type:"select",value:"__livre",options:[{v:"__livre",t:"— criar do zero —"}].concat(ESPECIAIS.map(e=>({v:e.nome,t:e.nome+" · "+e.orgao})))},
+  {key:"n",label:"Nome (se criar do zero)",type:"text"},
   {key:"org",label:"Órgão (opcional)",type:"text"},
   {key:"peso",label:"Peso",type:"text",value:"2"},
   {key:"rito",label:"Rito",type:"select",value:"reg",options:[{v:"reg",t:"Regulatório (material → protocolo → análise → aprovação)"},{v:"estudo",t:"Estudo (elaboração → revisão → aprovação)"},{v:"simples",t:"Simples (1 passo)"}]},
   {key:"fase",label:"Fase",type:"select",value:p.fases[3].id,options:p.fases.map(f=>({v:f.id,t:f.nome}))},
   {key:"pos",label:"Posição na fase",type:"select",value:"fim",options:[{v:"inicio",t:"No início"},{v:"fim",t:"No fim"}]}
-],onOk:v=>{if(!(v.n||"").trim()){ufError("Informe o nome.");return}const f=p.fases.find(x=>x.id===v.fase)||p.fases[3];let peso=parseInt(v.peso,10);if(isNaN(peso)||peso<1)peso=2;const org=(v.org||"").trim();const it={id:"esp_"+Date.now(),nome:v.n.trim(),dono:"DTU",peso,rito:v.rito,orgao:org,abs:false,opc:true,livre:false,texto:"",pctManual:null,esp:true,trilha:f.trilha,aplicavel:true,blq:null,historico:[],passos:ritoPassos({rito:v.rito,dono:"DTU",orgao:org})};if(v.pos==="inicio")f.itens.unshift(it);else f.itens.push(it);touch(p);save();expe=it.id;closeModal();renderTab()}})}
+],onOk:v=>{let nome=(v.n||"").trim(),org=(v.org||"").trim(),peso=parseInt(v.peso,10),rito=v.rito,faseId=v.fase;
+  const lib=(v.base&&v.base!=="__livre")?ESPECIAIS.find(x=>x.nome===v.base):null;
+  if(lib){if(!nome)nome=lib.nome;if(!org)org=lib.orgao;if(isNaN(peso)||peso<1)peso=lib.peso;rito="reg";if(v.fase===p.fases[3].id&&lib.faseId)faseId=lib.faseId}
+  if(!nome){ufError("Escolha um item da biblioteca ou informe um nome.");return}
+  if(isNaN(peso)||peso<1)peso=2;
+  const f=p.fases.find(x=>x.id===faseId)||p.fases[3];
+  const it={id:"esp_"+Date.now(),nome,dono:"DTU",peso,rito,orgao:org,abs:false,opc:true,livre:false,texto:"",pctManual:null,esp:true,trilha:f.trilha,aplicavel:true,blq:null,historico:[],passos:ritoPassos({rito,dono:"DTU",orgao:org})};
+  if(v.pos==="inicio")f.itens.unshift(it);else f.itens.push(it);touch(p);save();expe=it.id;closeModal();renderTab()}})}
 function removeEnt(eid){if(!guardM())return;const p=proj(cur);let target=null,fase=null;p.fases.forEach(f=>f.itens.forEach(e=>{if(e.id===eid){target=e;fase=f}}));if(!target||!target.esp)return;uiConfirm(`Remover o item “${target.nome}”? Só itens especiais podem ser removidos.`,()=>{fase.itens=fase.itens.filter(e=>e.id!==eid);touch(p);save();renderTab()})}
 function moveEnt(eid,dir){if(!guardM())return;const p=proj(cur);p.fases.forEach(f=>{const i=f.itens.findIndex(e=>e.id===eid);if(i<0)return;if(!f.itens[i].esp)return;const j=i+dir;if(j<0||j>=f.itens.length)return;const e=f.itens.splice(i,1)[0];f.itens.splice(j,0,e)});touch(p);save();renderTab()}
-function addAcao(){if(!guard())return;uiForm({title:"Nova ação da semana",okText:"Adicionar",fields:[{key:"t",label:"Ação / tarefa",type:"text",placeholder:"O que precisa ser feito"},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const p=proj(cur);if(!p.semana)p.semana=[];p.semana.push({id:"a"+Date.now(),titulo:v.t.trim(),resp:v.resp||"",prazo:v.prazo||today(),prio:v.prio,status:"aberta",alerta:true,vinc:""});touch(p);save();closeModal();renderTab()}})}
+function addAcao(){if(!guard())return;uiForm({title:"Nova ação da semana",okText:"Adicionar",fields:[{key:"t",label:"Ação / tarefa",type:"text",placeholder:"O que precisa ser feito"},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const p=proj(cur);if(!p.semana)p.semana=[];p.semana.push({id:"a"+Date.now(),titulo:v.t.trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||today(),prio:v.prio,status:"aberta",alerta:true,vinc:""});touch(p);save();closeModal();renderTab()}})}
 function doneAcao(id){if(!guard())return;const p=proj(cur),a=(p.semana||[]).find(x=>x.id===id);if(a)a.status=a.status==="concluida"?"aberta":"concluida";save();renderTab()}
 function delAcao(id){if(!guard())return;const p=proj(cur);p.semana=(p.semana||[]).filter(x=>x.id!==id);save();renderTab()}
 function setPrioModal(id){if(!guardM())return;const p=proj(id);uiForm({title:"Prioridade na carteira",okText:"Salvar",fields:[{key:"n",label:"Posição (1 = topo da carteira). Em branco remove a prioridade.",type:"number",value:p.prioridade||""}],onOk:v=>{const n=parseInt(v.n);p.prioridade=(isNaN(n)||n<=0)?null:n;save();closeModal();renderHome()}})}
-function regAtualiza(){if(!guard())return;const p=proj(cur);uiForm({title:"Registrar atualização",okText:"Registrar",fields:[{key:"nota",label:"Nota de status (opcional)",type:"textarea",placeholder:"Resumo do andamento",value:p.statusNota||""},{key:"dossie",label:"Dossiê atualizado?",type:"select",value:p.dossie?"sim":"nao",options:[{v:"sim",t:"Sim"},{v:"nao",t:"Não"}]}],onOk:v=>{p.ultAt=today();p.por="Alberto";p.statusNota=(v.nota||"").trim();p.dossie=(v.dossie==="sim");if(p.dossie)p.dossieData=today();save();closeModal();renderP()}})}
+function regAtualiza(){if(!guard())return;const p=proj(cur);uiForm({title:"Anotação no projeto",okText:"Anotar",fields:[{key:"nota",label:"Nota de status (opcional — fica no histórico; suas edições já salvam sozinhas)",type:"textarea",placeholder:"Ex.: conversei com a AMMA, prometeram retorno em 10 dias",value:p.statusNota||""},{key:"dossie",label:"Dossiê atualizado?",type:"select",value:p.dossie?"sim":"nao",options:[{v:"sim",t:"Sim"},{v:"nao",t:"Não"}]}],onOk:v=>{p.ultAt=today();p.por="Alberto";p.statusNota=(v.nota||"").trim();p.dossie=(v.dossie==="sim");if(p.dossie)p.dossieData=today();save();closeModal();renderP()}})}
+function avancoPts(p){let d=0,t=0;p.fases.forEach(f=>{if(f.trilha!=="reg")return;const ft=faseTot(f);d+=ft.d;t+=ft.t});return{pts:Math.round(d),total:Math.round(t),pct:t?d/t:0}}
+function weekStart(iso){const d=iso?new Date(iso):new Date();const day=(d.getDay()+6)%7;return new Date(d.getFullYear(),d.getMonth(),d.getDate()-day)}
+function weekKey(iso){const m=weekStart(iso);return m.getFullYear()+"-"+String(m.getMonth()+1).padStart(2,"0")+"-"+String(m.getDate()).padStart(2,"0")}
+function weekLabel(iso){const m=weekStart(iso);return "Sem "+String(m.getDate()).padStart(2,"0")+"/"+String(m.getMonth()+1).padStart(2,"0")}
+function autoSnap(p){if(!p.snapshots)p.snapshots=[];const a=avancoPts(p),key=weekKey(),ex=p.snapshots.find(s=>s.key===key);if(ex){if(!ex.manual){ex.pts=a.pts;ex.total=a.total;ex.pct=a.pct;ex.data=today();ex.auto=true}}else{p.snapshots.push({key,rotulo:weekLabel(),pts:a.pts,total:a.total,pct:a.pct,data:today(),auto:true})}}
+function autoSnapAll(){(DATA||[]).forEach(autoSnap)}
+const cmpColors=["#2E9E5B","#2F6FB0","#C9821A","#8E5BB5","#C0504D","#1B998B","#5A5A5A","#D2691E"];
+let cmpSel=[];
+function openCompare(){const act=DATA.filter(p=>p.status!=="arquivada");cmpSel=cmpSel.filter(c=>act.some(p=>p.codigo===c));if(!cmpSel.length)cmpSel=act.slice(0,3).map(p=>p.codigo);renderCompare()}
+function toggleCmp(code){const i=cmpSel.indexOf(code);if(i>=0){if(cmpSel.length>1)cmpSel.splice(i,1)}else{if(cmpSel.length>=4)cmpSel.shift();cmpSel.push(code)}renderCompare()}
+function phaseCum(){const f=build("·","·",{}).fases.filter(x=>x.trilha==="reg");let tot=0;f.forEach(fa=>tot+=fa.itens.reduce((a,b)=>a+b.peso,0));let run=0;return f.map(fa=>{run+=fa.itens.reduce((a,b)=>a+b.peso,0);return{nome:fa.nome,pct:tot?run/tot:0}});}
+function cmpBars(list){const rows=list.slice().sort((a,b)=>avancoReg(b)-avancoReg(a));const cum=phaseCum();const media=rows.length?rows.reduce((a,p)=>a+avancoReg(p),0)/rows.length:0;const W=880,padL=200,padR=56,rowH=30,top=20,axisH=40,plotW=W-padL-padR,H=rows.length*rowH+top+axisH;const X=pc=>padL+pc*plotW;const cb=top+rows.length*rowH;let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">`;s+=`<line x1="${X(0).toFixed(1)}" y1="${top}" x2="${X(0).toFixed(1)}" y2="${cb+4}" style="stroke:var(--line)"/>`;let prev=0;cum.forEach((c,i)=>{const x=X(c.pct),ctr=X((prev+c.pct)/2);s+=`<line x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${cb+4}" style="stroke:var(--line)" stroke-dasharray="2 3"/><text x="${ctr.toFixed(1)}" y="${cb+18}" text-anchor="middle" font-size="9.5" style="fill:var(--ink-dim)">${i+1}</text>`;prev=c.pct;});rows.forEach((p,i)=>{const y=top+i*rowH,cy=y+rowH/2,pc=avancoReg(p),bw=Math.max(2,pc*plotW),col=HEX[saude(p)],nm=p.nome.length>27?p.nome.slice(0,26)+"…":p.nome;s+=`<text x="${padL-12}" y="${(cy+4).toFixed(0)}" text-anchor="end" font-size="12.5" style="fill:var(--ink);cursor:pointer" onclick="closeModal();openP('${p.codigo}')">${esc(nm)}</text><rect x="${padL}" y="${(cy-7).toFixed(0)}" width="${plotW}" height="14" rx="4" style="fill:var(--surface2)"/><rect x="${padL}" y="${(cy-7).toFixed(0)}" width="${bw.toFixed(1)}" height="14" rx="4" style="fill:${col}"/><text x="${(padL+plotW+8).toFixed(0)}" y="${(cy+4).toFixed(0)}" font-size="12" font-weight="600" style="fill:var(--ink-mid)">${Math.round(pc*100)}%</text>`;});const mx=X(media);s+=`<line x1="${mx.toFixed(1)}" y1="${top-2}" x2="${mx.toFixed(1)}" y2="${cb+4}" style="stroke:var(--accent)" stroke-width="2"/><text x="${mx.toFixed(1)}" y="${(top-7).toFixed(0)}" text-anchor="middle" font-size="10" font-weight="600" style="fill:var(--accent)">média ${Math.round(media*100)}%</text>`;s+=`</svg>`;const leg=cum.map((c,i)=>`<span style="white-space:nowrap"><b style="color:var(--ink-mid)">${i+1}</b> ${esc(c.nome)}</span>`).join("&nbsp;·&nbsp;");s+=`<div style="font-size:10.5px;color:var(--ink-dim);margin-top:10px;line-height:1.8">${leg}</div>`;return s;}
+function cmpLines(list){const ws=list.filter(p=>(p.snapshots||[]).length>=2);if(!ws.length)return `<div class="empty">A comparação temporal aparece quando há ao menos duas semanas registradas. Como o registro é automático e semanal, ela vai se formando sozinha.</div>`;const km={};ws.forEach(p=>p.snapshots.forEach(sn=>{const k=sn.key||sn.rotulo;km[k]={k,rot:sn.rotulo,data:sn.data||k};}));const keys=Object.values(km).sort((a,b)=>(a.data||a.k).localeCompare(b.data||b.k));const idx={};keys.forEach((kk,i)=>idx[kk.k]=i);let yMax=1;ws.forEach(p=>p.snapshots.forEach(sn=>{if(sn.pts>yMax)yMax=sn.pts;}));yMax=Math.max(20,Math.ceil(yMax/20)*20);const W=820,padL=44,padR=150,padT=12,padB=34,plotW=W-padL-padR,H=300,plotH=H-padT-padB;const X=i=>padL+(keys.length>1?i/(keys.length-1)*plotW:0),Y=v=>padT+plotH-(v/yMax)*plotH;let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">`;for(let g=0;g<=4;g++){const v=yMax*g/4,y=Y(v);s+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${padL+plotW}" y2="${y.toFixed(1)}" style="stroke:var(--line)"/><text x="${padL-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9" style="fill:var(--ink-dim)">${Math.round(v)}</text>`;}keys.forEach((kk,i)=>{if(keys.length>9&&i%2)return;s+=`<text x="${X(i).toFixed(1)}" y="${H-padB+16}" text-anchor="middle" font-size="9" style="fill:var(--ink-dim)">${esc(kk.rot)}</text>`;});ws.forEach((p,pi)=>{const col=cmpColors[pi%cmpColors.length];const pts=p.snapshots.map(sn=>[X(idx[sn.key||sn.rotulo]),Y(sn.pts)]).filter(pt=>pt[0]!=null&&!isNaN(pt[0]));if(pts.length>1)s+=`<polyline points="${pts.map(pt=>pt[0].toFixed(1)+','+pt[1].toFixed(1)).join(' ')}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round"/>`;pts.forEach(pt=>s+=`<circle cx="${pt[0].toFixed(1)}" cy="${pt[1].toFixed(1)}" r="2.6" fill="${col}"/>`);});ws.forEach((p,pi)=>{const col=cmpColors[pi%cmpColors.length],ly=padT+8+pi*16;const nm=p.nome.length>15?p.nome.slice(0,14)+"…":p.nome;s+=`<rect x="${padL+plotW+14}" y="${ly-7}" width="9" height="9" rx="2" fill="${col}"/><text x="${padL+plotW+27}" y="${ly+1}" font-size="10.5" style="fill:var(--ink-mid)">${esc(p.codigo)} · ${esc(nm)}</text>`;});return s+`</svg>`;}
+const RADAR_FASES=[["orig",["Originação"]],["dir",["Diretrizes","& Outorgas"]],["amb",["Ambiental &","Complementares"]],["anal",["Análise &",'"de acordo"']],["li",["Licença de","Instalação"]],["aprov",["Aprovar projetos","complementares"]],["dec",["Decreto"]]];
+function radarVals(p){return RADAR_FASES.map(a=>{const f=p.fases.find(x=>x.id===a[0]);return f?faseTot(f).pct:0});}
+function cmpRadar(sel){const N=RADAR_FASES.length,W=620,H=470,cx=W/2,cy=H/2+16,R=124;const ang=i=>-Math.PI/2+i*2*Math.PI/N;const pt=(i,r)=>[cx+Math.cos(ang(i))*R*r,cy+Math.sin(ang(i))*R*r];let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;max-width:620px">`;[0.25,0.5,0.75,1].forEach(r=>{const poly=[...Array(N)].map((_,i)=>pt(i,r)).map(pp=>pp[0].toFixed(1)+','+pp[1].toFixed(1)).join(' ');s+=`<polygon points="${poly}" fill="none" style="stroke:var(--line)"/>`;});RADAR_FASES.forEach((a,i)=>{const e=pt(i,1),l=pt(i,1.14),lx=l[0],ly=l[1],anc=lx<cx-6?'end':(lx>cx+6?'start':'middle'),lines=a[1],sdy=-(lines.length-1)*5.5;s+=`<line x1="${cx}" y1="${cy}" x2="${e[0].toFixed(1)}" y2="${e[1].toFixed(1)}" style="stroke:var(--line)"/>`;lines.forEach((ln,li)=>{s+=`<text x="${lx.toFixed(1)}" y="${(ly+sdy+li*11).toFixed(1)}" text-anchor="${anc}" font-size="9.5" style="fill:var(--ink-mid)">${esc(ln)}</text>`;});});sel.forEach((code,si)=>{const p=proj(code);if(!p)return;const col=cmpColors[si%cmpColors.length],v=radarVals(p);const poly=v.map((val,i)=>pt(i,Math.max(.02,val))).map(pp=>pp[0].toFixed(1)+','+pp[1].toFixed(1)).join(' ');s+=`<polygon points="${poly}" fill="${col}" fill-opacity="0.14" stroke="${col}" stroke-width="2"/>`;});sel.forEach((code,si)=>{const p=proj(code),col=cmpColors[si%cmpColors.length];s+=`<rect x="12" y="${14+si*18}" width="10" height="10" rx="2" fill="${col}"/><text x="28" y="${23+si*18}" font-size="11" style="fill:var(--ink-mid)">${esc(p?p.nome:code)}</text>`;});return s+`</svg>`;}
+function renderCompare(){const root=document.getElementById("modalRoot");const act=DATA.filter(p=>p.status!=="arquivada");const chips=act.map(p=>`<button class="cmpchip ${cmpSel.includes(p.codigo)?'on':''}" onclick="toggleCmp('${p.codigo}')">${esc(p.codigo)}</button>`).join("");root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mwide"><div class="mh"><h2>Comparar frentes</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb"><div class="cmpsec"><h4>Ranking de avanço regulatório</h4>${cmpBars(act)}</div><div class="cmpsec"><h4>Comparativo por fase <span class="legend">% de conclusão · selecione 2 a 4 frentes</span></h4><div class="cmpchips">${chips}</div>${cmpRadar(cmpSel)}</div></div></div></div>`;}
+function snapFoto(){if(!guard())return;const p=proj(cur);const a=avancoPts(p);uiForm({title:"Registrar semana manualmente",okText:"Salvar",fields:[{key:"rot",label:"Semana / rótulo (ex.: Sem 09/06 — para preencher histórico)",type:"text",value:weekLabel()},{key:"pts",label:"Pontos de avanço",type:"text",value:String(a.pts)}],onOk:v=>{let pts=parseInt(v.pts,10);if(isNaN(pts))pts=a.pts;if(!p.snapshots)p.snapshots=[];const rot=(v.rot||weekLabel()).trim();const ex=p.snapshots.find(s=>s.rotulo===rot);if(ex){ex.pts=pts;ex.total=a.total;ex.pct=a.total?pts/a.total:0;ex.manual=true;ex.data=today()}else{p.snapshots.push({rotulo:rot,pts,total:a.total,pct:a.total?pts/a.total:0,data:today(),manual:true})}p.snapshots.sort((x,y)=>(x.data||"").localeCompare(y.data||""));p.ultAt=today();save();closeModal();renderP()}})}
+function delSnap(i){if(!guardM())return;const p=proj(cur);uiConfirm("Remover este snapshot do histórico de evolução?",()=>{p.snapshots.splice(i,1);touch(p);save();renderP()})}
+function evolucaoHTML(p){const s=(p.snapshots||[]);if(!s.length)return `<div class="empty" style="margin-top:8px">O avanço é registrado automaticamente a cada período.${ED?` <a href="#" onclick="snapFoto();return false" style="color:var(--accent)">registrar histórico manual</a>`:''}</div>`;
+  const last=s[s.length-1],prev=s.length>1?s[s.length-2]:null;
+  const dpts=prev?last.pts-prev.pts:0,dpct=prev&&prev.pts?Math.round((last.pts-prev.pts)/prev.pts*100):0;
+  const W=260,H=54,pad=7,vals=s.map(x=>x.pts),mx=Math.max(...vals,1),mn=Math.min(...vals,0),rng=(mx-mn)||1,step=s.length>1?(W-2*pad)/(s.length-1):0;
+  const xy=s.map((x,i)=>[pad+i*step,H-pad-(x.pts-mn)/rng*(H-2*pad)]);
+  const poly=xy.map(c=>c[0].toFixed(1)+","+c[1].toFixed(1)).join(" ");
+  const dots=xy.map(c=>`<circle cx="${c[0].toFixed(1)}" cy="${c[1].toFixed(1)}" r="3" fill="var(--accent)"/>`).join("");
+  let h=`<div style="display:flex;align-items:baseline;gap:10px;margin-top:10px"><span style="font-family:var(--mono);font-weight:600;font-size:28px;line-height:1">${last.pts}</span><span style="font-size:11.5px;color:var(--ink-mid)">pts em ${esc(last.rotulo)}${last.total?' · de '+last.total:''}</span>`;
+  if(prev)h+=`<span style="margin-left:auto;font-weight:600;font-size:12.5px;color:${dpts>0?'var(--green)':dpts<0?'var(--red)':'var(--ink-mid)'}">${dpts>0?'+':''}${dpts} pts${dpct?' · '+(dpct>0?'+':'')+dpct+'%':''}</span>`;
+  h+=`</div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:54px;margin-top:8px;overflow:visible"><polyline points="${poly}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+  h+=`<div style="margin-top:8px;border-top:1px solid var(--line);padding-top:6px">`+s.map((x,i)=>`<div class="row" style="padding:4px 0"><div style="font-size:12.5px">${esc(x.rotulo)}${x.manual?' <span class="legend">manual</span>':''}</div><div style="display:flex;align-items:center;gap:9px"><span style="font-family:var(--mono);font-weight:600">${x.pts}</span>${MA?`<button class="fz" onclick="delSnap(${i})" title="remover">×</button>`:''}</div></div>`).join("")+`</div>`;
+  if(ED)h+=`<div style="margin-top:6px"><a href="#" onclick="snapFoto();return false" style="font-size:11.5px;color:var(--ink-dim)">registrar período manual…</a></div>`;
+  return h}
 function statusFrente(){if(!guardM())return;const p=proj(cur);uiForm({title:"Status da frente na carteira",okText:"Salvar",fields:[{key:"s",label:"Situação",type:"select",value:p.status||"ativa",options:[{v:"ativa",t:"Ativa (NNU)"},{v:"monitorada",t:"Monitorada / lançada"},{v:"obras",t:"Transferida para Obras"},{v:"arquivada",t:"Arquivada"}]}],onOk:v=>{p.status=v.s;touch(p);save();closeModal();renderP()}})}
 function excluirFrente(){if(!guardM())return;const p=proj(cur);uiConfirm(`Excluir a frente “${p.nome}” em definitivo? Esta ação não pode ser desfeita.`,()=>{DATA=DATA.filter(x=>x.id!==cur);save();renderHome()})}
 function resetEnt(e){e.passos.forEach(x=>{x.status="nao";x.data="";x.nota="";if(x.rodada)delete x.rodada;if(x.kind==="o")x.desde=""});e.blq=null}
 function zerarTudo(){if(!guardM())return;uiConfirm("Zerar todos os marcos desta frente? O progresso volta a zero.",()=>{const p=proj(cur);p.fases.forEach(f=>f.itens.forEach(resetEnt));touch(p);save();renderP()})}
-function zerarFase(fi){if(!guardM())return;const p=proj(cur);uiConfirm(`Zerar os marcos da fase “${p.fases[fi].nome}”?`,()=>{p.fases[fi].itens.forEach(resetEnt);touch(p);save();renderTab()})}
+function zerarFase(fi){if(!guardM())return;const p=proj(cur);uiConfirm(`Zerar os marcos da fase “${p.fases[fi].nome}”?`,()=>{p.fases[fi].itens.forEach(resetEnt);p.fases[fi].pctManual=null;touch(p);save();renderTab()})}
+function setFasePct(fi,v){if(!guard())return;const p=proj(cur),f=p.fases[fi];const s=String(v).trim();if(s===""){f.pctManual=null}else{let n=parseInt(s,10);if(isNaN(n))n=0;f.pctManual=Math.max(0,Math.min(100,n))}touch(p);save();renderTab()}
 
 function foot(m){const f=document.getElementById("foot");
   if(m==="h")f.innerHTML=`<b>Cockpit NNU</b> · da originação ao lançamento. Avanço por marcos ponderados sobre a EAP R22 (não a substitui). <b>Aguardando órgão</b> (pendência externa, com SLA semeado do R22) é distinto de <b>pendência interna</b> (responsabilidade da equipe). Indicadores conforme RASCI REV13. Esteira de Produto/Comercial e <code>IPPL</code> estruturados, ativam-se ao receber itens. Dados salvos neste navegador — use <b>Exportar</b> para backup.`;
@@ -771,6 +833,7 @@ function updateAccessUI(){const b=document.getElementById("bAccess");const suf=G
 document.getElementById("bAccess").onclick=()=>{if(GATE){showGate();return}if(ROLE!=="view"){setRole("view");cur?renderP():renderHome();return}uiForm({title:"Acessar",okText:"Entrar",fields:[{key:"s",label:"Senha (visualização, edição ou master)",type:"password",placeholder:"Senha"}],onOk:v=>{const r=PWD[v.s];if(!r){ufError("Senha incorreta.");return}setRole(r);closeModal();cur?renderP():renderHome()}})};
 document.getElementById("bPrint").onclick=()=>window.print();
 document.getElementById("bManual").onclick=openManual;
+document.getElementById("bCompare").onclick=openCompare;
 document.getElementById("bTheme").onclick=()=>{applyTheme(document.documentElement.getAttribute("data-theme")==="light"?"dark":"light");cur?renderP():renderHome()};
 document.getElementById("bNew").onclick=()=>{if(!guardM())return;uiForm({title:"Nova frente",okText:"Criar",fields:[{key:"nome",label:"Nome da frente",type:"text"},{key:"cod",label:"Código (sigla)",type:"text"}],onOk:v=>{if(!(v.nome||"").trim()){ufError("Informe o nome.");return}let c=((v.cod||"").trim()||v.nome.slice(0,4).toUpperCase());const p=build(v.nome.trim(),c||("P"+Date.now()),{estagio:"Prospecção / MOU",through:-1});let b=p.id,k=1;while(proj(p.id)){p.id=b+(++k);p.codigo=p.id}DATA.push(p);save();closeModal();openP(p.id)}})};
 document.getElementById("bExp").onclick=()=>{const bl=new Blob([JSON.stringify(snapshot(),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="cockpit-urbanismo-"+today()+".json";a.click()};
@@ -787,6 +850,7 @@ async function boot(){
   let baked=null;try{const res=await fetch(DADOS_URL,{cache:"no-store"});if(res.ok)baked=await res.json()}catch(e){}
   let hasLocal=false;try{hasLocal=!!localStorage.getItem(STORE)}catch(e){}
   if(baked&&!hasLocal)applySnapshot(baked);
+  try{autoSnapAll();save()}catch(e){}
   const q=new URLSearchParams(location.search);const m=(q.get("modo")||q.get("m")||q.get("acesso")||"").toLowerCase();
   if(m==="master"||m==="edit"||m==="view"){setRoleSilent(m);renderAfterAuth();return}
   if(GATE){showGate();return}

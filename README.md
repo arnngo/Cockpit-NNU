@@ -1,5 +1,7 @@
 # Cockpit NNU — publicar no GitHub Pages
 
+> **Pacote v4** · TEMPLATE 2026.07.1 · inclui evolução semanal automática, "Comparar frentes" (ranking com eixo de fases + média da carteira e radar por fase), tipografia moderna e anotação opcional.
+
 Esta pasta tem **dois arquivos** que vão para o ar juntos:
 - `index.html` — o painel.
 - `dados.json` — os dados que todos verão (o snapshot publicado).
