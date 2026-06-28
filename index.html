@@ -55,6 +55,17 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .prio .pchips{display:flex;gap:5px}
 .pchip{font-size:9px;padding:1px 6px;border-radius:5px;font-weight:700;white-space:nowrap}
 .pchip.r{background:var(--red-soft);color:var(--red)}.pchip.y{background:var(--amber-soft);color:var(--amber)}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:4px}
+.hlc{border:1px solid var(--line);border-top:3px solid var(--line);border-radius:12px;padding:13px 14px 14px;background:var(--surface);cursor:pointer;transition:box-shadow .15s,transform .15s}
+.hlc:hover{box-shadow:0 5px 16px rgba(2,12,27,.08);transform:translateY(-2px)}
+.hlc.g{border-top-color:var(--green)}.hlc.y{border-top-color:var(--amber)}.hlc.r{border-top-color:var(--red)}
+.hlc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.hlc-rk{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;min-width:21px;height:21px;padding:0 5px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center}
+.hlc-av{font-family:var(--mono);font-weight:700;font-size:19px;line-height:1}
+.hlc-nome{font-weight:600;font-size:14px;line-height:1.25}
+.hlc-est{color:var(--ink-dim);font-size:11px;margin-top:3px}
+.hlc-trv{font-size:11px;margin-top:9px;line-height:1.35;font-weight:500}
+.hlc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
 .kofi{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
 .kofi:first-child{border-top:none}.kofi .kn{color:var(--ink-mid)}.kofi .kv{font-family:var(--mono);font-weight:600}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px}
@@ -421,7 +432,7 @@ function gerenciarDepts(){if(!guardM())return;const root=document.getElementById
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
 const TEMPLATE_VERSION="2026.07.5";
-const BUILD="v2026.07.5 · rev 7 (28/06)";
+const BUILD="v2026.07.5 · rev 8 (28/06)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -592,14 +603,16 @@ function renderHome(){cur=null;const v=document.getElementById("view");
     <div class="kpi"><div class="label">Pendências internas</div><div class="val" style="color:${bl?'var(--red)':'inherit'}">${bl}</div><div class="foot">responsabilidade interna</div></div>
     <div class="kpi"><div class="label">Sem atualização</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
   </div>
-  <div class="panel" style="margin-top:18px"><h3>Prioridades da semana ${MA?'<span class="legend">defina o número no card de cada frente</span>':''}</h3>`;
-  const prF=vis.filter(p=>p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade);
+  <div class="panel" style="margin-top:18px"><h3>Prioridades da semana <span class="legend">top 5${MA?' · defina o número no card de cada frente':''}</span></h3>`;
+  const prF=vis.filter(p=>p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).slice(0,5);
   if(!prF.length)h+=`<div class="empty">Nenhuma frente priorizada.${MA?' Use “prioridade” no card para numerar (1 = topo).':''}</div>`;
-  else prF.forEach(p=>{const s=saude(p),av=avancoReg(p),ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),venc=ags.filter(a=>a.atraso).length;
-    const topAc=(p.semana||[]).filter(a=>a.status!=="concluida").sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
-    const linha=topAc?("▸ "+topAc.titulo):travaPrincipal(p,ip,ags);
-    let chips="";if(venc)chips+=`<span class="pchip r">${venc} venc.</span>`;if(ags.length)chips+=`<span class="pchip y">${ags.length} órgão</span>`;if(bls.length)chips+=`<span class="pchip r">${bls.length} int.</span>`;
-    h+=`<div class="prio" onclick="openP('${p.id}')" style="cursor:pointer"><span class="rk">${p.prioridade}</span><span class="dot ${s}" style="margin-top:5px;flex:0 0 auto"></span><span class="pn" style="flex:1;min-width:0"><b>${esc(p.nome)}</b><small style="display:inline;margin-left:7px">${esc(p.estagio)}</small><span class="trv" style="color:${HEX[s]}">${esc(linha)}</span></span><span class="pr-r"><span class="pr-av">${pct(av)}%</span><span class="pchips">${chips}</span></span></div>`});
+  else{h+=`<div class="hl-grid">`;
+    prF.forEach(p=>{const s=saude(p),av=avancoReg(p),ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),venc=ags.filter(a=>a.atraso).length;
+      const topAc=(p.semana||[]).filter(a=>a.status!=="concluida").sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
+      const linha=topAc?("▸ "+topAc.titulo):travaPrincipal(p,ip,ags);
+      let chips="";if(venc)chips+=`<span class="pchip r">${venc} venc.</span>`;if(ags.length)chips+=`<span class="pchip y">${ags.length} órgão</span>`;if(bls.length)chips+=`<span class="pchip r">${bls.length} int.</span>`;
+      h+=`<div class="hlc ${s}" onclick="openP('${p.id}')"><div class="hlc-top"><span class="hlc-rk" style="background:${HEX[s]}">${p.prioridade}</span><span class="hlc-av">${pct(av)}<small style="font-size:11px;font-weight:600">%</small></span></div><div class="hlc-nome">${esc(p.nome)}</div><div class="hlc-est">${esc(p.estagio)}</div><div class="bar" style="margin:9px 0 0"><i style="width:${pct(av)}%"></i></div><div class="hlc-trv" style="color:${HEX[s]}">${esc(linha)}</div>${chips?`<div class="hlc-chips">${chips}</div>`:""}</div>`});
+    h+=`</div>`;}
   h+=`</div>
   <div class="sectlabel"><h2>Carteira</h2><span class="legend">${MA?'prioridade manual + criticidade':'ordenada por criticidade'} · clique para abrir</span></div>
   <div class="cards">`;
