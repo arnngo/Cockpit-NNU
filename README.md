@@ -1,6 +1,6 @@
 # Cockpit NNU — publicar no GitHub Pages
 
-> **Pacote v4** · TEMPLATE 2026.07.1 · inclui evolução semanal automática, "Comparar frentes" (ranking com eixo de fases + média da carteira e radar por fase), tipografia moderna e anotação opcional.
+> **Pacote v4** · TEMPLATE 2026.07.3 · evolução semanal automática, "Comparar frentes" (ranking com eixo de fases + média da carteira e radar por fase), departamento responsável editável (master cria), Análise Seplanh em 3 linhas, Matrícula/SPE/Contrato na Originação, risco "Aprovação", e SLA com data prevista + Reprogramar + log.
 
 Esta pasta tem **dois arquivos** que vão para o ar juntos:
 - `index.html` — o painel.

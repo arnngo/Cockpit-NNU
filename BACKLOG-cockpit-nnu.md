@@ -20,6 +20,11 @@ Documento de referência para guardar e consultar quando precisar mexer. Cobre: 
 - **Tipografia moderna (offline)** — pilha de sistema (Segoe UI Variable no Windows 11 / San Francisco no Mac), tamanho/entrelinha/espaçamento calibrados. Sem fonte externa.
 - **"Registrar atualização" → "Anotação no projeto"** — edições já salvam e atualizam o "atualizado há…" sozinhas; o botão virou opcional, só para nota narrada no histórico.
 - **Comparar frentes** — botão na barra de topo (leitura, todos os níveis) abrindo dois gráficos em **SVG na mão (offline)**: (1) **Ranking de avanço** — barra por frente, ordenada, colorida pela saúde; eixo inferior com as **14 fases numeradas** posicionadas pelo peso acumulado (fases iniciais espremidas à esquerda) + **linha vertical da média da carteira**; clicar no nome abre a frente; legenda numerada das fases embaixo. (2) **Comparativo por fase (radar)** — teia de **7 eixos** (Originação, Diretrizes & Outorgas, Ambiental & Complementares, Análise & "de acordo", Licença de Instalação, Aprovar projetos complementares, Decreto), cada eixo = % de conclusão da fase, comparando 2 a 4 frentes escolhidas nos chips.
+- **Departamento responsável editável** — seletor de departamento no entregável (dono geral) e em cada passo interno; lista NNU, DPRO - EDU, DPRO - H, LEG, CONS, DTU, OBRA, MKT, COM, JUR, PROJ EXT, FIN, CTB; master pode **criar novos departamentos** (opção "＋ criar departamento…", salva em `opus_pmo_depts_v1`). Passos de órgão externo mantêm o nome do órgão. Siglas antigas fora da lista são preservadas.
+- **Análise Seplanh em 3 linhas** — CHEADV, Cartografia, GERAAP (antes uma linha só), mantendo o absoluto "Seplanh de acordo".
+- **Matrícula / SPE / Contrato de parceria movidos para a Originação** (deixaram a Base Fundiária). O peso foi junto: Originação passou a 9 e Base Fundiária a 4, total 195 mantido.
+- **Risco "Aprovação"** — sexta dimensão da matriz de riscos (além de Ambiental, Fundiário, Jurídico, Infraestrutura, Comercial).
+- **SLA repensado (data prevista + reprogramar + log)** — informa-se Protocolado em + SLA esperado (dias); o sistema mostra a **data prevista** (protocolo + SLA) e "faltam Xd / vencido há Xd". Ao vencer, botão **Reprogramar** empurra a previsão e registra no histórico ("Reprogramado (órgão): previsto DD/MM → DD/MM — motivo"), com contador "reprog. Nx". Início (protocolo) e conclusão são logados automaticamente. Correção do **bug do ano** (datas com ano de 2 dígitos, ex.: "0026", normalizadas para 20xx no cálculo e na exibição, inclusive em dados já salvos). Migração agora preserva sla/previsto/reprog/rodada dos passos.
 
 ---
 
@@ -49,7 +54,9 @@ fase       = { id, nome, gate, trilha:'reg'|'produto', pctManual(null=auto), ite
 entregavel = { id, nome, dono, peso, rito:'reg|estudo|simples', orgao, abs, opc,
                livre, texto, pctManual(null=auto), esp, steps(custom),
                trilha, aplicavel, blq{motivo,resp,desde}|null, historico[], passos[] }
-passo      = { nome, dono, kind:'n'|'o', status:'nao|exec|aguarda|exig|ok', data, orgao, sla, desde, rodada }
+passo      = { nome, dono(departamento), kind:'n'|'o', status:'nao|exec|aguarda|exig|ok', data, orgao, sla(dias esperados), desde(protocolo), previsto(data; só se reprogramado), reprog(nº), rodada }
+riscos     = { dim:{prob,impacto,tend,acaoId,aceitavel} } — dimensões: Ambiental, Fundiário, Jurídico, Infraestrutura, Comercial, Aprovação
+departamentos = lista editável (master cria) em localStorage `opus_pmo_depts_v1`
 esp        = { contrapartidas:[{id,nome,passos:[{nome,status}]}],
                diversos:[{id,nome,status,notas:[{data,autor,texto}]}] }
 snapshot   = { frentes:[...], esp:{...} }   // export / import / dados.json / publicar
@@ -63,9 +70,9 @@ Níveis de risco (Prob×Impacto): alta×{baixo→Médio, médio→Alto, alto→C
 
 | Fase | Peso | % do projeto |
 |---|---|---|
-| Originação | 3 | 1,5% |
+| Originação | 9 | 4,6% |
 | Viabilidade | 5 | 2,6% |
-| Base Fundiária | 10 | 5,1% |
+| Base Fundiária | 4 | 2,1% |
 | Diretrizes & Outorgas | 16 | 8,2% |
 | Conceito Urbanístico | 16 | 8,2% |
 | Projeto Executivo | 10 | 5,1% |
@@ -98,6 +105,9 @@ Dentro de cada fase o item **absoluto** é o mais pesado (ex.: "de acordo" 12/20
 | **Evolução semanal (snapshots)** | `autoSnap`/`autoSnapAll` (captura automática), `weekKey/weekLabel`, `evolucaoHTML` (sparkline), `snapFoto` (manual) | semana = segunda-feira; `autoSnap` roda no `touch()` e no boot |
 | **Projetos Especiais (exemplo)** | `CONTRA_PASSOS / CONTRA_SEED / DIV_SEED` + `seedEsp()` | |
 | **Matriz de risco (níveis)** | `const NIVEL={...}` + `NIVLBL/NIVCOL` | regra Prob×Impacto e cores |
+| **Dimensões de risco** | `const RISK_DIMS=[...]` (+ `DIM_ORGAOS`) | hoje 6: Ambiental/Fundiário/Jurídico/Infraestrutura/Comercial/Aprovação |
+| **Departamentos** | `DEPT_DEFAULT` + `loadDepts/saveDepts` + `deptOpts/onDeptChange/addDept` | lista editável; master cria; persiste em `opus_pmo_depts_v1` |
+| **SLA / data prevista / reprogramar** | `previstoDate()`/`addDays()`, `reprogramar()`, `aguardando()`, `setSt()` (log início/fim via `logHist`) | data prevista = protocolo + SLA; reprogramar empurra e loga; ano<100 corrigido em `dias()`/`brdate()` |
 | **Sugestão automática de risco** | `DIM_ORGAOS` + `sugereRisco()` | mapeia órgão→dimensão |
 | **Crédito parcial por passo** | `const CR={...}` | .5/.6/.4 etc |
 | **Tema (claro navy / escuro verde)** | blocos `[data-theme=...]` no `<style>` | variáveis CSS |
