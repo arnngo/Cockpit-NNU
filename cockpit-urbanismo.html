@@ -49,6 +49,23 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .prio .rk{font-family:var(--mono);font-size:11px;color:var(--ink-dim);min-width:14px}
 .prio .pn b{font-weight:600}.prio .pn small{display:block;color:var(--ink-mid);font-size:11.5px;margin-top:1px}
 .prio .pd{margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:600;white-space:nowrap}
+.prio .trv{display:block;font-size:11px;margin-top:3px}
+.prio .pr-r{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:0 0 auto}
+.prio .pr-av{font-family:var(--mono);font-weight:600;font-size:15px;line-height:1}
+.prio .pchips{display:flex;gap:5px}
+.pchip{font-size:9px;padding:1px 6px;border-radius:5px;font-weight:700;white-space:nowrap}
+.pchip.r{background:var(--red-soft);color:var(--red)}.pchip.y{background:var(--amber-soft);color:var(--amber)}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:4px}
+.hlc{border:1px solid var(--line);border-top:3px solid var(--line);border-radius:12px;padding:13px 14px 14px;background:var(--surface);cursor:pointer;transition:box-shadow .15s,transform .15s}
+.hlc:hover{box-shadow:0 5px 16px rgba(2,12,27,.08);transform:translateY(-2px)}
+.hlc.g{border-top-color:var(--green)}.hlc.y{border-top-color:var(--amber)}.hlc.r{border-top-color:var(--red)}
+.hlc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.hlc-rk{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;min-width:21px;height:21px;padding:0 5px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center}
+.hlc-av{font-family:var(--mono);font-weight:700;font-size:19px;line-height:1}
+.hlc-nome{font-weight:600;font-size:14px;line-height:1.25}
+.hlc-est{color:var(--ink-dim);font-size:11px;margin-top:3px}
+.hlc-trv{font-size:11px;margin-top:9px;line-height:1.35;font-weight:500}
+.hlc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
 .kofi{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
 .kofi:first-child{border-top:none}.kofi .kn{color:var(--ink-mid)}.kofi .kv{font-family:var(--mono);font-weight:600}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px}
@@ -66,6 +83,16 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .calert{margin-top:9px;font-size:11px;color:var(--amber);background:var(--amber-soft);border-radius:6px;padding:5px 8px;display:flex;gap:6px;align-items:center}
 .calert.r{color:var(--red);background:var(--red-soft)}
 .calert .mk{font-weight:700}
+.exec{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px;padding:15px 18px;border-radius:12px;border:1px solid var(--line);margin-bottom:14px}
+.exec.g{background:var(--green-soft)}.exec.y{background:var(--amber-soft)}.exec.r{background:var(--red-soft)}
+.exec-st{font-size:19px;font-weight:700;line-height:1.1}
+.exec-m{display:flex;flex-direction:column;gap:1px}
+.exec-m .k{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-dim)}
+.exec-m .v{font-size:14.5px;font-weight:600;color:var(--ink)}
+.exec-div{width:1px;align-self:stretch;background:var(--line);min-height:32px}
+.cc-n{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--surface2);font-size:10px;font-weight:700;color:var(--ink-mid);flex:0 0 auto;margin-top:1px}
+.cc-nat{font-weight:700;text-transform:uppercase;font-size:8.5px;letter-spacing:.04em;color:var(--ink-dim)}
+.cc-nat.r{color:var(--red)}.cc-nat.y{color:var(--amber)}
 .back{background:var(--surface);border:1px solid var(--line2);color:var(--accent);font-size:12.5px;font-weight:600;padding:6px 13px;margin:22px 0 8px;display:inline-flex;gap:7px;align-items:center;border-radius:8px;box-shadow:var(--shadow)}
 .back:hover{border-color:var(--accent);background:var(--accent-soft)}
 .det-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:4px 0 16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
@@ -246,7 +273,7 @@ input[type=file]{display:none}
 <body>
 <div class="shell">
   <div class="topbar">
-    <div class="brand"><span class="mark">OPUS</span><div><h1>Cockpit de Portfólio — Urbanismo</h1><div class="sub">NNU · da originação ao lançamento</div></div></div>
+    <div class="brand"><span class="mark">OPUS</span><div><h1>Cockpit de Portfólio — Urbanismo</h1><div class="sub">NNU · da originação ao lançamento <span id="buildtag" style="color:var(--ink-dim);font-size:10px;margin-left:4px"></span></div></div></div>
     <div class="toolbtns">
       <button class="tbtn" id="bManual">Manual</button>
       <button class="tbtn" id="bCompare">Comparar frentes</button>
@@ -405,6 +432,7 @@ function gerenciarDepts(){if(!guardM())return;const root=document.getElementById
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
 const TEMPLATE_VERSION="2026.07.5";
+const BUILD="v2026.07.5 · rev 8 (28/06)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -485,7 +513,7 @@ function renderEspeciais(){
     h+=`<div class="faseblk ${exp?'':'col'}"><div class="fh" onclick="espToggle('d:${d.id}')"><span class="fl"><span class="chev">▾</span>${esc(d.nome)}</span><span style="display:flex;gap:9px;align-items:center">${d.status?`<span class="tag">${esc(d.status)}</span>`:'<span class="legend">sem status</span>'}${MA?`<button class="fz" onclick="event.stopPropagation();renameDiv('${d.id}')">renomear</button><button class="fz" onclick="event.stopPropagation();removeDiv('${d.id}')">remover</button>`:''}</span></div>`;
     if(exp){h+=`<div class="passos">`;
       h+=`<div class="row"><div><b>Onde estamos:</b> ${d.status?esc(d.status):'—'}</div>${ED?`<button class="fz" onclick="setDivStatus('${d.id}')">editar status</button>`:''}</div>`;
-      if(d.notas&&d.notas.length)h+=`<div class="hist">`+d.notas.slice().reverse().map(n=>`<div class="hl"><span class="hd">${brdate(n.data)}</span> ${esc(n.texto)} <span class="ha">— ${esc(n.autor)}</span></div>`).join("")+`</div>`;
+      if(d.notas&&d.notas.length)h+=`<div class="hist">`+d.notas.map((n,idx)=>({n,idx})).reverse().map(({n,idx})=>`<div class="hl"><span class="hd">${brdate(n.data)}</span> ${esc(n.texto)} <span class="ha">— ${esc(n.autor)}</span>${MA?`<span class="hx"><button class="fz" onclick="editDivNota('${d.id}',${idx})">editar</button><button class="fz" style="color:var(--red)" onclick="removeDivNota('${d.id}',${idx})">remover</button></span>`:''}</div>`).join("")+`</div>`;
       if(ED)h+=`<input class="notein" placeholder="Adicionar anotação de acompanhamento" onchange="addDivNota('${d.id}',this.value)">`;
       h+=`</div>`;}
     h+=`</div>`;});
@@ -500,7 +528,9 @@ function addDiv(){if(!guardM())return;uiForm({title:"Novo item (Diversos)",okTex
 function renameDiv(id){if(!guardM())return;const d=ESP.diversos.find(x=>x.id===id);uiForm({title:"Renomear item",okText:"Salvar",fields:[{key:"n",label:"Nome",type:"text",value:d.nome}],onOk:v=>{if((v.n||"").trim())d.nome=v.n.trim();saveEsp();closeModal();renderHome()}})}
 function removeDiv(id){if(!guardM())return;const d=ESP.diversos.find(x=>x.id===id);uiConfirm(`Remover “${d.nome}”?`,()=>{ESP.diversos=ESP.diversos.filter(x=>x.id!==id);saveEsp();renderHome()})}
 function setDivStatus(id){if(!guard())return;const d=ESP.diversos.find(x=>x.id===id);uiForm({title:"Onde estamos",okText:"Salvar",fields:[{key:"s",label:"Status atual (uma linha)",type:"text",value:d.status||""}],onOk:v=>{d.status=(v.s||"").trim();saveEsp();closeModal();renderHome()}})}
-function addDivNota(id,t){if(!guard()||!(t||"").trim())return;const d=ESP.diversos.find(x=>x.id===id);if(!d.notas)d.notas=[];d.notas.push({data:today(),autor:"Alberto",texto:t.trim()});saveEsp();renderHome()}
+function addDivNota(id,t){if(!guard()||!(t||"").trim())return;const d=ESP.diversos.find(x=>x.id===id);if(!d.notas)d.notas=[];d.notas.push({data:today(),autor:EDITOR||"NNU",texto:t.trim()});saveEsp();renderHome()}
+function editDivNota(id,idx){if(!guardM())return;const d=ESP.diversos.find(x=>x.id===id);const n=d&&d.notas&&d.notas[idx];if(!n)return;uiForm({title:"Editar anotação",okText:"Salvar",fields:[{key:"t",label:"Texto da anotação",type:"textarea",value:n.texto||""}],onOk:v=>{const t=(v.t||"").trim();if(!t){ufError("O texto não pode ficar vazio.");return}n.texto=t;saveEsp();closeModal();renderHome()}})}
+function removeDivNota(id,idx){if(!guardM())return;const d=ESP.diversos.find(x=>x.id===id);if(!d||!d.notas||!d.notas[idx])return;uiConfirm("Remover esta anotação? Esta ação não pode ser desfeita.",()=>{d.notas.splice(idx,1);saveEsp();renderHome()})}
 function copyItemState(nw,old){nw.aplicavel=old.aplicavel!==false;nw.blq=old.blq||null;if(old.texto!==undefined)nw.texto=old.texto;if(old.processo!==undefined)nw.processo=old.processo;if(old.pctManual!==undefined)nw.pctManual=old.pctManual;nw.historico=old.historico||[];
   if(old.passos&&nw.passos){nw.passos.forEach((ps,i)=>{let o=old.passos.find(x=>x.nome===ps.nome);if(!o&&old.passos[i])o=old.passos[i];if(o){ps.status=o.status||"nao";if(o.data)ps.data=o.data;if(o.nota)ps.nota=o.nota;if(o.desde!==undefined)ps.desde=o.desde;if(o.sla!==undefined)ps.sla=o.sla;if(o.previsto!==undefined)ps.previsto=o.previsto;if(o.reprog!==undefined)ps.reprog=o.reprog;if(o.rodada!==undefined)ps.rodada=o.rodada}})}}
 function rebuildFrente(p){const oldItems={},espByFase={},oldFases={};(p.fases||[]).forEach(f=>{oldFases[f.id]=f;f.itens.forEach(it=>{oldItems[it.id]=it;if(it.esp){(espByFase[f.id]=espByFase[f.id]||[]).push(it)}})});
@@ -553,6 +583,10 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","
 function pct(x){return Math.round(x*100)}
 
 function prioridades(){return DATA.filter(p=>p.status!=="arquivada"&&p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).map(p=>({proj:p.id,nome:p.nome,sub:p.estagio,prio:p.prioridade}))}
+const PRIO_ORD={critica:4,alta:3,media:2,baixa:1};
+function riscoResumo(p){const order={critico:4,alto:3,medio:2,baixo:1};const dims=RISK_DIMS.map(d=>({d,n:nivelRisco(p.riscos[d])})).filter(x=>x.n);const top=dims.slice().sort((a,b)=>order[b.n]-order[a.n]);return{filled:dims.length,naoaval:RISK_DIMS.length-dims.length,crit:dims.filter(x=>x.n==="critico").length,alto:dims.filter(x=>x.n==="alto").length,top,nivel:top[0]?top[0].n:""}}
+function travaPrincipal(p,ip,ags){if(ip.travado){const m=ip.missing.find(x=>x.abs);return "Gate travado por "+(m?m.nome:"item absoluto")}const bd=RISK_DIMS.find(d=>p.riscos[d]&&p.riscos[d].aceitavel==="nao");if(bd)return "Gate travado por risco "+bd;const venc=ags.filter(a=>a.atraso).sort((a,b)=>b.over-a.over)[0];if(venc)return "Vencido no órgão: "+venc.ent;if(curGate(p)<0)return "Esteira regulatória concluída";if(ip.missing.length)return "Falta p/ o gate: "+ip.missing[0].nome;return "Em andamento — sem trava"}
+function caminhoCritico(p,ip,ags,bls){const out=[];if(ip.travado)ip.missing.filter(m=>m.abs).forEach(m=>out.push({txt:m.nome,nat:"trava do gate",col:"r",prazo:"",score:5,over:9999}));RISK_DIMS.forEach(d=>{const o=p.riscos[d];if(o&&o.aceitavel==="nao")out.push({txt:"Risco "+d+" não aceitável p/ gate",nat:"risco",col:"r",prazo:"",score:5,over:9998})});ags.forEach(a=>{const col=a.atraso?"r":(a.over!=null&&a.over>=-7?"y":"");out.push({txt:a.ent,nat:"externa",col,sub:a.orgao+(a.exig?" · em exigência":""),prazo:a.over!=null?(a.atraso?'venceu '+a.over+'d':'faltam '+(-a.over)+'d'):'',score:a.atraso?4:(a.exig?3:(a.over!=null&&a.over>=-7?2:1)),over:a.over!=null?a.over:-999})});bls.forEach(b=>out.push({txt:b.ent,nat:"interna",col:"r",sub:b.motivo+(b.dept?" · "+b.dept:""),prazo:b.dias!=null?b.dias+'d':'',score:4,over:b.dias||0}));out.sort((a,b)=>(b.score-a.score)||((b.over||0)-(a.over||0)));return out}
 
 function renderHome(){cur=null;const v=document.getElementById("view");
   const vis=DATA.filter(p=>p.status!=="arquivada");const total=vis.length||1;
@@ -569,10 +603,16 @@ function renderHome(){cur=null;const v=document.getElementById("view");
     <div class="kpi"><div class="label">Pendências internas</div><div class="val" style="color:${bl?'var(--red)':'inherit'}">${bl}</div><div class="foot">responsabilidade interna</div></div>
     <div class="kpi"><div class="label">Sem atualização</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
   </div>
-  <div class="panel" style="margin-top:18px"><h3>Prioridades da semana ${MA?'<span class="legend">defina o número no card de cada frente</span>':''}</h3>`;
-  const pr=prioridades();
-  if(!pr.length)h+=`<div class="empty">Nenhuma frente priorizada.${MA?' Use “prioridade” no card para numerar (1 = topo).':''}</div>`;
-  else pr.forEach(x=>{h+=`<div class="prio" onclick="openP('${x.proj}')" style="cursor:pointer"><span class="rk">${x.prio}</span><span class="pn"><b>${esc(x.nome)}</b><small>${esc(x.sub)}</small></span></div>`});
+  <div class="panel" style="margin-top:18px"><h3>Prioridades da semana <span class="legend">top 5${MA?' · defina o número no card de cada frente':''}</span></h3>`;
+  const prF=vis.filter(p=>p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).slice(0,5);
+  if(!prF.length)h+=`<div class="empty">Nenhuma frente priorizada.${MA?' Use “prioridade” no card para numerar (1 = topo).':''}</div>`;
+  else{h+=`<div class="hl-grid">`;
+    prF.forEach(p=>{const s=saude(p),av=avancoReg(p),ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),venc=ags.filter(a=>a.atraso).length;
+      const topAc=(p.semana||[]).filter(a=>a.status!=="concluida").sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
+      const linha=topAc?("▸ "+topAc.titulo):travaPrincipal(p,ip,ags);
+      let chips="";if(venc)chips+=`<span class="pchip r">${venc} venc.</span>`;if(ags.length)chips+=`<span class="pchip y">${ags.length} órgão</span>`;if(bls.length)chips+=`<span class="pchip r">${bls.length} int.</span>`;
+      h+=`<div class="hlc ${s}" onclick="openP('${p.id}')"><div class="hlc-top"><span class="hlc-rk" style="background:${HEX[s]}">${p.prioridade}</span><span class="hlc-av">${pct(av)}<small style="font-size:11px;font-weight:600">%</small></span></div><div class="hlc-nome">${esc(p.nome)}</div><div class="hlc-est">${esc(p.estagio)}</div><div class="bar" style="margin:9px 0 0"><i style="width:${pct(av)}%"></i></div><div class="hlc-trv" style="color:${HEX[s]}">${esc(linha)}</div>${chips?`<div class="hlc-chips">${chips}</div>`:""}</div>`});
+    h+=`</div>`;}
   h+=`</div>
   <div class="sectlabel"><h2>Carteira</h2><span class="legend">${MA?'prioridade manual + criticidade':'ordenada por criticidade'} · clique para abrir</span></div>
   <div class="cards">`;
@@ -624,20 +664,30 @@ function faseBlocksHTML(p,trilha){let h="";
     h+=`</div>`});
   return h}
 function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!b)return;
-  if(tab==="resumo"){const ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),ippl=ipplVal(p);
-    let h=`<div class="subgrid"><div style="display:flex;flex-direction:column;gap:14px">
-      <div class="panel"><h3>Próximo gate</h3><div class="bigblk"><span class="n" style="color:${ip.travado?'var(--red)':ip.pct>=.85?'var(--green)':'var(--amber)'}">${pct(ip.pct)}%</span><div><div style="font-weight:600">${esc(ip.gate)}</div><div style="font-size:11.5px;color:var(--ink-mid)">IPPE — prontidão para a próxima etapa</div></div></div>
-      ${ip.travado?`<div class="calert r" style="margin-top:10px"><span class="mk">!</span>Travado: bloqueador absoluto pendente</div>`:''}
-      ${riscoFlags(p).block?`<div class="calert r" style="margin-top:8px"><span class="mk">!</span>Risco marcado como não aceitável para avançar o gate</div>`:''}
-      ${ip.missing.length?`<ul class="miss" style="margin-top:10px">${ip.missing.map(m=>`<li><span class="bx ${m.abs?'abs':''}"></span>${esc(m.nome)}${m.abs?' <span class="tag abs" style="margin-left:auto">absoluto</span>':''}</li>`).join("")}</ul>`:`<div class="empty" style="margin-top:8px">Etapa completa.</div>`}
-      ${ippl!=null?`<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)"><div class="bigblk"><span class="n" style="font-size:22px">${pct(ippl)}%</span><div style="font-size:11.5px;color:var(--ink-mid)">IPPL — prontidão para lançamento</div></div></div>`:''}
-      </div>
-      <div class="panel"><h3>Evolução do projeto <span class="legend">automático · semanal</span></h3>${evolucaoHTML(p)}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="panel"><h3>Aguardando órgãos <span class="legend">pendência externa</span></h3>${ags.length?ags.map(a=>`<div class="row"><div><div>${esc(a.ent)}</div><div class="sub">${esc(a.orgao)}${a.exig?' · em exigência':''} · previsto ${a.prev?brdate(a.prev):'—'}${a.reprog?' · reprog. '+a.reprog+'x':''}</div></div><div class="d ${a.atraso?'r':'y'}">${a.over!=null?(a.atraso?'vencido '+a.over+'d':'faltam '+(-a.over)+'d'):'—'}</div></div>`).join(""):`<div class="empty">Sem pendência externa.</div>`}</div>
-      <div class="panel"><h3>Pendências internas <span class="legend">responsabilidade interna</span></h3>${bls.length?bls.map(x=>`<div class="row"><div><div>${esc(x.ent)}</div><div class="sub">${esc(x.motivo)}${x.dept?' · '+esc(x.dept):''}${x.resp?' · '+esc(x.resp):''}</div></div><div class="d r">${x.dias!=null?x.dias+'d':'—'}</div></div>`).join(""):`<div class="empty">Sem pendência interna.</div>`}</div>
-      </div></div>`;
+  if(tab==="resumo"){const ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),ippl=ipplVal(p),s=saude(p),rr=riscoResumo(p),av=avancoReg(p);
+    const cc=caminhoCritico(p,ip,ags,bls),trava=travaPrincipal(p,ip,ags),acoes=(p.semana||[]).filter(a=>a.status!=="concluida");
+    const topAcao=acoes.slice().sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
+    const acaoBox=topAcao?`<div style="margin-left:auto;max-width:320px;min-width:190px;background:var(--surface);border:1px solid ${topAcao.prio==="critica"?"var(--red)":"var(--line)"};border-radius:9px;padding:8px 12px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-dim);margin-bottom:3px">Próxima ação <span class="pr ${topAcao.prio}" style="margin-left:4px">${topAcao.prio}</span></div><div style="font-size:13px;font-weight:600;color:var(--ink);line-height:1.25">${esc(topAcao.titulo)}</div><div style="font-size:11px;color:var(--ink-mid);margin-top:1px">${esc(topAcao.resp||"—")} · vence ${brdate(topAcao.prazo)}</div></div>`:"";
+    let h=`<div class="exec ${s}"><div style="min-width:160px"><div class="exec-st" style="color:${HEX[s]}">${SL[s]}</div><div style="font-size:12px;color:var(--ink-mid);margin-top:2px">${esc(trava)}</div></div><div class="exec-div"></div>`+
+      [["Gate atual",esc(ip.gate),""],["IPPE",pct(ip.pct)+"%",ip.travado?"var(--red)":ip.pct>=.85?"var(--green)":"var(--amber)"],["Avanço total",pct(av)+"%",""],["IPPL",ippl!=null?pct(ippl)+"%":"—",""],["Risco",rr.filled?NIVLBL[rr.nivel]:"Não avaliado",rr.filled?NIVCOL[rr.nivel]:"var(--ink-dim)"],["Prioridade",p.prioridade!=null?"P"+p.prioridade:"—",""],["Atualizado",(dias(p.ultAt)||0)+"d",""]].map(m=>`<div class="exec-m"><span class="k">${m[0]}</span><span class="v"${m[2]?` style="color:${m[2]}"`:""}>${m[1]}</span></div>`).join("")+acaoBox+`</div>`;
+    h+=`<div class="panel" style="margin-bottom:14px"><h3>Resumo executivo <span class="legend">situação para reunião</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="regAtualiza()">editar</button>`:""}</h3>${p.statusNota?`<div style="font-size:13.5px;color:var(--ink);line-height:1.5">${esc(p.statusNota)}</div>`:`<div class="empty">Sem resumo executivo escrito.${ED?" Clique em “editar” para descrever situação, trava e próxima ação.":""}</div>`}</div>`;
+    h+=`<div class="subgrid"><div style="display:flex;flex-direction:column;gap:14px">`;
+    h+=`<div class="panel"><h3>Caminho crítico <span class="legend">o que trava o avanço, por urgência</span></h3>`;
+    h+=cc.length?cc.slice(0,6).map((c,i)=>`<div class="row"><div style="display:flex;gap:9px"><span class="cc-n">${i+1}</span><div><div>${esc(c.txt)}</div><div class="sub"><span class="cc-nat ${c.col}">${c.nat}</span>${c.sub?" · "+esc(c.sub):""}</div></div></div>${c.prazo?`<div class="d ${c.col}">${esc(c.prazo)}</div>`:""}</div>`).join(""):`<div class="empty">Nada travando o avanço agora.</div>`;
+    h+=`<div style="font-size:11px;color:var(--ink-dim);margin-top:9px;padding-top:8px;border-top:1px solid var(--line)">Externas: ${ags.length} · Internas: ${bls.length} · Vencidas: ${ags.filter(a=>a.atraso).length} · Em exigência: ${ags.filter(a=>a.exig).length}</div></div>`;
+    h+=`<div class="panel"><h3>Ações da semana <span class="legend">${acoes.length} aberta(s)</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('semana')">abrir</button>`:""}</h3>`;
+    {const restAc=acoes.slice().sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||"")).filter(a=>a!==topAcao).slice(0,5);
+      if(restAc.length)h+=restAc.map(a=>`<div class="sw"><span class="pr ${a.prio}">${a.prio}</span><div class="sb"><div class="st">${esc(a.titulo)}</div></div></div>`).join("");
+      else h+=`<div class="empty">${topAcao?"A ação prioritária está no topo.":"Nenhuma ação aberta."}</div>`;}
+    h+=`</div></div><div style="display:flex;flex-direction:column;gap:14px">`;
+    h+=`<div class="panel"><h3>Riscos <span class="legend">da matriz estratégica</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('riscos')">abrir matriz</button>`:""}</h3>`;
+    if(rr.filled===0)h+=`<div class="calert"><span class="mk">!</span>Matriz não preenchida — pendência de governança.</div><div style="font-size:11.5px;color:var(--ink-mid);margin-top:7px">Avaliar: ${RISK_DIMS.join(", ")}.</div>`;
+    else h+=`<div class="bigblk"><span class="n" style="font-size:21px;color:${NIVCOL[rr.nivel]}">${NIVLBL[rr.nivel]}</span><div style="font-size:11.5px;color:var(--ink-mid)">risco executivo · maior nível da matriz</div></div><div style="font-size:11.5px;color:var(--ink-mid);margin:9px 0">Críticos: ${rr.crit} · Altos: ${rr.alto} · Não avaliados: ${rr.naoaval}</div>`+rr.top.slice(0,3).map(t=>`<div class="row"><div>${esc(t.d)}</div><div class="d" style="color:${NIVCOL[t.n]}">${NIVLBL[t.n]}</div></div>`).join("");
+    h+=`</div><div class="panel"><h3>Prontidão para lançamento <span class="legend">IPPL</span></h3>`;
+    if(ippl==null)h+=`<div class="empty">Esteira de produto ainda não iniciada.</div>`;
+    else{const pf=p.fases.filter(f=>f.trilha==="produto"),pend=[];pf.forEach(f=>f.itens.forEach(e=>{if(e.aplicavel&&entPct(e)<.999)pend.push(e.nome)}));h+=`<div class="bigblk"><span class="n" style="font-size:24px;color:${ippl>=.85?"var(--green)":ippl>=.4?"var(--amber)":"var(--ink-mid)"}">${pct(ippl)}%</span><div style="font-size:11.5px;color:var(--ink-mid)">prontidão consolidada da esteira</div></div>`;if(pend.length)h+=`<div style="font-size:9.5px;color:var(--ink-dim);margin:9px 0 4px;text-transform:uppercase;letter-spacing:.05em">Pendente</div><ul class="miss">${pend.slice(0,6).map(m=>`<li><span class="bx"></span>${esc(m)}</li>`).join("")}${pend.length>6?`<li style="color:var(--ink-dim)">+${pend.length-6} item(ns)</li>`:""}</ul>`;else h+=`<div class="empty" style="margin-top:6px">Tudo pronto para lançar.</div>`;}
+    h+=`</div><div class="panel"><h3>Evolução <span class="legend">tendência semanal</span></h3>${evolucaoHTML(p)}</div>`;
+    h+=`</div></div>`;
     b.innerHTML=h}
   else if(tab==="entreg"){b.innerHTML=faseBlocksHTML(p,"reg")+(MA?`<button class="addbtn" onclick="addEspecial()">+ Item especial</button>`:"")}
   else if(tab==="produto"){const ippl=ipplVal(p);const pf=p.fases.filter(f=>f.trilha==="produto");
@@ -790,7 +840,7 @@ function evolucaoHTML(p){const s=(p.snapshots||[]);if(!s.length)return `<div cla
   const dots=xy.map(c=>`<circle cx="${c[0].toFixed(1)}" cy="${c[1].toFixed(1)}" r="3" fill="var(--accent)"/>`).join("");
   let h=`<div style="display:flex;align-items:baseline;gap:10px;margin-top:10px"><span style="font-family:var(--mono);font-weight:600;font-size:28px;line-height:1">${last.pts}</span><span style="font-size:11.5px;color:var(--ink-mid)">pts em ${esc(last.rotulo)}${last.total?' · de '+last.total:''}</span>`;
   if(prev)h+=`<span style="margin-left:auto;font-weight:600;font-size:12.5px;color:${dpts>0?'var(--green)':dpts<0?'var(--red)':'var(--ink-mid)'}">${dpts>0?'+':''}${dpts} pts${dpct?' · '+(dpct>0?'+':'')+dpct+'%':''}</span>`;
-  h+=`</div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:54px;margin-top:8px;overflow:visible"><polyline points="${poly}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+  h+=`</div>${prev?"":'<div style="font-size:11.5px;color:var(--ink-dim);margin-top:5px">Histórico insuficiente para tendência — 1 medição. Preenche conforme as semanas passam.</div>'}<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:54px;margin-top:8px;overflow:visible"><polyline points="${poly}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
   h+=`<div style="margin-top:8px;border-top:1px solid var(--line);padding-top:6px">`+s.map((x,i)=>`<div class="row" style="padding:4px 0"><div style="font-size:12.5px">${esc(x.rotulo)}${x.manual?' <span class="legend">manual</span>':''}</div><div style="display:flex;align-items:center;gap:9px"><span style="font-family:var(--mono);font-weight:600">${x.pts}</span>${MA?`<button class="fz" onclick="delSnap(${i})" title="remover">×</button>`:''}</div></div>`).join("")+`</div>`;
   if(ED)h+=`<div style="margin-top:6px"><a href="#" onclick="snapFoto();return false" style="font-size:11.5px;color:var(--ink-dim)">registrar período manual…</a></div>`;
   return h}
@@ -803,7 +853,7 @@ function setFasePct(fi,v){if(!guard())return;const p=proj(cur),f=p.fases[fi];con
 
 function foot(m){const f=document.getElementById("foot");
   if(m==="h")f.innerHTML=`<b>Cockpit NNU</b> · da originação ao lançamento. Avanço por marcos ponderados sobre a EAP R22 (não a substitui). <b>Aguardando órgão</b> (pendência externa, com SLA semeado do R22) é distinto de <b>pendência interna</b> (responsabilidade da equipe). Indicadores conforme RASCI REV13. Esteira de Produto/Comercial e <code>IPPL</code> estruturados, ativam-se ao receber itens. Dados salvos neste navegador — use <b>Exportar</b> para backup.`;
-  else f.innerHTML=`<b>IPPE</b> = prontidão para o próximo gate; trava se houver bloqueador absoluto pendente. Cada entregável abre nos passos do rito (Material técnico → Protocolo → Análise no órgão → Aprovação). No passo de órgão você informa o <b>protocolo</b> e o <b>SLA esperado</b> (dias); o sistema mostra a <b>data prevista</b> (protocolo + SLA) e quanto falta ou há quanto venceu. Ao vencer, use <b>Reprogramar</b> para empurrar a previsão — início, reprogramações e conclusão ficam no histórico do entregável. <b>Operação da semana</b> não entra no cálculo.`}
+  else f.innerHTML=`<b>IPPE</b> prontidão do próximo gate (trava se houver absoluto pendente) · <b>IPPL</b> prontidão de lançamento · <b>Avanço total</b> da esteira regulatória. Pendência <b>externa</b> (órgão, com SLA/data prevista) ≠ pendência <b>interna</b> (equipe). Operação da semana não entra no cálculo.`}
 
 function manualHTML(){return `<div class="overlay" onclick="if(event.target===this)closeManual()"><div class="modal">
   <div class="mh"><h2>Manual — Cockpit de Portfólio NNU</h2><button class="mx" onclick="closeManual()">×</button></div>
@@ -893,6 +943,7 @@ function showGate(){document.getElementById("modalRoot").innerHTML=`<div class="
   const submit=()=>{const v=document.getElementById("gate-pw").value;const r=PWD[v];if(!r){ufError("Senha incorreta.");return}setRoleSilent(r);closeModal();renderAfterAuth();if(r==="edit")pickEditor();else if(r==="master")EDITOR="NNU"};
   document.getElementById("gate-ok").onclick=submit;const i=document.getElementById("gate-pw");i.addEventListener("keydown",e=>{if(e.key==="Enter")submit()});setTimeout(()=>{try{i.focus()}catch(e){}},40)}
 async function boot(){
+  try{const bt=document.getElementById("buildtag");if(bt)bt.textContent="· "+BUILD}catch(e){}
   let baked=null;try{const res=await fetch(DADOS_URL,{cache:"no-store"});if(res.ok)baked=await res.json()}catch(e){}
   let hasLocal=false;try{hasLocal=!!localStorage.getItem(STORE)}catch(e){}
   if(baked&&!hasLocal)applySnapshot(baked);
