@@ -167,6 +167,8 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .seg button{padding:4px 9px}
 .hist{margin:6px 0 2px;border-top:1px dashed var(--line);padding-top:6px}
 .hl{font-size:11.5px;color:var(--ink-mid);padding:3px 0;line-height:1.45}
+.hl .hx{margin-left:8px;white-space:nowrap}
+.hl .hx .fz{padding:1px 7px;margin-left:4px}
 .hd{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-right:4px}
 .ha{color:var(--ink-dim);font-size:10.5px}
 .rolebadge{font-size:10px;color:var(--ink-dim);letter-spacing:.06em;text-transform:uppercase}
@@ -505,7 +507,7 @@ function rebuildFrente(p){const oldItems={},espByFase={},oldFases={};(p.fases||[
   const fresh=build(p.nome,p.codigo,{});["id","codigo","tipo","estagio","status","ultAt","por","dossie","dossieData","prioridade","statusNota","metas","semana","snapshots"].forEach(k=>{if(p[k]!==undefined)fresh[k]=p[k]});
   fresh.riscos=normRiscos(p.riscos||{});
   fresh.fases.forEach(f=>{if(oldFases[f.id]&&oldFases[f.id].pctManual!==undefined)f.pctManual=oldFases[f.id].pctManual;f.itens.forEach(it=>{const old=oldItems[it.id];if(old)copyItemState(it,old)});
-    (espByFase[f.id]||[]).forEach(e=>{if(e.pctManual===undefined)e.pctManual=null;if(e.texto===undefined)e.texto="";if(!e.historico)e.historico=[];f.itens.push(e)})});
+    (espByFase[f.id]||[]).forEach(e=>{if(e.pctManual===undefined)e.pctManual=null;if(e.texto===undefined)e.texto="";if(e.processo===undefined)e.processo="";if(!e.historico)e.historico=[];f.itens.push(e)})});
   const known=fresh.fases.map(f=>f.id);Object.keys(espByFase).forEach(fid=>{if(!known.includes(fid)){const fb=fresh.fases.find(f=>f.id==="dir")||fresh.fases[3];espByFase[fid].forEach(e=>fb.itens.push(e))}});
   fresh._tv=TEMPLATE_VERSION;return fresh}
 function migrate(d){const map={GMA:["IGM","Indep. Gleba Maior"],GME:["IG1A","Indep. Gleba 1A"],IND:["IPGO","Independência Pós GO-020"]};const nmap={"Gleba Maior":"GMA","Gleba Menor":"GME","Independências":"IND"};
@@ -670,6 +672,7 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
     h+=`</div></div>`;b.innerHTML=h}
 }
 function renderPassos(p,fi,e){let h=`<div class="passos">`;
+  if(ED||e.processo)h+=`<div style="display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:8px 11px;background:var(--surface);border:1px solid var(--line);border-radius:8px"><span class="lbl" style="font-size:10px;color:var(--ink-dim);white-space:nowrap;font-weight:600">Nº do processo</span>${ED?`<input class="notein" style="max-width:260px;margin:0;flex:1" value="${esc(e.processo||'')}" onchange="setProcesso('${e.id}',this.value)" placeholder="Ex.: 2026.0001234-5 — AVT, AVTO, LP...">`:`<span style="font-weight:600;color:var(--ink)">${esc(e.processo)}</span>`}</div>`;
   e.passos.forEach((x,pi)=>{
     const isO=x.kind==="o";
     const donoHTML=`<span class="pd">${esc(x.dono)}</span>`;
@@ -682,7 +685,7 @@ function renderPassos(p,fi,e){let h=`<div class="passos">`;
     if(isO&&(x.status==="aguarda"||x.status==="exig")){const prev=previstoDate(x),over=prev!=null?dias(prev):null,sla=x.sla||SLA[x.orgao]||30,atr=over!=null&&over>0;
       if(ED)h+=`<div class="orgbox ${atr?'atraso':''} ${x.status==='exig'?'exig':''}">
         <div class="fld"><label>Órgão</label><input class="w-org" value="${esc(x.orgao)}" onchange="setPasso('${e.id}',${pi},'orgao',this.value)"></div>
-        <div class="fld"><label>Protocolado em</label><input type="date" value="${fixYear(x.desde)||''}" onchange="setPasso('${e.id}',${pi},'desde',this.value)"></div>
+        <div class="fld"><label>Protocolado em</label><input type="date" min="${DMIN}" max="${DMAX}" value="${fixYear(x.desde)||''}" onchange="setPasso('${e.id}',${pi},'desde',this.value)"></div>
         <div class="fld"><label>SLA esperado (dias)</label><input type="number" class="w-sla" value="${sla}" onchange="setPasso('${e.id}',${pi},'sla',this.value)"></div>
         <div class="sla-read" style="color:${atr?'var(--red)':'var(--amber)'}">previsto ${prev?brdate(prev):'—'} · ${over!=null?(atr?'vencido há '+over+'d':'faltam '+(-over)+'d'):'—'}${x.reprog?' · reprog. '+x.reprog+'x':''}</div>
         <button class="fz" onclick="reprogramar('${e.id}',${pi})">Reprogramar</button></div>`;
@@ -690,9 +693,8 @@ function renderPassos(p,fi,e){let h=`<div class="passos">`;
     }
     if(x.data)h+=`<div class="noteline">Concluído em ${brdate(x.data)}</div>`;
   });
-  if(ED||e.processo)h+=`<div style="margin:8px 0 2px"><div class="lbl" style="font-size:9px;color:var(--ink-dim);margin-bottom:3px">Nº do processo / protocolo no órgão</div>${ED?`<input class="notein" style="max-width:300px;margin:0" value="${esc(e.processo||'')}" onchange="setProcesso('${e.id}',this.value)" placeholder="Ex.: 2026.0001234-5 (AVT, AVTO, LP...)">`:`<div class="noteline">${esc(e.processo)}</div>`}</div>`;
   if(e.livre)h+=`<div style="margin:6px 0 2px"><div class="lbl" style="font-size:9px;color:var(--ink-dim);margin-bottom:3px">Detalhar (texto livre — ex.: quais condicionantes / projetos complementares)</div>${ED?`<textarea class="notein" style="min-height:54px" onchange="setTexto('${e.id}',this.value)" placeholder="Liste aqui...">${esc(e.texto||"")}</textarea>`:`<div class="noteline">${e.texto?esc(e.texto):'—'}</div>`}</div>`;
-  if(e.historico&&e.historico.length)h+=`<div class="hist">`+e.historico.slice().reverse().map(it=>`<div class="hl"><span class="hd">${brdate(it.data)}</span> ${esc(it.texto)} <span class="ha">— ${esc(it.autor)}</span></div>`).join("")+`</div>`;
+  if(e.historico&&e.historico.length)h+=`<div class="hist">`+e.historico.map((it,idx)=>({it,idx})).reverse().map(({it,idx})=>`<div class="hl"><span class="hd">${brdate(it.data)}</span> ${esc(it.texto)} <span class="ha">— ${esc(it.autor)}</span>${MA?`<span class="hx"><button class="fz" onclick="editHist('${e.id}',${idx})">editar</button><button class="fz" style="color:var(--red)" onclick="removeHist('${e.id}',${idx})">remover</button></span>`:''}</div>`).join("")+`</div>`;
   if(ED){
     h+=`<input class="notein" placeholder="Adicionar observação (vira histórico — não sobrescreve)" value="" onchange="addHist('${e.id}',this.value)">`;
     h+=`<div class="entfoot">
@@ -718,7 +720,9 @@ function setSt(eid,pi,val){if(!guard())return;const p=proj(cur),e=findEnt(p,eid)
   touch(p);save();renderTab()}
 function reprogramar(eid,pi){if(!guard())return;const p=proj(cur),e=findEnt(p,eid),x=e.passos[pi];const atual=previstoDate(x)||today();uiForm({title:"Reprogramar previsão",okText:"Reprogramar",fields:[{key:"d",label:"Nova data prevista",type:"date",value:atual},{key:"m",label:"Motivo (opcional)",type:"text",placeholder:"Ex.: órgão pediu mais prazo"}],onOk:v=>{const ant=previstoDate(x);const nova=fixYear(v.d)||atual;x.previsto=nova;x.reprog=(x.reprog||0)+1;logHist(e,`Reprogramado (${x.orgao||'órgão'}): previsto ${brdate(ant)} → ${brdate(nova)}${(v.m||'').trim()?' — '+v.m.trim():''}`);touch(p);save();closeModal();renderTab()}})}
 function setPasso(eid,pi,k,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.passos[pi][k]=k==="sla"?(+v||30):(k==="desde"?fixYear(v):v);touch(proj(cur));save();renderTab()}
-function addHist(eid,v){if(!guard()||!(v||"").trim())return;const e=findEnt(proj(cur),eid);if(!e.historico)e.historico=[];e.historico.push({data:today(),autor:"Alberto",texto:v.trim()});touch(proj(cur));save();renderTab()}
+function addHist(eid,v){if(!guard()||!(v||"").trim())return;const e=findEnt(proj(cur),eid);if(!e.historico)e.historico=[];e.historico.push({data:today(),autor:EDITOR||"NNU",texto:v.trim()});touch(proj(cur));save();renderTab()}
+function editHist(eid,idx){if(!guardM())return;const e=findEnt(proj(cur),eid);const it=e.historico&&e.historico[idx];if(!it)return;uiForm({title:"Editar comentário",okText:"Salvar",fields:[{key:"t",label:"Texto do comentário",type:"textarea",value:it.texto||""}],onOk:v=>{const t=(v.t||"").trim();if(!t){ufError("O texto não pode ficar vazio.");return}it.texto=t;save();closeModal();renderTab()}})}
+function removeHist(eid,idx){if(!guardM())return;const e=findEnt(proj(cur),eid);if(!e.historico||!e.historico[idx])return;uiConfirm("Remover este comentário do histórico? Esta ação não pode ser desfeita.",()=>{e.historico.splice(idx,1);save();renderTab()})}
 function setTexto(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);e.texto=v;touch(proj(cur));save()}
 function setPctManual(eid,v){if(!guard())return;const e=findEnt(proj(cur),eid);const s=String(v).trim();if(s===""){e.pctManual=null}else{let n=parseInt(s,10);if(isNaN(n))n=0;e.pctManual=Math.max(0,Math.min(100,n))}touch(proj(cur));save();renderTab()}
 function toggleConcluido(eid){if(!guard())return;const e=findEnt(proj(cur),eid);e.pctManual=(e.pctManual===100?null:100);touch(proj(cur));save();renderTab()}
@@ -848,11 +852,12 @@ function openManual(){document.getElementById("modalRoot").innerHTML=manualHTML(
 function closeManual(){document.getElementById("modalRoot").innerHTML=""}
 function closeModal(){document.getElementById("modalRoot").innerHTML=""}
 function ufError(msg){const e=document.getElementById("uf-err");if(e){e.textContent=msg;e.style.display="block"}}
+const DMIN="2024-01-01",DMAX="2035-12-31";
 function uiForm(opts){const root=document.getElementById("modalRoot");
   const body=opts.fields.map(f=>{
     if(f.type==="select")return `<label class="uf-l">${esc(f.label)}<select data-k="${f.key}">${f.options.map(o=>`<option value="${esc(o.v)}" ${o.v===f.value?'selected':''}>${esc(o.t)}</option>`).join("")}</select></label>`;
     if(f.type==="textarea")return `<label class="uf-l">${esc(f.label)}<textarea data-k="${f.key}" placeholder="${esc(f.placeholder||'')}">${esc(f.value||'')}</textarea></label>`;
-    return `<label class="uf-l">${esc(f.label)}<input data-k="${f.key}" type="${f.type||'text'}" value="${esc(f.value||'')}" placeholder="${esc(f.placeholder||'')}"></label>`;
+    return `<label class="uf-l">${esc(f.label)}<input data-k="${f.key}" type="${f.type||'text'}" ${f.type==="date"?`min="${DMIN}" max="${DMAX}"`:''} value="${esc(f.value||'')}" placeholder="${esc(f.placeholder||'')}"></label>`;
   }).join("");
   root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mform"><div class="mh"><h2>${esc(opts.title)}</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb"><div id="uf-err" class="uf-err" style="display:none"></div>${body}<div class="uf-actions"><button class="uf-cancel" onclick="closeModal()">Cancelar</button><button class="uf-ok" id="uf-ok">${esc(opts.okText||'Confirmar')}</button></div></div></div></div>`;
   const submit=()=>{const vals={};root.querySelectorAll("[data-k]").forEach(el=>vals[el.getAttribute("data-k")]=el.value);opts.onOk(vals)};
