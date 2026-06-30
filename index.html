@@ -66,6 +66,17 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .hlc-est{color:var(--ink-dim);font-size:11px;margin-top:3px}
 .hlc-trv{font-size:11px;margin-top:9px;line-height:1.35;font-weight:500}
 .hlc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.anots{margin-top:9px}
+.anot{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:11.5px;line-height:1.3}
+.anot-d{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
+.anot-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-mid)}
+.anot-p{flex:0 0 auto;font-family:var(--mono);font-size:10px;color:var(--ink-dim)}
+.kclick{cursor:pointer;transition:background .12s}.kclick:hover{background:var(--surface2)}
+.dr-row{padding:9px 2px;border-top:1px solid var(--line);cursor:pointer}.dr-row:first-child{border-top:none}
+.dr-row:hover{background:var(--surface2)}
+.dr-n{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.dr-c{font-family:var(--mono);font-size:10px;color:var(--ink-dim);font-weight:400}
+.dr-s{font-size:11.5px;color:var(--ink-mid);margin-top:2px}
 .kofi{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
 .kofi:first-child{border-top:none}.kofi .kn{color:var(--ink-mid)}.kofi .kv{font-family:var(--mono);font-weight:600}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px}
@@ -83,7 +94,14 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .calert{margin-top:9px;font-size:11px;color:var(--amber);background:var(--amber-soft);border-radius:6px;padding:5px 8px;display:flex;gap:6px;align-items:center}
 .calert.r{color:var(--red);background:var(--red-soft)}
 .calert .mk{font-weight:700}
-.exec{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px;padding:15px 18px;border-radius:12px;border:1px solid var(--line);margin-bottom:14px}
+.exec{display:flex;flex-direction:column;padding:15px 18px;border-radius:12px;border:1px solid var(--line);margin-bottom:14px}
+.exec-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px}
+.exec-why{font-size:12px;color:var(--ink-mid);margin-top:4px;line-height:1.35;max-width:175px}
+.exec-drv{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+.exec-drv-l{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-dim);font-weight:600}
+.exec-drv-i{font-size:11.5px;color:var(--ink-mid);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 9px 3px 7px;display:inline-flex;gap:5px;align-items:center}
+.exec-drv-i b{font-family:var(--mono);font-size:10px;color:var(--ink-dim)}
+.exec-drv-i.r{border-left:3px solid var(--red)}.exec-drv-i.y{border-left:3px solid var(--amber)}
 .exec.g{background:var(--green-soft)}.exec.y{background:var(--amber-soft)}.exec.r{background:var(--red-soft)}
 .exec-st{font-size:19px;font-weight:700;line-height:1.1}
 .exec-m{display:flex;flex-direction:column;gap:1px}
@@ -92,6 +110,15 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .exec-div{width:1px;align-self:stretch;background:var(--line);min-height:32px}
 .cc-n{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--surface2);font-size:10px;font-weight:700;color:var(--ink-mid);flex:0 0 auto;margin-top:1px}
 .cc-nat{font-weight:700;text-transform:uppercase;font-size:8.5px;letter-spacing:.04em;color:var(--ink-dim)}
+.ccrow{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-top:1px solid var(--line)}
+.ccrow:first-child{border-top:none}
+.ccrow-n{font-family:var(--mono);font-size:11px;color:var(--ink-dim);min-width:14px;margin-top:3px}
+.ccrow-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:5px;white-space:nowrap;margin-top:2px;background:var(--surface2);color:var(--ink-mid)}
+.ccrow-tag.r{background:var(--red-soft);color:var(--red)}.ccrow-tag.y{background:var(--amber-soft);color:var(--amber)}
+.ccrow-main{flex:1;min-width:0}.ccrow-t{font-size:13px;line-height:1.3}
+.ccrow-s{font-size:11px;color:var(--ink-dim);margin-top:2px}
+.ccrow-d{flex:0 0 auto;font-family:var(--mono);font-size:11px;font-weight:600;margin-top:2px}
+.ccrow-d.r{color:var(--red)}.ccrow-d.y{color:var(--amber)}
 .cc-nat.r{color:var(--red)}.cc-nat.y{color:var(--amber)}
 .back{background:var(--surface);border:1px solid var(--line2);color:var(--accent);font-size:12.5px;font-weight:600;padding:6px 13px;margin:22px 0 8px;display:inline-flex;gap:7px;align-items:center;border-radius:8px;box-shadow:var(--shadow)}
 .back:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -172,6 +199,16 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .semana .pr{font-size:9px;padding:2px 7px;border-radius:5px;white-space:nowrap;margin-top:1px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
 .pr.critica{background:var(--red-soft);color:var(--red)}.pr.alta{background:var(--amber-soft);color:var(--amber)}.pr.media{background:var(--accent-soft);color:var(--accent)}.pr.baixa{background:var(--surface2);color:var(--ink-dim)}
 .semana .sb{flex:1}.semana .sb .st{font-size:13px}.semana .sb .ss{font-size:11px;color:var(--ink-dim);margin-top:2px}
+.sd{font-size:12px;color:var(--ink-mid);margin-top:3px;line-height:1.45;white-space:pre-wrap}
+.sa{display:inline-block;margin-top:5px;font-size:11px;color:var(--accent);text-decoration:none}
+.sa:hover{text-decoration:underline}
+.swd{opacity:.65}
+.rk-dimhead{display:flex;align-items:center;gap:7px;margin:18px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--line);font-weight:700;font-size:14px}
+.rk-dimhead:first-child{margin-top:0}.rk-dimn{font-size:14px}
+.rk-risk{border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:9px;background:var(--surface)}
+.rk-rhead{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.rk-rtitle{font-weight:600;font-size:13px}
+.rk-rdesc{font-size:12px;color:var(--ink-mid);margin:5px 0 2px;line-height:1.45;white-space:pre-wrap}
+.rk-empty{color:var(--ink-dim);font-size:12px;padding:2px 0 6px}
 .semana .sx{background:none;border:none;color:var(--ink-dim);font-size:14px;padding:0 4px}.semana .sx:hover{color:var(--red)}
 .addbtn{background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;margin-top:12px}
 .risks .rr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
@@ -431,8 +468,8 @@ function removeEditor(i){EDITORES.splice(i,1);saveEditores();gerenciarEditores()
 function gerenciarDepts(){if(!guardM())return;const root=document.getElementById("modalRoot");const rows=DEPTS.map((d,i)=>`<div class="row" style="padding:5px 0"><div>${esc(d)}</div><button class="fz" style="color:var(--red)" onclick="removeDept(${i})">remover</button></div>`).join("");root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mform"><div class="mh"><h2>Departamentos</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb"><div id="uf-err" class="uf-err" style="display:none"></div>${rows||'<div class="empty">Nenhum departamento cadastrado.</div>'}<div style="display:flex;gap:8px;margin-top:14px"><input id="newdept" class="notein" placeholder="Novo departamento (ex.: DPRO - C)" style="flex:1;margin:0"><button class="uf-ok" onclick="addDeptInline()">Adicionar</button></div></div></div></div>`}
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
-const TEMPLATE_VERSION="2026.07.5";
-const BUILD="v2026.07.5 · rev 9 (30/06)";
+const TEMPLATE_VERSION="2026.07.6";
+const BUILD="v2026.07.5 · rev 14 (30/06)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -483,7 +520,7 @@ const ESP_STORE="opus_pmo_esp_v1";
 const CONTRA_PASSOS=["Aplicação do TR","Mapa de cotação","Aprovação da Prefeitura","Assinatura de contrato","Início dos trabalhos","Produção de material técnico","Aprovação do conceitual (Prefeitura/município)","Entrega do produto final","Validação no SEI"];
 const CONTRA_SEED=["Botafogo","Cascavel","Pontes","Complexos Viários 1 e 2","Recuperação de Pontes","Parque das Laranjeiras"];
 const DIV_SEED=["Viaduto GO-020","Praça Senador Canedo","Duplicação da GO-536","Reforma Alameda Ricardo Paranhos","Parque da Serrinha"];
-let espExp=null;
+let espOpen={};
 function seedEsp(){return{contrapartidas:CONTRA_SEED.map((n,i)=>({id:"ct"+i,nome:n,passos:CONTRA_PASSOS.map(p=>({nome:p,status:"nao"}))})),diversos:DIV_SEED.map((n,i)=>({id:"dv"+i,nome:n,status:"",notas:[]}))}}
 function loadEsp(){try{const r=localStorage.getItem(ESP_STORE);if(r){const e=JSON.parse(r);if(!e.contrapartidas)e.contrapartidas=[];if(!e.diversos)e.diversos=[];return e}}catch(e){}return seedEsp()}
 let ESP=loadEsp();
@@ -491,30 +528,40 @@ function saveEsp(){try{localStorage.setItem(ESP_STORE,JSON.stringify(ESP))}catch
 function snapshot(){return{frentes:DATA,esp:ESP}}
 function applySnapshot(o){if(Array.isArray(o)){DATA=migrate(o)}else if(o&&typeof o==="object"){DATA=migrate(o.frentes||[]);if(o.esp){ESP=o.esp;if(!ESP.contrapartidas)ESP.contrapartidas=[];if(!ESP.diversos)ESP.diversos=[]}}saveEsp()}
 function contraPct(c){if(!c.passos.length)return 0;let s=0;c.passos.forEach(p=>s+=CR[p.status]||0);return Math.round(s/c.passos.length*100)}
-function espToggle(k){espExp=espExp===k?null:k;renderHome()}
+function espToggle(k){espOpen[k]=!espOpen[k];renderHome()}
 function renderHeatmap(){const vis=DATA.filter(p=>p.status!=="arquivada");if(!vis.length)return"";
   let h=`<div class="sectlabel" style="margin-top:30px"><h2>Mapa de calor — riscos</h2><span class="legend">nível por dimensão · clique na frente para abrir</span></div><div class="heat"><table><thead><tr><th class="hh"></th>${RISK_DIMS.map(d=>`<th title="${d}">${d.slice(0,4)}</th>`).join("")}</tr></thead><tbody>`;
-  vis.forEach(p=>{h+=`<tr><td class="hl-name" onclick="openP('${p.id}')">${esc(p.nome)}</td>${RISK_DIMS.map(d=>{const n=nivelRisco(p.riscos[d]);return`<td><span class="hc" style="background:${n?NIVCOL[n]:'var(--surface2)'}" title="${d}: ${n?NIVLBL[n]:'sem avaliação'}"></span></td>`}).join("")}</tr>`});
+  vis.forEach(p=>{h+=`<tr><td class="hl-name" onclick="openP('${p.id}')">${esc(p.nome)}</td>${RISK_DIMS.map(d=>{const n=dimNivelOf(p,d);return`<td><span class="hc" style="background:${n?NIVCOL[n]:'var(--surface2)'}" title="${d}: ${n?NIVLBL[n]:'sem avaliação'}"></span></td>`}).join("")}</tr>`});
   h+=`</tbody></table><div class="heat-leg">${["baixo","medio","alto","critico"].map(n=>`<span><i style="background:${NIVCOL[n]}"></i>${NIVLBL[n]}</span>`).join("")}</div></div>`;return h}
+function espItem(kind,id){return (kind==="c"?ESP.contrapartidas:ESP.diversos).find(x=>x.id===id)}
+function espNotaForm(title,init,onOk){uiForm({title,okText:"Salvar",fields:[
+  {key:"tit",label:"Título (opcional)",type:"text",value:init.titulo||""},
+  {key:"txt",label:"Descrição / anotação",type:"textarea",value:init.texto||""},
+  {key:"data",label:"Data",type:"date",value:init.data||today()},
+  {key:"anexo",label:"Anexo (link — Drive, SharePoint…)",type:"text",value:init.anexo||""}
+],onOk:v=>{if(!(v.txt||"").trim()&&!(v.tit||"").trim()){ufError("Escreva ao menos um título ou descrição.");return}onOk({titulo:(v.tit||"").trim(),texto:(v.txt||"").trim(),data:fixYear(v.data)||today(),anexo:(v.anexo||"").trim(),autor:EDITOR||"NNU"})}})}
+function addEspNota(kind,id){if(!guard())return;const it=espItem(kind,id);if(!it)return;espNotaForm(kind==="c"?"Nova anotação — contrapartida":"Nova anotação",{},nd=>{if(!it.notas)it.notas=[];it.notas.push(nd);saveEsp();closeModal();renderHome()})}
+function editEspNota(kind,id,idx){if(!guardM())return;const it=espItem(kind,id);const n=it&&it.notas&&it.notas[idx];if(!n)return;espNotaForm("Editar anotação",n,nd=>{Object.assign(n,nd);saveEsp();closeModal();renderHome()})}
+function removeEspNota(kind,id,idx){if(!guardM())return;const it=espItem(kind,id);if(!it||!it.notas||!it.notas[idx])return;uiConfirm("Remover esta anotação?",()=>{it.notas.splice(idx,1);saveEsp();renderHome()})}
+function espNotasHTML(kind,it){if(!it.notas||!it.notas.length)return ED?'':'<div class="empty" style="margin-top:6px">Sem anotações.</div>';return '<div class="hist">'+it.notas.map((n,idx)=>({n,idx})).reverse().map(({n,idx})=>`<div class="hl"><span class="hd">${brdate(n.data)}</span> ${n.titulo?`<b>${esc(n.titulo)}</b>${n.texto?" — ":""}`:""}${esc(n.texto||"")}${n.anexo?` <a class="sa" href="${esc(n.anexo)}" target="_blank" rel="noopener">📎</a>`:""} <span class="ha">— ${esc(n.autor||"NNU")}</span>${MA?`<span class="hx"><button class="fz" onclick="editEspNota('${kind}','${it.id}',${idx})">editar</button><button class="fz" style="color:var(--red)" onclick="removeEspNota('${kind}','${it.id}',${idx})">remover</button></span>`:""}</div>`).join("")+'</div>';}
 function renderEspeciais(){
   let h=`<div class="sectlabel" style="margin-top:32px"><h2>Projetos Especiais</h2><span class="legend">acompanhamento fora da esteira de loteamento</span></div>`;
   h+=`<div class="esp-h"><h3>Contrapartidas (Município)</h3>${MA?`<button class="addbtn sm" onclick="addContra()">+ Contrapartida</button>`:''}</div>`;
   if(!ESP.contrapartidas.length)h+=`<div class="empty" style="margin-bottom:8px">Nenhuma contrapartida.</div>`;
-  ESP.contrapartidas.forEach(c=>{const pc=contraPct(c),exp=espExp==="c:"+c.id;
+  ESP.contrapartidas.forEach(c=>{const pc=contraPct(c),exp=!!espOpen["c:"+c.id];
     h+=`<div class="faseblk ${exp?'':'col'}"><div class="fh" onclick="espToggle('c:${c.id}')"><span class="fl"><span class="chev">▾</span>${esc(c.nome)}</span><span style="display:flex;gap:9px;align-items:center"><span class="fp">${pc}%</span>${MA?`<button class="fz" onclick="event.stopPropagation();renameContra('${c.id}')">renomear</button><button class="fz" onclick="event.stopPropagation();removeContra('${c.id}')">remover</button>`:''}</span></div><div class="mini"><i style="width:${pc}%"></i></div>`;
     if(exp){h+=`<div class="passos">`;
       c.passos.forEach((p,i)=>{h+=`<div class="passo"><span class="pn">${esc(p.nome)}</span>${ED?`<span class="seg">${[["nao","","Não"],["exec","e","Andamento"],["ok","o","Concluído"]].map(([v,cl,lb])=>`<button class="${p.status===v?'on-'+cl:''}" onclick="setContraStep('${c.id}',${i},'${v}')">${lb}</button>`).join("")}</span>${MA?`<button class="fz" title="remover passo" onclick="removeContraStep('${c.id}',${i})">×</button>`:''}`:`<span class="pst" style="color:${SCOL[p.status]}">${SLBL[p.status]}</span>`}</div>`});
-      if(MA)h+=`<div class="entfoot"><button onclick="addContraStep('${c.id}')">+ Passo</button></div>`;
+      if(MA)h+=`<div class="entfoot"><button onclick="addContraStep('${c.id}')">+ Passo</button></div>`;h+=espNotasHTML("c",c);if(ED)h+=`<div class="entfoot"><button onclick="addEspNota('c','${c.id}')">+ Anotação</button></div>`;
       h+=`</div>`;}
     h+=`</div>`;});
   h+=`<div class="esp-h" style="margin-top:18px"><h3>Diversos <span class="legend">acompanhamento, sem % de avanço</span></h3>${MA?`<button class="addbtn sm" onclick="addDiv()">+ Item</button>`:''}</div>`;
   if(!ESP.diversos.length)h+=`<div class="empty">Nenhum item.</div>`;
-  ESP.diversos.forEach(d=>{const exp=espExp==="d:"+d.id;
+  ESP.diversos.forEach(d=>{const exp=!!espOpen["d:"+d.id];
     h+=`<div class="faseblk ${exp?'':'col'}"><div class="fh" onclick="espToggle('d:${d.id}')"><span class="fl"><span class="chev">▾</span>${esc(d.nome)}</span><span style="display:flex;gap:9px;align-items:center">${d.status?`<span class="tag">${esc(d.status)}</span>`:'<span class="legend">sem status</span>'}${MA?`<button class="fz" onclick="event.stopPropagation();renameDiv('${d.id}')">renomear</button><button class="fz" onclick="event.stopPropagation();removeDiv('${d.id}')">remover</button>`:''}</span></div>`;
     if(exp){h+=`<div class="passos">`;
       h+=`<div class="row"><div><b>Onde estamos:</b> ${d.status?esc(d.status):'—'}</div>${ED?`<button class="fz" onclick="setDivStatus('${d.id}')">editar status</button>`:''}</div>`;
-      if(d.notas&&d.notas.length)h+=`<div class="hist">`+d.notas.map((n,idx)=>({n,idx})).reverse().map(({n,idx})=>`<div class="hl"><span class="hd">${brdate(n.data)}</span> ${esc(n.texto)} <span class="ha">— ${esc(n.autor)}</span>${MA?`<span class="hx"><button class="fz" onclick="editDivNota('${d.id}',${idx})">editar</button><button class="fz" style="color:var(--red)" onclick="removeDivNota('${d.id}',${idx})">remover</button></span>`:''}</div>`).join("")+`</div>`;
-      if(ED)h+=`<input class="notein" placeholder="Adicionar anotação de acompanhamento" onchange="addDivNota('${d.id}',this.value)">`;
+      h+=espNotasHTML("d",d);if(ED)h+=`<div class="entfoot"><button onclick="addEspNota('d','${d.id}')">+ Anotação</button></div>`;
       h+=`</div>`;}
     h+=`</div>`;});
   return h}
@@ -571,8 +618,15 @@ const NIVEL={alta:{baixo:"medio",medio:"alto",alto:"critico"},media:{baixo:"baix
 const NIVLBL={baixo:"Baixo",medio:"Médio",alto:"Alto",critico:"Crítico"};
 const NIVCOL={baixo:"var(--green)",medio:"var(--amber)",alto:"var(--red)",critico:"#8a1f1f"};
 function nivelRisco(o){if(!o||!o.prob||!o.impacto)return"";return (NIVEL[o.prob]||{})[o.impacto]||""}
-function normRiscos(r){const o={};RISK_DIMS.forEach(d=>{const v=r&&r[d];if(v&&typeof v==="object"){o[d]={prob:v.prob||"",impacto:v.impacto||"",tend:v.tend||"",acaoId:v.acaoId||null,aceitavel:v.aceitavel||""}}else{const m={g:["baixa","baixo"],y:["media","medio"],r:["alta","alto"]}[v]||["",""];o[d]={prob:m[0],impacto:m[1],tend:"",acaoId:null,aceitavel:""}}});return o}
-function riscoFlags(p){let crit=false,warn=false,block=false;RISK_DIMS.forEach(d=>{const o=p.riscos&&p.riscos[d];const n=nivelRisco(o);if(n==="critico")crit=true;if(n==="alto"||n==="medio")warn=true;if(o&&o.aceitavel==="nao")block=true});return{crit,warn,block}}
+function rid(){return "r"+Date.now().toString(36)+Math.floor(Math.random()*46656).toString(36)}
+function normRisco(v){v=v||{};return{id:v.id||rid(),titulo:v.titulo||"",desc:v.desc||"",prob:v.prob||"",impacto:v.impacto||"",tend:v.tend||"",acaoId:v.acaoId||null,aceitavel:v.aceitavel||""}}
+function normRiscos(r){const o={};RISK_DIMS.forEach(d=>{const v=r&&r[d];if(Array.isArray(v)){o[d]=v.map(normRisco)}else if(v&&typeof v==="object"){const has=v.prob||v.impacto||v.tend||v.aceitavel||v.acaoId;o[d]=has?[normRisco(v)]:[]}else if(typeof v==="string"&&v){const m={g:["baixa","baixo"],y:["media","medio"],r:["alta","alto"]}[v];o[d]=m?[normRisco({prob:m[0],impacto:m[1]})]:[]}else{o[d]=[]}});return o}
+function dimArr(p,d){const v=p&&p.riscos&&p.riscos[d];return Array.isArray(v)?v:[]}
+const _NIVO={"":0,baixo:1,medio:2,alto:3,critico:4};
+function dimWorst(p,d){let best=null,bv=-1;dimArr(p,d).forEach(r=>{const o=_NIVO[nivelRisco(r)]||0;if(o>bv){bv=o;best=r}});return best}
+function dimNivelOf(p,d){const w=dimWorst(p,d);return w?nivelRisco(w):""}
+function dimBlocks(p,d){return dimArr(p,d).some(r=>r.aceitavel==="nao")}
+function riscoFlags(p){let crit=false,warn=false,block=false;RISK_DIMS.forEach(d=>{dimArr(p,d).forEach(r=>{const n=nivelRisco(r);if(n==="critico")crit=true;if(n==="alto"||n==="medio")warn=true;if(r.aceitavel==="nao")block=true})});return{crit,warn,block}}
 function saude(p){const ag=aguardando(p),bl=bloqueios(p),rf=riscoFlags(p);
   if(bl.length||ag.some(a=>a.atraso)||gateVencido(p)||rf.crit||rf.block)return"r";
   if(ag.length||rf.warn||gateRisco(p))return"y";
@@ -584,10 +638,22 @@ function pct(x){return Math.round(x*100)}
 
 function prioridades(){return DATA.filter(p=>p.status!=="arquivada"&&p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).map(p=>({proj:p.id,nome:p.nome,sub:p.estagio,prio:p.prioridade}))}
 const PRIO_ORD={critica:4,alta:3,media:2,baixa:1};
-function riscoResumo(p){const order={critico:4,alto:3,medio:2,baixo:1};const dims=RISK_DIMS.map(d=>({d,n:nivelRisco(p.riscos[d])})).filter(x=>x.n);const top=dims.slice().sort((a,b)=>order[b.n]-order[a.n]);return{filled:dims.length,naoaval:RISK_DIMS.length-dims.length,crit:dims.filter(x=>x.n==="critico").length,alto:dims.filter(x=>x.n==="alto").length,top,nivel:top[0]?top[0].n:""}}
-function travaPrincipal(p,ip,ags){if(ip.travado){const m=ip.missing.find(x=>x.abs);return "Marco travado por "+(m?m.nome:"item absoluto")}const bd=RISK_DIMS.find(d=>p.riscos[d]&&p.riscos[d].aceitavel==="nao");if(bd)return "Marco travado por risco "+bd;const venc=ags.filter(a=>a.atraso).sort((a,b)=>b.over-a.over)[0];if(venc)return "Vencido no órgão: "+venc.ent;if(curGate(p)<0)return "Esteira regulatória concluída";if(ip.missing.length)return "Falta p/ o marco: "+ip.missing[0].nome;return "Em andamento — sem trava"}
-function caminhoCritico(p,ip,ags,bls){const out=[];if(ip.travado)ip.missing.filter(m=>m.abs).forEach(m=>out.push({txt:m.nome,nat:"trava do marco",col:"r",prazo:"",score:5,over:9999}));RISK_DIMS.forEach(d=>{const o=p.riscos[d];if(o&&o.aceitavel==="nao")out.push({txt:"Risco "+d+" não aceitável p/ marco",nat:"risco",col:"r",prazo:"",score:5,over:9998})});ags.forEach(a=>{const col=a.atraso?"r":(a.over!=null&&a.over>=-7?"y":"");out.push({txt:a.ent,nat:"externa",col,sub:a.orgao+(a.exig?" · em exigência":""),prazo:a.over!=null?(a.atraso?'venceu '+a.over+'d':'faltam '+(-a.over)+'d'):'',score:a.atraso?4:(a.exig?3:(a.over!=null&&a.over>=-7?2:1)),over:a.over!=null?a.over:-999})});bls.forEach(b=>out.push({txt:b.ent,nat:"interna",col:"r",sub:b.motivo+(b.dept?" · "+b.dept:""),prazo:b.dias!=null?b.dias+'d':'',score:4,over:b.dias||0}));out.sort((a,b)=>(b.score-a.score)||((b.over||0)-(a.over||0)));return out}
+function riscoResumo(p){const order={critico:4,alto:3,medio:2,baixo:1};const all=[];RISK_DIMS.forEach(d=>dimArr(p,d).forEach(r=>{const n=nivelRisco(r);if(n)all.push({d,n,titulo:r.titulo||""})}));const top=all.slice().sort((a,b)=>order[b.n]-order[a.n]);const fdims=RISK_DIMS.filter(d=>dimArr(p,d).some(r=>nivelRisco(r))).length;return{filled:all.length,naoaval:RISK_DIMS.length-fdims,crit:all.filter(x=>x.n==="critico").length,alto:all.filter(x=>x.n==="alto").length,top,nivel:top[0]?top[0].n:""}}
+function travaPrincipal(p,ip,ags){if(ip.travado){const m=ip.missing.find(x=>x.abs);return "Marco travado por "+(m?m.nome:"item absoluto")}const bd=RISK_DIMS.find(d=>dimBlocks(p,d));if(bd){const _r=dimArr(p,bd).find(x=>x.aceitavel==="nao");return "Marco travado por risco "+(_r&&_r.titulo?_r.titulo:bd)}const venc=ags.filter(a=>a.atraso).sort((a,b)=>b.over-a.over)[0];if(venc)return "Vencido no órgão: "+venc.ent;if(curGate(p)<0)return "Esteira regulatória concluída";if(ip.missing.length)return "Falta p/ o marco: "+ip.missing[0].nome;return "Em andamento — sem trava"}
+function caminhoCritico(p,ip,ags,bls){const out=[];if(ip.travado)ip.missing.filter(m=>m.abs).forEach(m=>out.push({txt:m.nome,nat:"trava do marco",col:"r",prazo:"",score:5,over:9999}));RISK_DIMS.forEach(d=>{dimArr(p,d).forEach(r=>{if(r.aceitavel==="nao")out.push({txt:"Risco "+d+(r.titulo?" — "+r.titulo:"")+" não aceitável p/ marco",nat:"risco",col:"r",prazo:"",score:5,over:9998})})});ags.forEach(a=>{const col=a.atraso?"r":(a.over!=null&&a.over>=-7?"y":"");out.push({txt:a.ent,nat:"externa",col,sub:a.orgao+(a.exig?" · em exigência":""),prazo:a.over!=null?(a.atraso?'venceu '+a.over+'d':'faltam '+(-a.over)+'d'):'',score:a.atraso?4:(a.exig?3:(a.over!=null&&a.over>=-7?2:1)),over:a.over!=null?a.over:-999})});bls.forEach(b=>out.push({txt:b.ent,nat:"interna",col:"r",sub:b.motivo+(b.dept?" · "+b.dept:""),prazo:b.dias!=null?b.dias+'d':'',score:4,over:b.dias||0}));out.sort((a,b)=>(b.score-a.score)||((b.over||0)-(a.over||0)));return out}
 
+const PCOL={critica:"var(--red)",alta:"var(--amber)",media:"var(--accent)",baixa:"var(--ink-dim)"};
+function anotLine(a){return '<div class="anot"><span class="anot-d" style="background:'+(PCOL[a.prio]||"var(--ink-dim)")+'"></span><span class="anot-t" title="'+esc(a.titulo)+'">'+esc(a.titulo)+'</span>'+(a.prazo?'<span class="anot-p">'+brdate(a.prazo)+'</span>':'')+'</div>';}
+function topAnots(p,n,onlyAlerta){let L=(p.semana||[]).filter(a=>a.status!=="concluida");if(onlyAlerta)L=L.filter(a=>a.alerta);L.sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||String(a.prazo||"").localeCompare(String(b.prazo||"")));return L.slice(0,n);}
+function kpiDrill(tipo){const root=document.getElementById("modalRoot");const vis=DATA.filter(p=>p.status!=="arquivada");let title="",body="";
+  const row=(p,sub,dot)=>`<div class="dr-row" onclick="closeModal();openP('${p.id}')"><div class="dr-n">${dot?`<span class="dot ${dot}"></span>`:''}${esc(p.nome)} <span class="dr-c">${esc(p.codigo)}</span></div><div class="dr-s">${sub}</div></div>`;
+  if(tipo==="criticas"){title="Frentes críticas";const L=vis.filter(p=>saude(p)==="r");body=L.length?L.map(p=>row(p,esc(travaPrincipal(p,ippe(p),aguardando(p))),"r")).join(""):'<div class="empty">Nenhuma frente crítica no momento.</div>';}
+  else if(tipo==="aguardando"){title="Aguardando órgãos";const rows=[];vis.forEach(p=>aguardando(p).forEach(a=>rows.push({p,a})));rows.sort((x,y)=>(y.a.over!=null?y.a.over:-999)-(x.a.over!=null?x.a.over:-999));body=rows.length?rows.map(({p,a})=>row(p,esc(a.ent)+' · '+esc(a.orgao||'órgão')+(a.exig?' · em exigência':'')+(a.over!=null?(a.atraso?' · venceu '+a.over+'d':' · faltam '+(-a.over)+'d'):''),a.atraso?"r":"y")).join(""):'<div class="empty">Nada aguardando órgão.</div>';}
+  else if(tipo==="internas"){title="Pendências internas";const rows=[];vis.forEach(p=>bloqueios(p).forEach(b=>rows.push({p,b})));body=rows.length?rows.map(({p,b})=>row(p,esc(b.ent||b.motivo||'pendência')+(b.dept?' · '+esc(b.dept):'')+(b.resp?' · '+esc(b.resp):'')+(b.dias!=null?' · '+b.dias+'d':''),"r")).join(""):'<div class="empty">Sem pendência interna.</div>';}
+  else if(tipo==="stale"){title="Sem atualização há +7 dias";const L=vis.filter(p=>(dias(p.ultAt)||0)>7).sort((a,b)=>(dias(b.ultAt)||0)-(dias(a.ultAt)||0));body=L.length?L.map(p=>row(p,(dias(p.ultAt)||0)+' dias · por '+esc(p.por||'—'),"y")).join(""):'<div class="empty">Tudo atualizado.</div>';}
+  else return;
+  root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mform"><div class="mh"><h2>${title}</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb">${body}</div></div></div>`;
+}
 function renderHome(){cur=null;const v=document.getElementById("view");
   const vis=DATA.filter(p=>p.status!=="arquivada");const total=vis.length||1;
   const mat=vis.reduce((s,p)=>s+avancoReg(p),0)/total;
@@ -598,20 +664,19 @@ function renderHome(){cur=null;const v=document.getElementById("view");
   let h=`<div class="kpis">
     <div class="kpi"><div class="label">Frentes ativas NNU</div><div class="val">${ativasN}</div><div class="foot">monitoradas ${monit}${arq?` · arquiv. ${arq}`:''}</div></div>
     <div class="kpi"><div class="label">Avanço médio</div><div class="val">${pct(mat)}<small>%</small></div><div class="bar" style="margin-top:8px"><i style="width:${pct(mat)}%"></i></div></div>
-    <div class="kpi"><div class="label">Frentes críticas</div><div class="val" style="color:${cnt.r?'var(--red)':'inherit'}">${cnt.r}</div><div class="foot"><span class="dot g"></span> ${cnt.g} &nbsp;<span class="dot y"></span> ${cnt.y}</div></div>
-    <div class="kpi"><div class="label">Aguardando órgãos</div><div class="val" style="color:var(--amber)">${ag}</div><div class="foot">pendência externa</div></div>
-    <div class="kpi"><div class="label">Pendências internas</div><div class="val" style="color:${bl?'var(--red)':'inherit'}">${bl}</div><div class="foot">responsabilidade interna</div></div>
-    <div class="kpi"><div class="label">Sem atualização</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('criticas')"><div class="label">Frentes críticas</div><div class="val" style="color:${cnt.r?'var(--red)':'inherit'}">${cnt.r}</div><div class="foot"><span class="dot g"></span> ${cnt.g} &nbsp;<span class="dot y"></span> ${cnt.y}</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('aguardando')"><div class="label">Aguardando órgãos</div><div class="val" style="color:var(--amber)">${ag}</div><div class="foot">pendência externa</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('internas')"><div class="label">Pendências internas</div><div class="val" style="color:${bl?'var(--red)':'inherit'}">${bl}</div><div class="foot">responsabilidade interna</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('stale')"><div class="label">Sem atualização</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
   </div>
   <div class="panel" style="margin-top:18px"><h3>Prioridades da semana <span class="legend">top 5${MA?' · defina o número no card de cada frente':''}</span></h3>`;
   const prF=vis.filter(p=>p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).slice(0,5);
   if(!prF.length)h+=`<div class="empty">Nenhuma frente priorizada.${MA?' Use “prioridade” no card para numerar (1 = topo).':''}</div>`;
   else{h+=`<div class="hl-grid">`;
     prF.forEach(p=>{const s=saude(p),av=avancoReg(p),ip=ippe(p),ags=aguardando(p),bls=bloqueios(p),venc=ags.filter(a=>a.atraso).length;
-      const topAc=(p.semana||[]).filter(a=>a.status!=="concluida").sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
-      const linha=topAc?("▸ "+topAc.titulo):travaPrincipal(p,ip,ags);
+      const anots=topAnots(p,3,true);const linhaT=anots.length?anots.map(anotLine).join(""):'<div class="anot"><span class="anot-d" style="background:var(--ink-dim)"></span><span class="anot-t">'+esc(travaPrincipal(p,ip,ags))+'</span></div>';
       let chips="";if(venc)chips+=`<span class="pchip r">${venc} venc.</span>`;if(ags.length)chips+=`<span class="pchip y">${ags.length} órgão</span>`;if(bls.length)chips+=`<span class="pchip r">${bls.length} int.</span>`;
-      h+=`<div class="hlc ${s}" onclick="openP('${p.id}')"><div class="hlc-top"><span class="hlc-rk" style="background:${HEX[s]}">${p.prioridade}</span><span class="hlc-av">${pct(av)}<small style="font-size:11px;font-weight:600">%</small></span></div><div class="hlc-nome">${esc(p.nome)}</div><div class="hlc-est">${esc(p.estagio)}</div><div class="bar" style="margin:9px 0 0"><i style="width:${pct(av)}%"></i></div><div class="hlc-trv" style="color:${HEX[s]}">${esc(linha)}</div>${chips?`<div class="hlc-chips">${chips}</div>`:""}</div>`});
+      h+=`<div class="hlc ${s}" onclick="openP('${p.id}')"><div class="hlc-top"><span class="hlc-rk" style="background:${HEX[s]}">${p.prioridade}</span><span class="hlc-av">${pct(av)}<small style="font-size:11px;font-weight:600">%</small></span></div><div class="hlc-nome">${esc(p.nome)}</div><div class="hlc-est">${esc(p.estagio)}</div><div class="bar" style="margin:9px 0 0"><i style="width:${pct(av)}%"></i></div><div class="anots">${linhaT}</div>${chips?`<div class="hlc-chips">${chips}</div>`:""}</div>`});
     h+=`</div>`;}
   h+=`</div>
   <div class="sectlabel"><h2>Carteira</h2><span class="legend">${MA?'prioridade manual + criticidade':'ordenada por criticidade'} · clique para abrir</span></div>
@@ -627,12 +692,14 @@ function renderHome(){cur=null;const v=document.getElementById("view");
       <div class="bar" style="margin-top:11px"><i style="width:${pct(av)}%"></i></div>
       <span class="chip"><span class="dot ${s}"></span>Marco: ${esc(ip.gate)} · ${ip.travado?'travado':pct(ip.pct)+'%'}</span>${(()=>{const v=ipplVal(p);return v!=null?`<span class="chip" style="margin-left:6px">Lançamento ${pct(v)}%</span>`:''})()}
       <div class="cmeta"><span>${ags.length?`<b style="color:var(--amber)">${ags.length}</b> no órgão`:'—'} · ${bls.length?`<b style="color:var(--red)">${bls.length}</b> internas`:'sem pendência interna'}</span><span>${dias(p.ultAt)||0}d atrás</span></div>`;
-    if(al||atr)h+=`<div class="calert ${(atr&&(atr.atraso||atr.motivo))?'r':''}"><span class="mk">!</span>${esc(al?al.titulo:(atr.ent||atr.motivo)+(atr.resp?' · '+atr.resp:'')+(atr.dias!=null?' · '+atr.dias+'d':''))}</div>`;
+    {const cAn=topAnots(p,2,true);if(cAn.length)h+=`<div class="anots">${cAn.map(anotLine).join("")}</div>`;else if(atr)h+=`<div class="calert r"><span class="mk">!</span>${esc((atr.ent||atr.motivo)+(atr.resp?' · '+atr.resp:'')+(atr.dias!=null?' · '+atr.dias+'d':''))}</div>`;}
     h+=`</div>`});
   h+=`</div>`+renderEspeciais();
   v.innerHTML=h;foot("h")}
 
 function openP(id){cur=id;tab="resumo";colf={};expe=null;renderP();window.scrollTo({top:0,behavior:'smooth'})}
+const NATLBL={"trava do marco":"Trava","risco":"Risco","externa":"No órgão","interna":"Equipe"};
+function execWhy(s,cc,ip){if(s==="g")return "Sem travas — seguindo o planejado.";const drv=cc.filter(c=>c.col==="r"||c.col==="y");const n=drv.length;if(s==="r")return n?("Há "+n+" fator"+(n>1?"es":"")+" bloqueando o avanço. Resolva os itens abaixo para destravar."):"Frente em estado crítico — verifique pendências e prazos.";return n?("Avança, mas com "+n+" ponto"+(n>1?"s":"")+" de atenção a acompanhar."):"Pontos de atenção a acompanhar.";}
 function renderP(){const p=proj(cur);if(!p){renderHome();return}
   const v=document.getElementById("view"),av=avancoReg(p),s=saude(p),c=curGate(p);
   let gates="";p.fases.forEach((f,i)=>{const done=faseTot(f).pct>=.999,cls=done?"done":(i===c?"curr":"")+(f.trilha==="produto"?" prod":"");gates+=`<div class="gate ${cls}"><span class="gm"></span><div class="gl">${esc(f.gate)}</div></div>`});
@@ -647,7 +714,7 @@ function renderP(){const p=proj(cur);if(!p){renderHome();return}
     <button class="tab ${tab==='resumo'?'on':''}" onclick="setTab('resumo')">Resumo</button>
     <button class="tab ${tab==='entreg'?'on':''}" onclick="setTab('entreg')">Entregáveis</button>
     <button class="tab ${tab==='produto'?'on':''}" onclick="setTab('produto')">Produto &amp; Lançamento${(()=>{const v=ipplVal(p);return v!=null?`<span class="b">${pct(v)}%</span>`:''})()}</button>
-    <button class="tab ${tab==='semana'?'on':''}" onclick="setTab('semana')">Operação da semana${semAb?`<span class="b">${semAb}</span>`:''}</button>
+    <button class="tab ${tab==='semana'?'on':''}" onclick="setTab('semana')">Anotações${semAb?`<span class="b">${semAb}</span>`:''}</button>
     <button class="tab ${tab==='riscos'?'on':''}" onclick="setTab('riscos')">Riscos</button>
   </div>${(ED||MA)?'':'<div class="ro-note"><b>Modo somente leitura.</b>&nbsp;Use “Acessar” no topo (edição ou master) para alterar status, datas e pendências.</div>'}<div id="tabbody"></div>`;
   renderTab();foot("p")}
@@ -668,21 +735,23 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
     const cc=caminhoCritico(p,ip,ags,bls),trava=travaPrincipal(p,ip,ags),acoes=(p.semana||[]).filter(a=>a.status!=="concluida");
     const topAcao=acoes.slice().sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||""))[0];
     const acaoBox=topAcao?`<div style="margin-left:auto;max-width:320px;min-width:190px;background:var(--surface);border:1px solid ${topAcao.prio==="critica"?"var(--red)":"var(--line)"};border-radius:9px;padding:8px 12px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-dim);margin-bottom:3px">Próxima ação <span class="pr ${topAcao.prio}" style="margin-left:4px">${topAcao.prio}</span></div><div style="font-size:13px;font-weight:600;color:var(--ink);line-height:1.25">${esc(topAcao.titulo)}</div><div style="font-size:11px;color:var(--ink-mid);margin-top:1px">${esc(topAcao.resp||"—")} · vence ${brdate(topAcao.prazo)}</div></div>`:"";
-    let h=`<div class="exec ${s}"><div style="min-width:160px"><div class="exec-st" style="color:${HEX[s]}">${SL[s]}</div><div style="font-size:12px;color:var(--ink-mid);margin-top:2px">${esc(trava)}</div></div><div class="exec-div"></div>`+
+    let h=`<div class="exec ${s}"><div class="exec-row"><div style="min-width:172px;flex:0 0 auto"><div class="exec-st" style="color:${HEX[s]}">${SL[s]}</div><div class="exec-why">${execWhy(s,cc,ip)}</div></div><div class="exec-div"></div>`+
       [["Marco atual",esc(ip.gate),""],["IPPE",pct(ip.pct)+"%",ip.travado?"var(--red)":ip.pct>=.85?"var(--green)":"var(--amber)"],["Avanço total",pct(av)+"%",""],["IPPL",ippl!=null?pct(ippl)+"%":"—",""],["Risco",rr.filled?NIVLBL[rr.nivel]:"Não avaliado",rr.filled?NIVCOL[rr.nivel]:"var(--ink-dim)"],["Prioridade",p.prioridade!=null?"P"+p.prioridade:"—",""],["Atualizado",(dias(p.ultAt)||0)+"d",""]].map(m=>`<div class="exec-m"><span class="k">${m[0]}</span><span class="v"${m[2]?` style="color:${m[2]}"`:""}>${m[1]}</span></div>`).join("")+acaoBox+`</div>`;
+    {const drv=cc.filter(c=>c.col==="r"||c.col==="y").slice(0,3);if(s!=="g"&&drv.length)h+=`<div class="exec-drv"><span class="exec-drv-l">Por que está ${SL[s].toLowerCase()}:</span>${drv.map((c,i)=>`<span class="exec-drv-i ${c.col}"><b>${i+1}</b> ${esc(c.txt)}${c.prazo?" · "+esc(c.prazo):""}</span>`).join("")}</div>`;}
+    h+=`</div>`;
     h+=`<div class="panel" style="margin-bottom:14px"><h3>Resumo executivo <span class="legend">situação para reunião</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="regAtualiza()">editar</button>`:""}</h3>${p.statusNota?`<div style="font-size:13.5px;color:var(--ink);line-height:1.5">${esc(p.statusNota)}</div>`:`<div class="empty">Sem resumo executivo escrito.${ED?" Clique em “editar” para descrever situação, trava e próxima ação.":""}</div>`}</div>`;
     h+=`<div class="subgrid"><div style="display:flex;flex-direction:column;gap:14px">`;
     h+=`<div class="panel"><h3>Caminho crítico <span class="legend">o que trava o avanço, por urgência</span></h3>`;
-    h+=cc.length?cc.slice(0,6).map((c,i)=>`<div class="row"><div style="display:flex;gap:9px"><span class="cc-n">${i+1}</span><div><div>${esc(c.txt)}</div><div class="sub"><span class="cc-nat ${c.col}">${c.nat}</span>${c.sub?" · "+esc(c.sub):""}</div></div></div>${c.prazo?`<div class="d ${c.col}">${esc(c.prazo)}</div>`:""}</div>`).join(""):`<div class="empty">Nada travando o avanço agora.</div>`;
+    h+=cc.length?cc.slice(0,6).map((c,i)=>`<div class="ccrow"><span class="ccrow-n">${i+1}</span><span class="ccrow-tag ${c.col}">${NATLBL[c.nat]||c.nat}</span><div class="ccrow-main"><div class="ccrow-t">${esc(c.txt)}</div>${c.sub?`<div class="ccrow-s">${esc(c.sub)}</div>`:""}</div>${c.prazo?`<span class="ccrow-d ${c.col}">${esc(c.prazo)}</span>`:""}</div>`).join(""):`<div class="empty">Nada travando o avanço agora.</div>`;
     h+=`<div style="font-size:11px;color:var(--ink-dim);margin-top:9px;padding-top:8px;border-top:1px solid var(--line)">Externas: ${ags.length} · Internas: ${bls.length} · Vencidas: ${ags.filter(a=>a.atraso).length} · Em exigência: ${ags.filter(a=>a.exig).length}</div></div>`;
-    h+=`<div class="panel"><h3>Ações da semana <span class="legend">${acoes.length} aberta(s)</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('semana')">abrir</button>`:""}</h3>`;
+    h+=`<div class="panel"><h3>Anotações <span class="legend">${acoes.length} aberta(s)</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('semana')">abrir</button>`:""}</h3>`;
     {const restAc=acoes.slice().sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||"")).filter(a=>a!==topAcao).slice(0,5);
-      if(restAc.length)h+=restAc.map(a=>`<div class="sw"><span class="pr ${a.prio}">${a.prio}</span><div class="sb"><div class="st">${esc(a.titulo)}</div></div></div>`).join("");
+      if(restAc.length)h+=restAc.map(a=>`<div class="sw"><span class="pr ${a.prio}">${a.prio}</span><div class="sb"><div class="st">${esc(a.titulo)}</div><div class="ss">${esc(a.resp||"—")}${a.prazo?" · vence "+brdate(a.prazo):""}</div></div></div>`).join("");
       else h+=`<div class="empty">${topAcao?"A ação prioritária está no topo.":"Nenhuma ação aberta."}</div>`;}
     h+=`</div></div><div style="display:flex;flex-direction:column;gap:14px">`;
     h+=`<div class="panel"><h3>Riscos <span class="legend">da matriz estratégica</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('riscos')">abrir matriz</button>`:""}</h3>`;
     if(rr.filled===0)h+=`<div class="calert"><span class="mk">!</span>Matriz não preenchida — pendência de governança.</div><div style="font-size:11.5px;color:var(--ink-mid);margin-top:7px">Avaliar: ${RISK_DIMS.join(", ")}.</div>`;
-    else h+=`<div class="bigblk"><span class="n" style="font-size:21px;color:${NIVCOL[rr.nivel]}">${NIVLBL[rr.nivel]}</span><div style="font-size:11.5px;color:var(--ink-mid)">risco executivo · maior nível da matriz</div></div><div style="font-size:11.5px;color:var(--ink-mid);margin:9px 0">Críticos: ${rr.crit} · Altos: ${rr.alto} · Não avaliados: ${rr.naoaval}</div>`+rr.top.slice(0,3).map(t=>`<div class="row"><div>${esc(t.d)}</div><div class="d" style="color:${NIVCOL[t.n]}">${NIVLBL[t.n]}</div></div>`).join("");
+    else h+=`<div class="bigblk"><span class="n" style="font-size:21px;color:${NIVCOL[rr.nivel]}">${NIVLBL[rr.nivel]}</span><div style="font-size:11.5px;color:var(--ink-mid)">risco executivo · maior nível da matriz</div></div><div style="font-size:11.5px;color:var(--ink-mid);margin:9px 0">Críticos: ${rr.crit} · Altos: ${rr.alto} · Não avaliados: ${rr.naoaval}</div>`+rr.top.slice(0,3).map(t=>`<div class="row"><div>${esc(t.d)}${t.titulo?' · '+esc(t.titulo):''}</div><div class="d" style="color:${NIVCOL[t.n]}">${NIVLBL[t.n]}</div></div>`).join("");
     h+=`</div><div class="panel"><h3>Prontidão para lançamento <span class="legend">IPPL</span></h3>`;
     if(ippl==null)h+=`<div class="empty">Esteira de produto ainda não iniciada.</div>`;
     else{const pf=p.fases.filter(f=>f.trilha==="produto"),pend=[];pf.forEach(f=>f.itens.forEach(e=>{if(e.aplicavel&&entPct(e)<.999)pend.push(e.nome)}));h+=`<div class="bigblk"><span class="n" style="font-size:24px;color:${ippl>=.85?"var(--green)":ippl>=.4?"var(--amber)":"var(--ink-mid)"}">${pct(ippl)}%</span><div style="font-size:11.5px;color:var(--ink-mid)">prontidão consolidada da esteira</div></div>`;if(pend.length)h+=`<div style="font-size:9.5px;color:var(--ink-dim);margin:9px 0 4px;text-transform:uppercase;letter-spacing:.05em">Pendente</div><ul class="miss">${pend.slice(0,6).map(m=>`<li><span class="bx"></span>${esc(m)}</li>`).join("")}${pend.length>6?`<li style="color:var(--ink-dim)">+${pend.length-6} item(ns)</li>`:""}</ul>`;else h+=`<div class="empty" style="margin-top:6px">Tudo pronto para lançar.</div>`;}
@@ -701,24 +770,31 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
     h+=`</div>`;
     b.innerHTML=h+faseBlocksHTML(p,"produto")}
   else if(tab==="semana"){const list=p.semana||[];
-    let h=`<div class="panel"><h3>Operação da semana <span class="legend">não altera o avanço técnico</span></h3>`;
-    if(!list.length)h+=`<div class="empty">Nenhuma ação registrada.</div>`;
-    list.forEach(a=>{h+=`<div class="sw"><span class="pr ${a.prio}">${a.prio}</span><div class="sb"><div class="st" style="${a.status==='concluida'?'text-decoration:line-through;color:var(--ink-dim)':''}">${esc(a.titulo)}</div><div class="ss">${esc(a.resp||'—')} · vence ${brdate(a.prazo)}${a.vinc?' · '+esc(a.vinc):''}${a.alerta?' · alerta no card':''}</div></div>${ED?`<button class="sx" title="concluir" onclick="doneAcao('${a.id}')">✓</button><button class="sx" title="remover" onclick="delAcao('${a.id}')">✕</button>`:''}</div>`});
-    if(ED)h+=`<button class="addbtn" onclick="addAcao()">+ Ação</button>`;
+    let h=`<div class="panel"><h3>Anotações <span class="legend">histórico do projeto · não altera o avanço técnico</span></h3>`;
+    if(!list.length)h+=`<div class="empty">Nenhuma anotação registrada.</div>`;
+    const _po={critica:0,alta:1,media:2,baixa:3};
+    const ordSW=[...list].sort((x,y)=>{const dx=x.status==="concluida"?1:0,dy=y.status==="concluida"?1:0;if(dx!==dy)return dx-dy;return ((_po[x.prio]??9)-(_po[y.prio]??9))||String(x.prazo||"").localeCompare(String(y.prazo||""))});
+    ordSW.forEach(a=>{const dn=a.status==="concluida";h+=`<div class="sw${dn?" swd":""}"><span class="pr ${a.prio}">${a.prio}</span><div class="sb"><div class="st"${dn?' style="text-decoration:line-through;color:var(--ink-dim)"':''}>${esc(a.titulo)}</div>${a.desc?`<div class="sd">${esc(a.desc)}</div>`:""}<div class="ss">${esc(a.resp||"—")}${a.dataReg?" · registrado "+brdate(a.dataReg):""}${a.prazo?" · vence "+brdate(a.prazo):""}${a.autor?" · "+esc(a.autor):""}${a.vinc?" · "+esc(a.vinc):""}${a.alerta?" · alerta no card":""}</div>${a.anexo?`<a class="sa" href="${esc(a.anexo)}" target="_blank" rel="noopener">\uD83D\uDCCE abrir anexo</a>`:""}</div>${ED?`<button class="sx" title="editar" onclick="editAcao('${a.id}')">\u270E</button><button class="sx" title="${dn?"reabrir":"concluir"}" onclick="doneAcao('${a.id}')">\u2713</button><button class="sx" title="remover" onclick="delAcao('${a.id}')">\u2715</button>`:""}</div>`});
+    if(ED)h+=`<button class="addbtn" onclick="addAcao()">+ Anotação</button>`;
     h+=`</div>`;b.innerHTML=h}
   else if(tab==="riscos"){
-    let h=`<div class="panel"><h3>Matriz de risco estratégico <span class="legend">probabilidade × impacto · sem pós-mitigação</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="sugerirRiscos()">Sugerir níveis</button>`:''}</h3><div class="rk-tbl">`;
-    RISK_DIMS.forEach(d=>{const o=p.riscos[d]||{};const n=nivelRisco(o);const ac=o.acaoId?(p.semana||[]).find(s=>s.id===o.acaoId):null;
-      h+=`<div class="rk-row"><div class="rk-dim">${d}${n?` <span class="rk-niv" style="background:${NIVCOL[n]}">${NIVLBL[n]}</span>`:' <span class="legend">sem avaliação</span>'}${o.tend?` <span class="rk-tend" title="tendência">${o.tend==="up"?"↑":o.tend==="down"?"↓":"→"}</span>`:''}${o.aceitavel==="nao"?' <span class="tag blq">não aceitável p/ marco</span>':o.aceitavel==="sim"?' <span class="tag" style="border-color:var(--green);color:var(--green)">aceitável</span>':''}</div>`;
-      if(ED){h+=`<div class="rk-ctrls">
-        <div class="rk-f"><span class="rk-l">Probabilidade</span><span class="seg">${[["baixa","Baixa"],["media","Média"],["alta","Alta"]].map(([v,l])=>`<button class="${o.prob===v?'on-e':''}" onclick="setRiscoCampo('${d}','prob','${v}')">${l}</button>`).join("")}</span></div>
-        <div class="rk-f"><span class="rk-l">Impacto</span><span class="seg">${[["baixo","Baixo"],["medio","Médio"],["alto","Alto"]].map(([v,l])=>`<button class="${o.impacto===v?'on-e':''}" onclick="setRiscoCampo('${d}','impacto','${v}')">${l}</button>`).join("")}</span></div>
-        <div class="rk-f"><span class="rk-l">Tendência</span><span class="seg">${[["down","↓ melhora"],["flat","→ estável"],["up","↑ piora"]].map(([v,l])=>`<button class="${o.tend===v?'on-e':''}" onclick="setRiscoCampo('${d}','tend','${v}')">${l}</button>`).join("")}</span></div>
-        <div class="rk-f"><span class="rk-l">Aceitável p/ avançar o marco?</span><span class="seg">${[["sim","o","Sim"],["nao","x","Não"]].map(([v,cl,l])=>`<button class="${o.aceitavel===v?'on-'+cl:''}" onclick="setRiscoCampo('${d}','aceitavel','${v}')">${l}</button>`).join("")}</span></div>
-        <div class="rk-f"><span class="rk-l">Ação de mitigação</span><div style="flex:1">${ac?`<span class="rk-ac">${esc(ac.titulo)} <span class="ha">· ${esc(ac.resp||'—')} · ${brdate(ac.prazo)}</span> <button class="fz" onclick="removeRiscoAcao('${d}')">desvincular</button></span>`:`<button class="fz" style="border-style:solid" onclick="addRiscoAcao('${d}')">+ criar na Operação da semana</button>`}</div></div>
-      </div>`;}
-      else if(ac){h+=`<div class="rk-ac">Mitigação: ${esc(ac.titulo)} <span class="ha">· ${esc(ac.resp||'—')} · ${brdate(ac.prazo)}</span></div>`}
-      h+=`</div>`;});
+    let h=`<div class="panel"><h3>Matriz de risco estratégico <span class="legend">probabilidade × impacto · vários riscos por dimensão</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="sugerirRiscos()">Sugerir níveis</button>`:''}</h3><div class="rk-tbl">`;
+    RISK_DIMS.forEach(d=>{const arr=dimArr(p,d);const dn=dimNivelOf(p,d);
+      h+=`<div class="rk-dimhead"><span class="rk-dimn">${d}</span>${dn?` <span class="rk-niv" style="background:${NIVCOL[dn]}">${NIVLBL[dn]}</span>`:` <span class="legend">sem risco</span>`}${arr.length>1?` <span class="legend">· ${arr.length} riscos</span>`:''}${ED?`<button class="fz" style="margin-left:auto;border-style:solid" onclick="addRisco('${d}')">+ risco</button>`:''}</div>`;
+      if(!arr.length&&!ED)h+=`<div class="rk-empty">— sem riscos registrados</div>`;
+      arr.forEach((o,ri)=>{const n=nivelRisco(o);const ac=o.acaoId?(p.semana||[]).find(s=>s.id===o.acaoId):null;
+        h+=`<div class="rk-risk"><div class="rk-rhead"><span class="rk-rtitle">${esc(o.titulo||("Risco "+(ri+1)))}</span>${n?` <span class="rk-niv" style="background:${NIVCOL[n]}">${NIVLBL[n]}</span>`:' <span class="legend">sem avaliação</span>'}${o.tend?` <span class="rk-tend" title="tendência">${o.tend==="up"?"↑":o.tend==="down"?"↓":"→"}</span>`:''}${o.aceitavel==="nao"?' <span class="tag blq">não aceitável p/ marco</span>':o.aceitavel==="sim"?' <span class="tag" style="border-color:var(--green);color:var(--green)">aceitável</span>':''}${ED?`<span style="margin-left:auto;display:flex;gap:4px"><button class="fz" onclick="editRisco('${d}','${o.id}')">editar</button><button class="fz" onclick="removeRisco('${d}','${o.id}')">remover</button></span>`:''}</div>`;
+        if(o.desc)h+=`<div class="rk-rdesc">${esc(o.desc)}</div>`;
+        if(ED){h+=`<div class="rk-ctrls">
+          <div class="rk-f"><span class="rk-l">Probabilidade</span><span class="seg">${[["baixa","Baixa"],["media","Média"],["alta","Alta"]].map(([v,l])=>`<button class="${o.prob===v?'on-e':''}" onclick="setRiscoCampo('${d}','${o.id}','prob','${v}')">${l}</button>`).join("")}</span></div>
+          <div class="rk-f"><span class="rk-l">Impacto</span><span class="seg">${[["baixo","Baixo"],["medio","Médio"],["alto","Alto"]].map(([v,l])=>`<button class="${o.impacto===v?'on-e':''}" onclick="setRiscoCampo('${d}','${o.id}','impacto','${v}')">${l}</button>`).join("")}</span></div>
+          <div class="rk-f"><span class="rk-l">Tendência</span><span class="seg">${[["down","↓ melhora"],["flat","→ estável"],["up","↑ piora"]].map(([v,l])=>`<button class="${o.tend===v?'on-e':''}" onclick="setRiscoCampo('${d}','${o.id}','tend','${v}')">${l}</button>`).join("")}</span></div>
+          <div class="rk-f"><span class="rk-l">Aceitável p/ avançar o marco?</span><span class="seg">${[["sim","o","Sim"],["nao","x","Não"]].map(([v,cl,l])=>`<button class="${o.aceitavel===v?'on-'+cl:''}" onclick="setRiscoCampo('${d}','${o.id}','aceitavel','${v}')">${l}</button>`).join("")}</span></div>
+          <div class="rk-f"><span class="rk-l">Ação de mitigação</span><div style="flex:1">${ac?`<span class="rk-ac">${esc(ac.titulo)} <span class="ha">· ${esc(ac.resp||'—')} · ${brdate(ac.prazo)}</span> <button class="fz" onclick="removeRiscoAcao('${d}','${o.id}')">desvincular</button></span>`:`<button class="fz" style="border-style:solid" onclick="addRiscoAcao('${d}','${o.id}')">+ criar nas Anotações</button>`}</div></div>
+        </div>`;}
+        else if(ac){h+=`<div class="rk-ac">Mitigação: ${esc(ac.titulo)} <span class="ha">· ${esc(ac.resp||'—')} · ${brdate(ac.prazo)}</span></div>`}
+        h+=`</div>`;});
+    });
     h+=`</div></div>`;b.innerHTML=h}
 }
 function renderPassos(p,fi,e){let h=`<div class="passos">`;
@@ -785,10 +861,14 @@ function sugereRisco(p,d){const orgs=DIM_ORGAOS[d]||[];const rel=aguardando(p).f
   if(d==="Fundiário"&&p.fases.filter(f=>["orig","fund","dir"].includes(f.id)).some(f=>f.itens.some(e=>e.blq))){prob="alta";imp="alto"}
   if(d==="Comercial"){const lanc=p.fases.find(f=>f.id==="lanc");const lancou=lanc&&lanc.itens.find(e=>e.id==="lancou");if(lancou&&entPct(lancou)>=.999){prob="baixa";imp="baixo"}}
   return{prob,imp}}
-function sugerirRiscos(){if(!guard())return;const p=proj(cur);RISK_DIMS.forEach(d=>{const s=sugereRisco(p,d);if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d].prob=s.prob;p.riscos[d].impacto=s.imp});touch(p);save();renderTab();toast("Níveis sugeridos a partir das pendências — ajuste se precisar.")}
-function setRiscoCampo(d,campo,v){if(!guard())return;const p=proj(cur);if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d][campo]=p.riscos[d][campo]===v?"":v;touch(p);save();renderTab()}
-function addRiscoAcao(d){if(!guard())return;const p=proj(cur);uiForm({title:"Ação de mitigação — "+d,okText:"Criar na semana",fields:[{key:"t",label:"Ação",type:"text",value:"Mitigar risco "+d.toLowerCase()},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const id="a"+Date.now();if(!p.semana)p.semana=[];p.semana.push({id,titulo:v.t.trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||today(),prio:v.prio,status:"aberta",alerta:true,vinc:"Risco: "+d});if(!p.riscos[d])p.riscos[d]={prob:"",impacto:"",tend:"",acaoId:null,aceitavel:""};p.riscos[d].acaoId=id;touch(p);save();closeModal();renderTab()}})}
-function removeRiscoAcao(d){if(!guard())return;const p=proj(cur);if(p.riscos[d])p.riscos[d].acaoId=null;touch(p);save();renderTab()}
+function sugerirRiscos(){if(!guard())return;const p=proj(cur);RISK_DIMS.forEach(d=>{const s=sugereRisco(p,d);const arr=dimArr(p,d);if(arr.length){arr[0].prob=s.prob;arr[0].impacto=s.imp}else if(s.prob!=="baixa"||s.imp!=="baixo"){if(!Array.isArray(p.riscos[d]))p.riscos[d]=[];p.riscos[d].push(normRisco({titulo:"Risco "+d.toLowerCase(),prob:s.prob,impacto:s.imp}))}});touch(p);save();renderTab();toast("Níveis sugeridos a partir das pendências — ajuste se precisar.")}
+function findRisco(p,d,id){return dimArr(p,d).find(r=>r.id===id)}
+function setRiscoCampo(d,id,campo,v){if(!guard())return;const p=proj(cur);const r=findRisco(p,d,id);if(!r)return;r[campo]=r[campo]===v?"":v;touch(p);save();renderTab()}
+function addRisco(d){if(!guard())return;const p=proj(cur);uiForm({title:"Novo risco — "+d,okText:"Adicionar",fields:[{key:"t",label:"Título do risco",type:"text",placeholder:"Ex.: Realinhamento viário negado pela SEPLANH"},{key:"desc",label:"Descrição",type:"textarea",placeholder:"Contexto, impacto, o que está em jogo…"}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe o título.");return}if(!Array.isArray(p.riscos[d]))p.riscos[d]=[];p.riscos[d].push(normRisco({titulo:v.t.trim(),desc:(v.desc||"").trim()}));touch(p);save();closeModal();renderTab()}})}
+function editRisco(d,id){if(!guard())return;const p=proj(cur);const r=findRisco(p,d,id);if(!r)return;uiForm({title:"Editar risco — "+d,okText:"Salvar",fields:[{key:"t",label:"Título do risco",type:"text",value:r.titulo||""},{key:"desc",label:"Descrição",type:"textarea",value:r.desc||""}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe o título.");return}r.titulo=v.t.trim();r.desc=(v.desc||"").trim();touch(p);save();closeModal();renderTab()}})}
+function removeRisco(d,id){if(!guard())return;const p=proj(cur);const r=findRisco(p,d,id);if(!r)return;uiConfirm('Remover o risco "'+(r.titulo||d)+'"?',()=>{p.riscos[d]=dimArr(p,d).filter(x=>x.id!==id);touch(p);save();renderTab()})}
+function addRiscoAcao(d,id){if(!guard())return;const p=proj(cur);const r=findRisco(p,d,id);if(!r)return;uiForm({title:"Ação de mitigação — "+d,okText:"Criar nas Anotações",fields:[{key:"t",label:"Ação",type:"text",value:r.titulo?("Mitigar: "+r.titulo):("Mitigar risco "+d.toLowerCase())},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const aid="a"+Date.now();if(!p.semana)p.semana=[];p.semana.push({id:aid,titulo:v.t.trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||today(),prio:v.prio,status:"aberta",alerta:true,vinc:"Risco: "+d,desc:"",anexo:"",dataReg:today(),autor:EDITOR||"NNU"});r.acaoId=aid;touch(p);save();closeModal();renderTab()}})}
+function removeRiscoAcao(d,id){if(!guard())return;const p=proj(cur);const r=findRisco(p,d,id);if(r)r.acaoId=null;touch(p);save();renderTab()}
 function addEspecial(){if(!guardM())return;const p=proj(cur);uiForm({title:"Novo item especial",okText:"Criar",fields:[
   {key:"base",label:"Puxar item pronto (biblioteca)",type:"select",value:"__livre",options:[{v:"__livre",t:"— criar do zero —"}].concat(ESPECIAIS.map(e=>({v:e.nome,t:e.nome+" · "+e.orgao})))},
   {key:"n",label:"Nome (se criar do zero)",type:"text"},
@@ -807,7 +887,8 @@ function addEspecial(){if(!guardM())return;const p=proj(cur);uiForm({title:"Novo
   if(v.pos==="inicio")f.itens.unshift(it);else f.itens.push(it);touch(p);save();expe=it.id;closeModal();renderTab()}})}
 function removeEnt(eid){if(!guardM())return;const p=proj(cur);let target=null,fase=null;p.fases.forEach(f=>f.itens.forEach(e=>{if(e.id===eid){target=e;fase=f}}));if(!target||!target.esp)return;uiConfirm(`Remover o item “${target.nome}”? Só itens especiais podem ser removidos.`,()=>{fase.itens=fase.itens.filter(e=>e.id!==eid);touch(p);save();renderTab()})}
 function moveEnt(eid,dir){if(!guardM())return;const p=proj(cur);p.fases.forEach(f=>{const i=f.itens.findIndex(e=>e.id===eid);if(i<0)return;if(!f.itens[i].esp)return;const j=i+dir;if(j<0||j>=f.itens.length)return;const e=f.itens.splice(i,1)[0];f.itens.splice(j,0,e)});touch(p);save();renderTab()}
-function addAcao(){if(!guard())return;uiForm({title:"Nova ação da semana",okText:"Adicionar",fields:[{key:"t",label:"Ação / tarefa",type:"text",placeholder:"O que precisa ser feito"},{key:"resp",label:"Responsável",type:"text",value:"Alberto"},{key:"prazo",label:"Prazo",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"alta",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe a ação.");return}const p=proj(cur);if(!p.semana)p.semana=[];p.semana.push({id:"a"+Date.now(),titulo:v.t.trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||today(),prio:v.prio,status:"aberta",alerta:true,vinc:""});touch(p);save();closeModal();renderTab()}})}
+function addAcao(){if(!guard())return;uiForm({title:"Nova anotação",okText:"Registrar",fields:[{key:"t",label:"Título",type:"text",placeholder:"Assunto / o que precisa ser feito"},{key:"desc",label:"Descrição",type:"textarea",placeholder:"Situação, contexto, próximos passos…"},{key:"resp",label:"Responsável",type:"text",value:(EDITOR&&EDITOR!=="NNU")?EDITOR:"Alberto"},{key:"prazo",label:"Prazo / data",type:"date",value:today()},{key:"prio",label:"Prioridade",type:"select",value:"media",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]},{key:"anexo",label:"Anexo (link — Drive, SharePoint, e-mail…)",type:"text",placeholder:"https://…"},{key:"alerta",label:"Mostrar como alerta no card?",type:"select",value:"sim",options:[{v:"sim",t:"Sim"},{v:"nao",t:"Não"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe o título.");return}const p=proj(cur);if(!p.semana)p.semana=[];p.semana.push({id:"a"+Date.now(),titulo:v.t.trim(),desc:(v.desc||"").trim(),resp:v.resp||"",prazo:fixYear(v.prazo)||"",prio:v.prio,anexo:(v.anexo||"").trim(),status:"aberta",alerta:v.alerta!=="nao",vinc:"",dataReg:today(),autor:EDITOR||"NNU"});touch(p);save();closeModal();renderTab()}})}
+function editAcao(id){if(!guard())return;const p=proj(cur),a=(p.semana||[]).find(x=>x.id===id);if(!a)return;uiForm({title:"Editar anotação",okText:"Salvar",fields:[{key:"t",label:"Título",type:"text",value:a.titulo||""},{key:"desc",label:"Descrição",type:"textarea",value:a.desc||""},{key:"resp",label:"Responsável",type:"text",value:a.resp||""},{key:"prazo",label:"Prazo / data",type:"date",value:a.prazo||""},{key:"prio",label:"Prioridade",type:"select",value:a.prio||"media",options:[{v:"baixa",t:"Baixa"},{v:"media",t:"Média"},{v:"alta",t:"Alta"},{v:"critica",t:"Crítica"}]},{key:"anexo",label:"Anexo (link)",type:"text",value:a.anexo||""},{key:"alerta",label:"Mostrar como alerta no card?",type:"select",value:a.alerta?"sim":"nao",options:[{v:"sim",t:"Sim"},{v:"nao",t:"Não"}]}],onOk:v=>{if(!(v.t||"").trim()){ufError("Informe o título.");return}a.titulo=v.t.trim();a.desc=(v.desc||"").trim();a.resp=v.resp||"";a.prazo=fixYear(v.prazo)||"";a.prio=v.prio;a.anexo=(v.anexo||"").trim();a.alerta=v.alerta!=="nao";if(!a.dataReg)a.dataReg=today();if(!a.autor)a.autor=EDITOR||"NNU";touch(p);save();closeModal();renderTab()}})}
 function doneAcao(id){if(!guard())return;const p=proj(cur),a=(p.semana||[]).find(x=>x.id===id);if(a)a.status=a.status==="concluida"?"aberta":"concluida";save();renderTab()}
 function delAcao(id){if(!guard())return;const p=proj(cur);p.semana=(p.semana||[]).filter(x=>x.id!==id);save();renderTab()}
 function setPrioModal(id){if(!guardM())return;const p=proj(id);uiForm({title:"Prioridade na carteira",okText:"Salvar",fields:[{key:"n",label:"Posição (1 = topo da carteira). Em branco remove a prioridade.",type:"number",value:p.prioridade||""}],onOk:v=>{const n=parseInt(v.n);p.prioridade=(isNaN(n)||n<=0)?null:n;save();closeModal();renderHome()}})}
@@ -853,7 +934,7 @@ function setFasePct(fi,v){if(!guard())return;const p=proj(cur),f=p.fases[fi];con
 
 function foot(m){const f=document.getElementById("foot");
   if(m==="h")f.innerHTML=`<b>Cockpit NNU</b> · da originação ao lançamento. Avanço por marcos ponderados sobre a EAP R22 (não a substitui). <b>Aguardando órgão</b> (pendência externa, com SLA semeado do R22) é distinto de <b>pendência interna</b> (responsabilidade da equipe). Indicadores conforme RASCI REV13. Esteira de Produto/Comercial e <code>IPPL</code> estruturados, ativam-se ao receber itens. Dados salvos neste navegador — use <b>Exportar</b> para backup.`;
-  else f.innerHTML=`<b>IPPE</b> prontidão do próximo marco (trava se houver absoluto pendente) · <b>IPPL</b> prontidão de lançamento · <b>Avanço total</b> da esteira regulatória. Pendência <b>externa</b> (órgão, com SLA/data prevista) ≠ pendência <b>interna</b> (equipe). Operação da semana não entra no cálculo.`}
+  else f.innerHTML=`<b>IPPE</b> prontidão do próximo marco (trava se houver absoluto pendente) · <b>IPPL</b> prontidão de lançamento · <b>Avanço total</b> da esteira regulatória. Pendência <b>externa</b> (órgão, com SLA/data prevista) ≠ pendência <b>interna</b> (equipe). Anotações não entram no cálculo.`}
 
 function manualHTML(){return `<div class="overlay" onclick="if(event.target===this)closeManual()"><div class="modal">
   <div class="mh"><h2>Manual — Cockpit de Portfólio NNU</h2><button class="mx" onclick="closeManual()">×</button></div>
