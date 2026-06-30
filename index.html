@@ -19,8 +19,13 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .lbl{font-family:var(--body);letter-spacing:.09em;text-transform:uppercase}
 .shell{max-width:1200px;margin:0 auto;padding:0 22px 90px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:linear-gradient(180deg,var(--bg) 82%,transparent);z-index:40}
+.admin-wrap{position:relative;display:inline-block}
+.admin-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(2,12,27,.14);padding:6px;display:none;flex-direction:column;gap:2px;min-width:190px;z-index:60}
+.admin-menu.open{display:flex}
+.admin-menu .tbtn{text-align:left;border:none;border-radius:7px;width:100%;white-space:nowrap}
+.admin-menu .tbtn:hover{background:var(--surface2)}
 .brand{display:flex;align-items:baseline;gap:12px}
-.brand .mark{font-family:var(--body);font-weight:600;letter-spacing:.16em;font-size:11px;color:var(--on-accent);background:var(--accent);padding:4px 9px;border-radius:4px}
+.brand .mark{font-family:var(--body);font-weight:700;letter-spacing:.12em;font-size:11px;color:var(--on-accent);background:var(--accent);padding:4px 10px;border-radius:4px}
 .brand h1{font-family:var(--display);font-weight:600;font-size:15px;margin:0}
 .brand .sub{font-size:10.5px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase}
 .toolbtns{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
@@ -336,20 +341,25 @@ input[type=file]{display:none}
 <body>
 <div class="shell">
   <div class="topbar">
-    <div class="brand"><span class="mark">OPUS</span><div><h1>Cockpit de Portfólio — Urbanismo</h1><div class="sub">NNU · da originação ao lançamento <span id="buildtag" style="color:var(--ink-dim);font-size:10px;margin-left:4px"></span></div></div></div>
+    <div class="brand"><span class="mark">PLANEAR</span><div><h1>Cockpit de Portfólio — Urbanismo</h1><div class="sub">NNU · da originação ao lançamento <span id="buildtag" style="color:var(--ink-dim);font-size:10px;margin-left:4px"></span></div></div></div>
     <div class="toolbtns">
       <button class="tbtn" id="bManual">Manual</button>
       <button class="tbtn" id="bCompare">Comparar frentes</button>
-      <button class="tbtn" id="bTheme">Tema</button>
-      <button class="tbtn" id="bAccess">Acessar</button>
       <button class="tbtn" id="bPrint">Imprimir</button>
-      <button class="tbtn ma-only" id="bNew">Nova frente</button>
-      <button class="tbtn" id="bExp">Exportar</button>
-      <button class="tbtn ma-only" id="bImp">Importar</button>
-      <button class="tbtn ma-only" id="bPub">Publicar (dados.json)</button>
-      <button class="tbtn ma-only" id="bEditores">Editores</button>
-      <button class="tbtn ma-only" id="bDept">Departamentos</button>
-      <button class="tbtn ma-only" id="bReset">Restaurar dados padrão</button>
+      <button class="tbtn" id="bAccess">Acessar</button>
+      <div class="admin-wrap">
+        <button class="tbtn" id="bAdmin">Administração ▾</button>
+        <div class="admin-menu" id="adminMenu">
+          <button class="tbtn" id="bTheme">Tema</button>
+          <button class="tbtn ma-only" id="bNew">Nova frente</button>
+          <button class="tbtn" id="bExp">Exportar</button>
+          <button class="tbtn ma-only" id="bImp">Importar</button>
+          <button class="tbtn ma-only" id="bPub">Publicar (dados.json)</button>
+          <button class="tbtn ma-only" id="bEditores">Editores</button>
+          <button class="tbtn ma-only" id="bDept">Departamentos</button>
+          <button class="tbtn ma-only" id="bReset">Restaurar dados padrão</button>
+        </div>
+      </div>
       <input type="file" id="fImp" accept="application/json">
     </div>
   </div>
@@ -495,7 +505,7 @@ function gerenciarDepts(){if(!guardM())return;const root=document.getElementById
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
 const TEMPLATE_VERSION="2026.07.6";
-const BUILD="v2026.07.5 · rev 15 (30/06)";
+const BUILD="v2026.07.5 · rev 18 (30/06)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -676,10 +686,12 @@ function kpiDrill(tipo){const root=document.getElementById("modalRoot");const vi
   if(tipo==="criticas"){title="Frentes críticas";const L=vis.filter(p=>saude(p)==="r");body=L.length?L.map(p=>row(p,esc(travaPrincipal(p,ippe(p),aguardando(p))),"r")).join(""):'<div class="empty">Nenhuma frente crítica no momento.</div>';}
   else if(tipo==="aguardando"){title="Aguardando órgãos";const rows=[];vis.forEach(p=>aguardando(p).forEach(a=>rows.push({p,a})));rows.sort((x,y)=>(y.a.over!=null?y.a.over:-999)-(x.a.over!=null?x.a.over:-999));body=rows.length?rows.map(({p,a})=>row(p,esc(a.ent)+' · '+esc(a.orgao||'órgão')+(a.exig?' · em exigência':'')+(a.over!=null?(a.atraso?' · venceu '+a.over+'d':' · faltam '+(-a.over)+'d'):''),a.atraso?"r":"y")).join(""):'<div class="empty">Nada aguardando órgão.</div>';}
   else if(tipo==="internas"){title="Pendências internas";const rows=[];vis.forEach(p=>bloqueios(p).forEach(b=>rows.push({p,b})));body=rows.length?rows.map(({p,b})=>row(p,esc(b.ent||b.motivo||'pendência')+(b.dept?' · '+esc(b.dept):'')+(b.resp?' · '+esc(b.resp):'')+(b.dias!=null?' · '+b.dias+'d':''),"r")).join(""):'<div class="empty">Sem pendência interna.</div>';}
-  else if(tipo==="stale"){title="Sem atualização há +7 dias";const L=vis.filter(p=>(dias(p.ultAt)||0)>7).sort((a,b)=>(dias(b.ultAt)||0)-(dias(a.ultAt)||0));body=L.length?L.map(p=>row(p,(dias(p.ultAt)||0)+' dias · por '+esc(p.por||'—'),"y")).join(""):'<div class="empty">Tudo atualizado.</div>';}
+  else if(tipo==="stale"){title="Dados desatualizados há +7 dias";const L=vis.filter(p=>(dias(p.ultAt)||0)>7).sort((a,b)=>(dias(b.ultAt)||0)-(dias(a.ultAt)||0));body=L.length?L.map(p=>row(p,(dias(p.ultAt)||0)+' dias · por '+esc(p.por||'—'),"y")).join(""):'<div class="empty">Tudo atualizado.</div>';}
+  else if(tipo==="riscosna"){title="Riscos não avaliados";const L=vis.filter(p=>riscoResumo(p).filled===0);body=L.length?L.map(p=>row(p,"Matriz de risco não preenchida — pendência de governança","")).join(""):'<div class="empty">Todas as frentes têm risco avaliado.</div>';}
   else return;
   root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mform"><div class="mh"><h2>${title}</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb">${body}</div></div></div>`;
 }
+function critScore(p){let s=0;const sd=saude(p);s+=sd==="r"?1000:sd==="y"?400:0;if(aguardando(p).some(a=>a.atraso))s+=300;if(bloqueios(p).length)s+=120;const rr=riscoResumo(p);if(!rr.filled)s+=200;else if(rr.nivel==="critico")s+=260;else if(rr.nivel==="alto")s+=150;if((dias(p.ultAt)||0)>7)s+=80;return s}
 function renderHome(){cur=null;const v=document.getElementById("view");
   const vis=DATA.filter(p=>p.status!=="arquivada");const total=vis.length||1;
   const mat=vis.reduce((s,p)=>s+avancoReg(p),0)/total;
@@ -687,13 +699,15 @@ function renderHome(){cur=null;const v=document.getElementById("view");
   const ativasN=DATA.filter(p=>p.status==="ativa").length,monit=DATA.filter(p=>p.status==="monitorada"||p.status==="obras").length,arq=DATA.filter(p=>p.status==="arquivada").length;
   const ag=vis.reduce((s,p)=>s+aguardando(p).length,0),bl=vis.reduce((s,p)=>s+bloqueios(p).length,0);
   const stale=vis.filter(p=>(dias(p.ultAt)||0)>7).length;
+  const riscoNA=vis.filter(p=>riscoResumo(p).filled===0).length;
   let h=`<div class="kpis">
     <div class="kpi"><div class="label">Frentes ativas NNU</div><div class="val">${ativasN}</div><div class="foot">monitoradas ${monit}${arq?` · arquiv. ${arq}`:''}</div></div>
-    <div class="kpi"><div class="label">Avanço médio</div><div class="val">${pct(mat)}<small>%</small></div><div class="bar" style="margin-top:8px"><i style="width:${pct(mat)}%"></i></div></div>
+    <div class="kpi"><div class="label">Avanço regulatório médio</div><div class="val">${pct(mat)}<small>%</small></div><div class="bar" style="margin-top:8px"><i style="width:${pct(mat)}%"></i></div></div>
     <div class="kpi kclick" onclick="kpiDrill('criticas')"><div class="label">Frentes críticas</div><div class="val" style="color:${cnt.r?'var(--red)':'inherit'}">${cnt.r}</div><div class="foot"><span class="dot g"></span> ${cnt.g} &nbsp;<span class="dot y"></span> ${cnt.y}</div></div>
     <div class="kpi kclick" onclick="kpiDrill('aguardando')"><div class="label">Aguardando órgãos</div><div class="val" style="color:var(--amber)">${ag}</div><div class="foot">pendência externa</div></div>
     <div class="kpi kclick" onclick="kpiDrill('internas')"><div class="label">Pendências internas</div><div class="val" style="color:${bl?'var(--red)':'inherit'}">${bl}</div><div class="foot">responsabilidade interna</div></div>
-    <div class="kpi kclick" onclick="kpiDrill('stale')"><div class="label">Sem atualização</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('stale')"><div class="label">Dados desatualizados</div><div class="val" style="color:${stale?'var(--amber)':'inherit'}">${stale}</div><div class="foot">há mais de 7 dias</div></div>
+    <div class="kpi kclick" onclick="kpiDrill('riscosna')"><div class="label">Riscos não avaliados</div><div class="val">${riscoNA}</div><div class="foot">matriz não preenchida</div></div>
   </div>
   <div class="panel" style="margin-top:18px"><h3>Prioridades da semana <span class="legend">top 5${MA?' · defina o número no card de cada frente':''}</span></h3>`;
   const prF=vis.filter(p=>p.prioridade!=null).sort((a,b)=>a.prioridade-b.prioridade).slice(0,5);
@@ -708,15 +722,15 @@ function renderHome(){cur=null;const v=document.getElementById("view");
   <div class="sectlabel"><h2>Carteira</h2><span class="legend">${MA?'prioridade manual + criticidade':'ordenada por criticidade'} · clique para abrir</span></div>
   <div class="cards">`;
   const ord={r:0,y:1,g:2};
-  [...vis].sort((a,b)=>{const pa=a.prioridade||999,pb=b.prioridade||999;if(pa!==pb)return pa-pb;return ord[saude(a)]-ord[saude(b)]||avancoReg(b)-avancoReg(a)}).forEach(p=>{
-    const s=saude(p),av=avancoReg(p),ip=ippe(p),bls=bloqueios(p),ags=aguardando(p);
+  [...vis].sort((a,b)=>{const pa=a.prioridade||999,pb=b.prioridade||999;if(pa!==pb)return pa-pb;return critScore(b)-critScore(a)||avancoReg(b)-avancoReg(a)}).forEach(p=>{
+    const s=saude(p),av=avancoReg(p),ip=ippe(p),bls=bloqueios(p),ags=aguardando(p),rr=riscoResumo(p);
     const al=(p.semana||[]).find(a=>a.alerta&&a.status!=="concluida");
     const atr=ags.find(a=>a.atraso)||bls[0];
     h+=`<div class="card" onclick="openP('${p.id}')"><div class="stripe" style="background:${HEX[s]}"></div>
       <div class="chead"><div><div class="cname">${esc(p.nome)}</div><div class="ccode">${esc(p.codigo)} · ${esc(p.estagio)}</div></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">${MA?`<button class="prio-pill ${p.prioridade?'':'def'}" onclick="event.stopPropagation();setPrioModal('${p.id}')">${p.prioridade?'P'+p.prioridade:'prioridade'}</button>`:(p.prioridade?`<span class="prio-pill">P${p.prioridade}</span>`:'')}<div class="cpct">${pct(av)}<small>avanço</small></div></div></div>
       <div class="bar" style="margin-top:11px"><i style="width:${pct(av)}%"></i></div>
-      <span class="chip"><span class="dot ${s}"></span>Marco: ${esc(ip.gate)} · ${ip.travado?'travado':pct(ip.pct)+'%'}</span>${(()=>{const v=ipplVal(p);return v!=null?`<span class="chip" style="margin-left:6px">Lançamento ${pct(v)}%</span>`:''})()}
+      <span class="chip"><span class="dot ${s}"></span>Marco: ${esc(ip.gate)} · ${ip.travado?'travado':pct(ip.pct)+'%'}</span>${(()=>{const v=ipplVal(p);return v!=null?`<span class="chip" style="margin-left:6px">Lançamento ${pct(v)}%</span>`:''})()}${(()=>{const c=rr.filled?NIVCOL[rr.nivel]:"var(--ink-dim)",l=rr.filled?NIVLBL[rr.nivel]:"Não avaliado";return `<span class="chip" style="margin-left:6px"><span class="dot" style="background:${c}"></span>Risco: ${l}</span>`})()}
       <div class="cmeta"><span>${ags.length?`<b style="color:var(--amber)">${ags.length}</b> no órgão`:'—'} · ${bls.length?`<b style="color:var(--red)">${bls.length}</b> internas`:'sem pendência interna'}</span><span>${dias(p.ultAt)||0}d atrás</span></div>`;
     {const cAn=topAnots(p,2,true);if(cAn.length)h+=`<div class="anots">${cAn.map(anotLine).join("")}</div>`;else if(atr)h+=`<div class="calert r"><span class="mk">!</span>${esc((atr.ent||atr.motivo)+(atr.resp?' · '+atr.resp:'')+(atr.dias!=null?' · '+atr.dias+'d':''))}</div>`;}
     h+=`</div>`});
@@ -1091,6 +1105,7 @@ document.getElementById("bCompare").onclick=openCompare;
 document.getElementById("bDept").onclick=gerenciarDepts;
 document.getElementById("bEditores").onclick=gerenciarEditores;
 document.getElementById("bTheme").onclick=()=>{applyTheme(document.documentElement.getAttribute("data-theme")==="light"?"dark":"light");cur?renderP():renderHome()};
+const _adm=document.getElementById("adminMenu");document.getElementById("bAdmin").onclick=(e)=>{e.stopPropagation();_adm.classList.toggle("open")};document.addEventListener("click",(e)=>{if(_adm.classList.contains("open")&&!e.target.closest(".admin-wrap"))_adm.classList.remove("open")});_adm.addEventListener("click",()=>_adm.classList.remove("open"));
 document.getElementById("bNew").onclick=()=>{if(!guardM())return;uiForm({title:"Nova frente",okText:"Criar",fields:[{key:"nome",label:"Nome da frente",type:"text"},{key:"cod",label:"Código (sigla)",type:"text"}],onOk:v=>{if(!(v.nome||"").trim()){ufError("Informe o nome.");return}let c=((v.cod||"").trim()||v.nome.slice(0,4).toUpperCase());const p=build(v.nome.trim(),c||("P"+Date.now()),{estagio:"Prospecção / MOU",through:-1});let b=p.id,k=1;while(proj(p.id)){p.id=b+(++k);p.codigo=p.id}DATA.push(p);save();closeModal();openP(p.id)}})};
 document.getElementById("bExp").onclick=()=>{const bl=new Blob([JSON.stringify(snapshot(),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="cockpit-urbanismo-"+today()+".json";a.click()};
 document.getElementById("bImp").onclick=()=>{if(guardM())document.getElementById("fImp").click()};
