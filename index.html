@@ -119,6 +119,32 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .ccrow-s{font-size:11px;color:var(--ink-dim);margin-top:2px}
 .ccrow-d{flex:0 0 auto;font-family:var(--mono);font-size:11px;font-weight:600;margin-top:2px}
 .ccrow-d.r{color:var(--red)}.ccrow-d.y{color:var(--amber)}
+.cmptabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.cmptabs button{background:none;border:none;padding:8px 14px;font-size:13px;font-weight:600;color:var(--ink-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.cmptabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+.op-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
+.op-num{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--surface)}
+.op-n{font-size:24px;font-weight:700;font-family:var(--mono);line-height:1}
+.op-l{font-size:10px;color:var(--ink-dim);margin-top:5px;text-transform:uppercase;letter-spacing:.04em;line-height:1.3}
+.op-sec{margin-top:22px}.op-sec h4{margin:0 0 10px;font-size:13px}
+.op-tbl{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.op-row{display:flex;align-items:center;gap:12px;padding:9px 13px;border-top:1px solid var(--line);font-size:12.5px}
+.op-row:first-child{border-top:none}
+.op-k{font-weight:600;min-width:118px;flex:0 0 auto}.op-v{flex:1;color:var(--ink-mid)}
+.op-fr{font-family:var(--mono);font-size:10px;color:var(--ink-dim);text-align:right;max-width:38%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.op-prgrp{display:flex;gap:10px;align-items:flex-start;margin-bottom:11px}.op-prlist{flex:1;min-width:0}
+.op-task{display:flex;align-items:baseline;gap:9px;padding:6px 0;border-top:1px solid var(--line);cursor:pointer;font-size:12.5px}
+.op-task:first-child{border-top:none}
+.op-task-fr{font-family:var(--mono);font-size:10px;color:var(--ink-dim);flex:0 0 auto;min-width:42px}
+.op-task-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.op-task-m{flex:0 0 auto;font-size:11px;color:var(--ink-dim)}
+.op-funil{display:flex;flex-direction:column;gap:4px}
+.op-fl{display:flex;align-items:center;gap:10px;font-size:12px}
+.op-fl-l{flex:0 0 auto;width:150px;color:var(--ink-mid);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.op-fl-bar{flex:1;height:14px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.op-fl-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-dim),var(--accent))}
+.op-fl-n{flex:0 0 auto;font-family:var(--mono);font-weight:600;min-width:20px}
+
 .cc-nat.r{color:var(--red)}.cc-nat.y{color:var(--amber)}
 .back{background:var(--surface);border:1px solid var(--line2);color:var(--accent);font-size:12.5px;font-weight:600;padding:6px 13px;margin:22px 0 8px;display:inline-flex;gap:7px;align-items:center;border-radius:8px;box-shadow:var(--shadow)}
 .back:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -469,7 +495,7 @@ function gerenciarDepts(){if(!guardM())return;const root=document.getElementById
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
 const TEMPLATE_VERSION="2026.07.6";
-const BUILD="v2026.07.5 · rev 14 (30/06)";
+const BUILD="v2026.07.5 · rev 15 (30/06)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -909,7 +935,60 @@ function cmpLines(list){const ws=list.filter(p=>(p.snapshots||[]).length>=2);if(
 const RADAR_FASES=[["orig",["Originação"]],["dir",["Diretrizes","& Outorgas"]],["amb",["Ambiental &","Complementares"]],["anal",["Análise &",'"de acordo"']],["li",["Licença de","Instalação"]],["aprov",["Aprovar projetos","complementares"]],["dec",["Decreto"]]];
 function radarVals(p){return RADAR_FASES.map(a=>{const f=p.fases.find(x=>x.id===a[0]);return f?faseTot(f).pct:0});}
 function cmpRadar(sel){const N=RADAR_FASES.length,W=620,H=470,cx=W/2,cy=H/2+16,R=124;const ang=i=>-Math.PI/2+i*2*Math.PI/N;const pt=(i,r)=>[cx+Math.cos(ang(i))*R*r,cy+Math.sin(ang(i))*R*r];let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;max-width:620px">`;[0.25,0.5,0.75,1].forEach(r=>{const poly=[...Array(N)].map((_,i)=>pt(i,r)).map(pp=>pp[0].toFixed(1)+','+pp[1].toFixed(1)).join(' ');s+=`<polygon points="${poly}" fill="none" style="stroke:var(--line)"/>`;});RADAR_FASES.forEach((a,i)=>{const e=pt(i,1),l=pt(i,1.14),lx=l[0],ly=l[1],anc=lx<cx-6?'end':(lx>cx+6?'start':'middle'),lines=a[1],sdy=-(lines.length-1)*5.5;s+=`<line x1="${cx}" y1="${cy}" x2="${e[0].toFixed(1)}" y2="${e[1].toFixed(1)}" style="stroke:var(--line)"/>`;lines.forEach((ln,li)=>{s+=`<text x="${lx.toFixed(1)}" y="${(ly+sdy+li*11).toFixed(1)}" text-anchor="${anc}" font-size="9.5" style="fill:var(--ink-mid)">${esc(ln)}</text>`;});});sel.forEach((code,si)=>{const p=proj(code);if(!p)return;const col=cmpColors[si%cmpColors.length],v=radarVals(p);const poly=v.map((val,i)=>pt(i,Math.max(.02,val))).map(pp=>pp[0].toFixed(1)+','+pp[1].toFixed(1)).join(' ');s+=`<polygon points="${poly}" fill="${col}" fill-opacity="0.14" stroke="${col}" stroke-width="2"/>`;});sel.forEach((code,si)=>{const p=proj(code),col=cmpColors[si%cmpColors.length];s+=`<rect x="12" y="${14+si*18}" width="10" height="10" rx="2" fill="${col}"/><text x="28" y="${23+si*18}" font-size="11" style="fill:var(--ink-mid)">${esc(p?p.nome:code)}</text>`;});return s+`</svg>`;}
-function renderCompare(){const root=document.getElementById("modalRoot");const act=DATA.filter(p=>p.status!=="arquivada");const chips=act.map(p=>`<button class="cmpchip ${cmpSel.includes(p.codigo)?'on':''}" onclick="toggleCmp('${p.codigo}')">${esc(p.codigo)}</button>`).join("");root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mwide"><div class="mh"><h2>Comparar frentes</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb"><div class="cmpsec"><h4>Ranking de avanço regulatório</h4>${cmpBars(act)}</div><div class="cmpsec"><h4>Comparativo por fase <span class="legend">% de conclusão · selecione 2 a 4 frentes</span></h4><div class="cmpchips">${chips}</div>${cmpRadar(cmpSel)}</div></div></div></div>`;}
+let cmpTab="op";
+function toggleCmpTab(t){cmpTab=t;renderCompare()}
+function operacaoPanel(){
+  const vis=DATA.filter(p=>p.status!=="arquivada");
+  let aAb=0,aCo=0;const AGS=[],BLS=[],ABERTAS=[];
+  vis.forEach(p=>{(p.semana||[]).forEach(a=>{if(a.status==="concluida")aCo++;else{aAb++;ABERTAS.push({p,a});}});
+    aguardando(p).forEach(a=>AGS.push({p,a}));bloqueios(p).forEach(b=>BLS.push({p,b}));});
+  const venc=AGS.filter(x=>x.a.atraso).length,exig=AGS.filter(x=>x.a.exig).length;
+  // 1) números de execução
+  const nums=[["Anotações abertas",aAb,""],["Concluídas",aCo,"var(--green)"],["Aguardando órgão",AGS.length,"var(--amber)"],["Vencidas no órgão",venc,venc?"var(--red)":""],["Em exigência",exig,exig?"var(--amber)":""],["Pendências internas",BLS.length,BLS.length?"var(--red)":""]];
+  let h=`<div class="op-nums">`+nums.map(n=>`<div class="op-num"><div class="op-n"${n[2]?` style="color:${n[2]}"`:""}>${n[1]}</div><div class="op-l">${n[0]}</div></div>`).join("")+`</div>`;
+  // 2) por departamento / responsável (interno)
+  const dept={};
+  BLS.forEach(({p,b})=>{const k=b.dept||b.resp||"— sem área";(dept[k]=dept[k]||{t:0,v:0,fr:new Set()});dept[k].t++;dept[k].fr.add(p.codigo);});
+  ABERTAS.forEach(({p,a})=>{const k=a.resp||"— sem resp.";(dept[k]=dept[k]||{t:0,v:0,fr:new Set()});dept[k].t++;if(a.prazo&&(dias(a.prazo)||0)>0)dept[k].v++;dept[k].fr.add(p.codigo);});
+  const deptRows=Object.entries(dept).sort((a,b)=>b[1].t-a[1].t);
+  h+=`<div class="op-sec"><h4>Por departamento / responsável <span class="legend">carga e gargalo interno</span></h4>`;
+  h+=deptRows.length?`<div class="op-tbl">`+deptRows.map(([k,o])=>`<div class="op-row"><span class="op-k">${esc(k)}</span><span class="op-v"><b>${o.t}</b> em aberto${o.v?` · <b style="color:var(--red)">${o.v}</b> vencida(s)`:""}</span><span class="op-fr">${[...o.fr].join(", ")}</span></div>`).join("")+`</div>`:`<div class="empty">Nada interno em aberto.</div>`;
+  h+=`</div>`;
+  // 3) por órgão (externo)
+  const org={};
+  AGS.forEach(({p,a})=>{const k=a.orgao||"Órgão";(org[k]=org[k]||{t:0,e:0,v:0,fr:new Set()});org[k].t++;if(a.exig)org[k].e++;if(a.atraso)org[k].v++;org[k].fr.add(p.codigo);});
+  const orgRows=Object.entries(org).sort((a,b)=>(b[1].v-a[1].v)||(b[1].t-a[1].t));
+  h+=`<div class="op-sec"><h4>Por órgão <span class="legend">o que cobrar fora</span></h4>`;
+  h+=orgRows.length?`<div class="op-tbl">`+orgRows.map(([k,o])=>`<div class="op-row"><span class="op-k">${esc(k)}</span><span class="op-v"><b>${o.t}</b> pendência(s)${o.e?` · ${o.e} em exigência`:""}${o.v?` · <b style="color:var(--red)">${o.v}</b> vencida(s)`:""}</span><span class="op-fr">${[...o.fr].join(", ")}</span></div>`).join("")+`</div>`:`<div class="empty">Nada aguardando órgão.</div>`;
+  h+=`</div>`;
+  // 4) onde está parado (ranking de gargalos)
+  const par=[];
+  AGS.forEach(({p,a})=>par.push({fr:p.codigo,frn:p.nome,id:p.id,txt:a.ent,sub:(a.orgao||"órgão")+(a.exig?" · em exigência":""),col:a.atraso?"r":(a.exig?"y":""),prazo:a.over!=null?(a.atraso?"venceu "+a.over+"d":"faltam "+(-a.over)+"d"):"",score:a.atraso?4:(a.exig?3:1),over:a.over!=null?a.over:-999}));
+  BLS.forEach(({p,b})=>par.push({fr:p.codigo,frn:p.nome,id:p.id,txt:b.ent,sub:"equipe · "+(b.motivo||"")+(b.resp?" · "+b.resp:""),col:"r",prazo:b.dias!=null?b.dias+"d parado":"",score:4,over:b.dias||0}));
+  par.sort((a,b)=>(b.score-a.score)||((b.over||0)-(a.over||0)));
+  h+=`<div class="op-sec"><h4>Onde está parado <span class="legend">o que destrava mais coisa</span></h4>`;
+  h+=par.length?par.slice(0,10).map((c,i)=>`<div class="ccrow" onclick="closeModal();openP('${c.id}')" style="cursor:pointer"><span class="ccrow-n">${i+1}</span><span class="ccrow-tag ${c.col}">${esc(c.fr)}</span><div class="ccrow-main"><div class="ccrow-t">${esc(c.txt)}</div><div class="ccrow-s">${esc(c.sub)}</div></div>${c.prazo?`<span class="ccrow-d ${c.col}">${esc(c.prazo)}</span>`:""}</div>`).join(""):`<div class="empty">Nada parado. 🎉</div>`;
+  h+=`</div>`;
+  // 5) o que fazer esta semana (anotações abertas por prioridade)
+  const ordP=["critica","alta","media","baixa"],PL={critica:"Crítica",alta:"Alta",media:"Média",baixa:"Baixa"};
+  h+=`<div class="op-sec"><h4>O que fazer esta semana <span class="legend">anotações abertas, por prioridade</span></h4>`;
+  let any=false;
+  ordP.forEach(prio=>{const L=ABERTAS.filter(x=>(x.a.prio||"media")===prio);if(!L.length)return;any=true;
+    h+=`<div class="op-prgrp"><span class="pr ${prio}">${PL[prio]}</span><div class="op-prlist">`+L.sort((a,b)=>String(a.a.prazo||"").localeCompare(String(b.a.prazo||""))).map(({p,a})=>`<div class="op-task" onclick="closeModal();openP('${p.id}')"><span class="op-task-fr">${esc(p.codigo)}</span><span class="op-task-t">${esc(a.titulo)}</span><span class="op-task-m">${esc(a.resp||"—")}${a.prazo?" · "+brdate(a.prazo):""}</span></div>`).join("")+`</div></div>`;});
+  if(!any)h+=`<div class="empty">Nenhuma anotação aberta.</div>`;
+  h+=`</div>`;
+  // 6) funil por marco
+  const ref=vis.find(p=>p.fases&&p.fases.length)||{fases:[]};
+  const funil=[];for(let i=0;i<REGFASES;i++){const lbl=(ref.fases[i]||{}).gate||("Marco "+(i+1));const n=vis.filter(p=>curGate(p)===i).length;funil.push({lbl,n});}
+  const concl=vis.filter(p=>curGate(p)<0).length;if(concl)funil.push({lbl:"Concluído / lançado",n:concl});
+  const maxN=Math.max(1,...funil.map(f=>f.n));
+  h+=`<div class="op-sec"><h4>Funil por marco <span class="legend">frentes em cada etapa da esteira</span></h4><div class="op-funil">`+funil.map(f=>`<div class="op-fl"><span class="op-fl-l">${esc(f.lbl)}</span><span class="op-fl-bar"><i style="width:${f.n/maxN*100}%"></i></span><span class="op-fl-n">${f.n}</span></div>`).join("")+`</div></div>`;
+  return h;
+}
+function renderCompare(){const root=document.getElementById("modalRoot");const act=DATA.filter(p=>p.status!=="arquivada");const chips=act.map(p=>`<button class="cmpchip ${cmpSel.includes(p.codigo)?'on':''}" onclick="toggleCmp('${p.codigo}')">${esc(p.codigo)}</button>`).join("");
+  const nav=`<div class="cmptabs"><button class="${cmpTab==='op'?'on':''}" onclick="toggleCmpTab('op')">Operação</button><button class="${cmpTab==='cmp'?'on':''}" onclick="toggleCmpTab('cmp')">Comparativo</button></div>`;
+  const body=cmpTab==="op"?operacaoPanel():(`<div class="cmpsec"><h4>Ranking de avanço regulatório</h4>${cmpBars(act)}</div><div class="cmpsec"><h4>Comparativo por fase <span class="legend">% de conclusão · selecione 2 a 4 frentes</span></h4><div class="cmpchips">${chips}</div>${cmpRadar(cmpSel)}</div>`);
+  root.innerHTML=`<div class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal mwide"><div class="mh"><h2>Painel de operação</h2><button class="mx" onclick="closeModal()">×</button></div><div class="mb">${nav}${body}</div></div></div>`;}
 function snapFoto(){if(!guard())return;const p=proj(cur);const a=avancoPts(p);uiForm({title:"Registrar semana manualmente",okText:"Salvar",fields:[{key:"rot",label:"Semana / rótulo (ex.: Sem 09/06 — para preencher histórico)",type:"text",value:weekLabel()},{key:"pts",label:"Pontos de avanço",type:"text",value:String(a.pts)}],onOk:v=>{let pts=parseInt(v.pts,10);if(isNaN(pts))pts=a.pts;if(!p.snapshots)p.snapshots=[];const rot=(v.rot||weekLabel()).trim();const ex=p.snapshots.find(s=>s.rotulo===rot);if(ex){ex.pts=pts;ex.total=a.total;ex.pct=a.total?pts/a.total:0;ex.manual=true;ex.data=today()}else{p.snapshots.push({rotulo:rot,pts,total:a.total,pct:a.total?pts/a.total:0,data:today(),manual:true})}p.snapshots.sort((x,y)=>(x.data||"").localeCompare(y.data||""));p.ultAt=today();save();closeModal();renderP()}})}
 function delSnap(i){if(!guardM())return;const p=proj(cur);uiConfirm("Remover este snapshot do histórico de evolução?",()=>{p.snapshots.splice(i,1);touch(p);save();renderP()})}
 function evolucaoHTML(p){const s=(p.snapshots||[]);if(!s.length)return `<div class="empty" style="margin-top:8px">O avanço é registrado automaticamente a cada período.${ED?` <a href="#" onclick="snapFoto();return false" style="color:var(--accent)">registrar histórico manual</a>`:''}</div>`;
