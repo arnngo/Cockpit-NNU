@@ -151,8 +151,8 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .op-fl-n{flex:0 0 auto;font-family:var(--mono);font-weight:600;min-width:20px}
 .anot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
 .anot-card{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--surface)}
-.anot-cb{flex:1;min-width:0}.anot-ct{font-weight:600;font-size:13px;line-height:1.3}
-.anot-cd{font-size:11.5px;color:var(--ink-mid);margin-top:3px;line-height:1.4;white-space:pre-wrap}
+.anot-cb{flex:1;min-width:0}.anot-ct{font-weight:600;font-size:14px;line-height:1.35}
+.anot-cd{font-size:12.5px;color:var(--ink-mid);margin-top:3px;line-height:1.45;white-space:pre-wrap}
 .anot-cm{font-size:11px;color:var(--ink-dim);margin-top:5px}
 
 .cc-nat.r{color:var(--red)}.cc-nat.y{color:var(--amber)}
@@ -235,6 +235,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .semana .sw:first-child{border-top:none}
 .semana .pr{font-size:9px;padding:2px 7px;border-radius:5px;white-space:nowrap;margin-top:2px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
 .pr.critica{background:var(--red-soft);color:var(--red)}.pr.alta{background:var(--amber-soft);color:var(--amber)}.pr.media{background:var(--accent-soft);color:var(--accent)}.pr.baixa{background:var(--surface2);color:var(--ink-dim)}
+.pr.pr-lg{font-size:12px;text-transform:none;letter-spacing:0;padding:3px 9px;border-radius:6px;font-weight:600}
 .semana .sb{flex:1}.semana .sb .st{font-size:13px}.semana .sb .ss{font-size:11px;color:var(--ink-dim);margin-top:2px}
 .sd{font-size:12px;color:var(--ink-mid);margin-top:3px;line-height:1.45;white-space:pre-wrap}
 .sa{display:inline-block;margin-top:5px;font-size:11px;color:var(--accent);text-decoration:none}
@@ -513,7 +514,7 @@ function gerenciarDepts(){if(!guardM())return;const root=document.getElementById
 function addDeptInline(){const el=document.getElementById("newdept");const v=(el?el.value||"":"").trim();if(!v){ufError("Informe o nome.");return}if(!DEPTS.includes(v))DEPTS.push(v);saveDepts();gerenciarDepts()}
 function removeDept(i){DEPTS.splice(i,1);saveDepts();gerenciarDepts()}
 const TEMPLATE_VERSION="2026.07.7";
-const BUILD="v2026.07.5 · rev 23 (30/06)";
+const BUILD="v2026.07.5 · rev 24 (01/07)";
 const DIM_ORGAOS={Ambiental:["AMMA","IPHAN","ANM"],Infraestrutura:["Saneago","Equatorial","GOINFRA","Concessionárias"],Jurídico:["SEPLANH","Casa Civil"],Fundiário:["Cartório"],Comercial:[],Aprovação:["SEPLANH","Casa Civil","Prefeitura"]};
 const ESPECIAIS=[{nome:"Barragem",orgao:"AMMA",peso:4,faseId:"amb"},{nome:"Linhas de transmissão",orgao:"Concessionárias",peso:2,faseId:"dir"},{nome:"Travessias",orgao:"Prefeitura",peso:2,faseId:"amb"},{nome:"Centro de reservação",orgao:"Saneago",peso:2,faseId:"dir"},{nome:"Iluminação pública",orgao:"Equatorial",peso:2,faseId:"li"},{nome:"CMTC",orgao:"Prefeitura",peso:1,faseId:"dir"},{nome:"DNPM / ANM (mineração)",orgao:"ANM",peso:3,faseId:"amb"},{nome:"Servidão de passagem",orgao:"Cartório",peso:2,faseId:"fund"},{nome:"Faixa de domínio rodoviária",orgao:"GOINFRA",peso:2,faseId:"dir"}];
 
@@ -817,7 +818,7 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
     h+=`<div class="panel" style="margin-bottom:14px"><h3>Resumo executivo <span class="legend">situação para reunião</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="regAtualiza()">editar</button>`:""}</h3>${p.statusNota?`<div style="font-size:13.5px;color:var(--ink);line-height:1.6;white-space:pre-wrap">${esc(p.statusNota)}</div>`:`<div class="empty">Sem resumo executivo escrito.${ED?" Clique em “editar” para descrever situação, trava e próxima ação.":""}</div>`}</div>`;
     h+=`<div class="panel" style="margin-bottom:14px"><h3>Anotações <span class="legend">${acoes.length} aberta(s) · histórico do projeto</span>${ED?`<button class="fz" style="float:right;border-style:solid" onclick="setTab('semana')">abrir todas</button>`:""}</h3>`;
     {const allAc=acoes.slice().sort((a,b)=>(PRIO_ORD[b.prio]||0)-(PRIO_ORD[a.prio]||0)||(a.prazo||"").localeCompare(b.prazo||"")).slice(0,6);
-      if(allAc.length)h+=`<div class="anot-grid">`+allAc.map(a=>`<div class="anot-card"><span class="pr ${a.prio}">${PRIO_LBL[a.prio]||a.prio}</span><div class="anot-cb"><div class="anot-ct">${esc(a.titulo)}</div>${a.desc?`<div class="anot-cd">${esc(a.desc)}</div>`:""}<div class="anot-cm">${esc(a.resp||"—")}${a.prazo?" · vence "+brdate(a.prazo):""}${a.autor?" · "+esc(a.autor):""}</div></div></div>`).join("")+`</div>`;
+      if(allAc.length)h+=`<div class="anot-grid">`+allAc.map(a=>`<div class="anot-card"><span class="pr pr-lg ${a.prio}">${PRIO_LBL[a.prio]||a.prio}</span><div class="anot-cb"><div class="anot-ct">${esc(a.titulo)}</div>${a.desc?`<div class="anot-cd">${esc(a.desc)}</div>`:""}<div class="anot-cm">${esc(a.resp||"—")}${a.prazo?" · vence "+brdate(a.prazo):""}${a.autor?" · "+esc(a.autor):""}</div></div></div>`).join("")+`</div>`;
       else h+=`<div class="empty">Nenhuma anotação aberta.</div>`;}
     h+=`</div>`;
     h+=`<div class="subgrid"><div style="display:flex;flex-direction:column;gap:14px">`;
@@ -850,7 +851,7 @@ function renderTab(){const p=proj(cur),b=document.getElementById("tabbody");if(!
     if(!list.length)h+=`<div class="empty">Nenhuma anotação registrada.</div>`;
     const _po={critica:0,alta:1,media:2,baixa:3};
     const ordSW=[...list].sort((x,y)=>{const dx=x.status==="concluida"?1:0,dy=y.status==="concluida"?1:0;if(dx!==dy)return dx-dy;return ((_po[x.prio]??9)-(_po[y.prio]??9))||String(x.prazo||"").localeCompare(String(y.prazo||""))});
-    ordSW.forEach(a=>{const dn=a.status==="concluida";h+=`<div class="sw${dn?" swd":""}"><span class="pr ${a.prio}">${PRIO_LBL[a.prio]||a.prio}</span><div class="sb"><div class="st"${dn?' style="text-decoration:line-through;color:var(--ink-dim)"':''}>${esc(a.titulo)}</div>${a.desc?`<div class="sd">${esc(a.desc)}</div>`:""}<div class="ss">${esc(a.resp||"—")}${a.dataReg?" · registrado "+brdate(a.dataReg):""}${a.prazo?" · vence "+brdate(a.prazo):""}${a.autor?" · "+esc(a.autor):""}${a.vinc?" · "+esc(a.vinc):""}${a.alerta?" · alerta no card":""}</div>${a.anexo?`<a class="sa" href="${esc(a.anexo)}" target="_blank" rel="noopener">\uD83D\uDCCE abrir anexo</a>`:""}</div>${ED?`<button class="sx" title="editar" onclick="editAcao('${a.id}')">\u270E</button><button class="sx" title="${dn?"reabrir":"concluir"}" onclick="doneAcao('${a.id}')">\u2713</button><button class="sx" title="remover" onclick="delAcao('${a.id}')">\u2715</button>`:""}</div>`});
+    ordSW.forEach(a=>{const dn=a.status==="concluida";h+=`<div class="sw${dn?" swd":""}"><span class="pr pr-lg ${a.prio}">${PRIO_LBL[a.prio]||a.prio}</span><div class="sb"><div class="st"${dn?' style="text-decoration:line-through;color:var(--ink-dim)"':''}>${esc(a.titulo)}</div>${a.desc?`<div class="sd">${esc(a.desc)}</div>`:""}<div class="ss">${esc(a.resp||"—")}${a.dataReg?" · registrado "+brdate(a.dataReg):""}${a.prazo?" · vence "+brdate(a.prazo):""}${a.autor?" · "+esc(a.autor):""}${a.vinc?" · "+esc(a.vinc):""}${a.alerta?" · alerta no card":""}</div>${a.anexo?`<a class="sa" href="${esc(a.anexo)}" target="_blank" rel="noopener">\uD83D\uDCCE abrir anexo</a>`:""}</div>${ED?`<button class="sx" title="editar" onclick="editAcao('${a.id}')">\u270E</button><button class="sx" title="${dn?"reabrir":"concluir"}" onclick="doneAcao('${a.id}')">\u2713</button><button class="sx" title="remover" onclick="delAcao('${a.id}')">\u2715</button>`:""}</div>`});
     if(ED)h+=`<button class="addbtn" onclick="addAcao()">+ Anotação</button>`;
     h+=`</div>`;b.innerHTML=h}
   else if(tab==="riscos"){
